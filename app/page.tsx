@@ -599,32 +599,21 @@ function Hero() {
                     overflow: "hidden",
                     position: "relative",
                     zIndex: 1,
+                    borderRadius: "clamp(24px, 3vw, 48px)",
+                    boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
                   }}
                 >
-                  <div
+                  <img
+                    src="/images/1614900731240.jpg"
+                    alt="Ziyaad Adams"
                     style={{
                       width: "100%",
                       height: "100%",
-                      background:
-                        "linear-gradient(180deg, rgba(40,40,40,0.5) 0%, rgba(55,55,55,0.35) 40%, rgba(15,15,15,0.95) 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      objectFit: "cover",
+                      objectPosition: "center top",
+                      display: "block",
                     }}
-                  >
-                    <svg
-                      viewBox="0 0 200 280"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      style={{ width: "60%", height: "60%", opacity: 0.18 }}
-                    >
-                      <ellipse cx="100" cy="80" rx="45" ry="52" fill="white" />
-                      <path
-                        d="M100 132 C42 138 18 195 12 280 L188 280 C182 195 158 138 100 132Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
+                  />
                 </motion.div>
 
                 {/* ── Name overlay — positioned over the photo's right side ── */}
