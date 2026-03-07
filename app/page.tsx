@@ -10,10 +10,10 @@ import { Mail, Linkedin, Github, Globe } from "lucide-react";
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const navItems = [
-  { label: "ABOUT US", href: "#about" },
-  { label: "PORTFOLIO", href: "#work" },
-  { label: "EXPERIENCE", href: "#skills" },
-  { label: "CAREER", href: "#experience" },
+  { label: "HOME", href: "#hero" },
+  { label: "ABOUT", href: "#about" },
+  { label: "PROJECTS", href: "#work" },
+  { label: "CONTACT", href: "#contact" },
 ];
 
 const workHistory = [
@@ -365,324 +365,753 @@ function CustomCursor() {
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
-const HEADLINE_WORDS = ["BUILDING", "ENTERPRISE", "SALESFORCE", "SOLUTIONS"];
+const CLIENT_LOGOS = [
+  "/logos/NHS-01.svg",
+  "/logos/capitec.svg",
+  "/logos/heineken.svg",
+  "/logos/absa.svg",
+  "/logos/pmi.svg",
+  "/logos/cafu.svg",
+];
+
+const SOCIAL_LINKS = [
+  {
+    href: "https://linkedin.com/in/ziyaad-adams-8b0b001a2",
+    label: "LinkedIn",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://github.com/ziyaadsmada",
+    label: "GitHub",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://trailblazer.me/id/zadams",
+    label: "Trailhead",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "mailto:ziyaada22@gmail.com",
+    label: "Email",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+    ),
+  },
+];
+
+const ABOUT_INFO = [
+  { label: "Name", value: "Ziyaad Adams" },
+  { label: "Nationality", value: "South African" },
+  { label: "Email", value: "ziyaada22@gmail.com" },
+  { label: "Experience", value: "5+ Years" },
+  { label: "Freelance", value: "Available" },
+  { label: "Language", value: "English / Afrikaans" },
+];
+
+const SKILL_CARDS = [
+  {
+    title: "Salesforce Stack",
+    items: "Apex, LWC, Flows, SOQL, Triggers, OmniStudio, Marketing Cloud, Service Cloud, Experience Cloud, Data Cloud",
+  },
+  {
+    title: "Front-End Side",
+    items: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS, Framer Motion",
+  },
+  {
+    title: "Back-End Side",
+    items: "Node.js, Express, REST APIs, MuleSoft, Heroku, AWS, Docker, PostgreSQL",
+  },
+  {
+    title: "UI & Styling",
+    items: "CSS, Sass, Tailwind CSS, Material-UI, shadcn/ui, Animations (GSAP, Framer Motion, Anime.js)",
+  },
+  {
+    title: "Database",
+    items: "Salesforce SOQL/SOSL, PostgreSQL, MongoDB, MySQL, Data Modelling, Schema Design, Indexing",
+  },
+  {
+    title: "Integration & APIs",
+    items: "MuleSoft, REST, SOAP, OAuth, JWT, Postman, Middleware, Rate Limiting, CORS, Platform Events",
+  },
+];
 
 function Hero() {
   return (
     <section
       id="hero"
+      className="hero-section"
       style={{
         minHeight: "100vh",
         background: "#000",
-        display: "flex",
-        flexDirection: "column",
-        paddingTop: "76px",
         position: "relative",
         overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      {/* Main content — centered */}
+      {/* Decorative circle top right */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 1.2 }}
+        className="hero-circle-deco"
+        style={{
+          position: "absolute",
+          top: "-6vw",
+          right: "-4vw",
+          width: "clamp(220px, 32vw, 520px)",
+          height: "clamp(220px, 32vw, 520px)",
+          borderRadius: "50%",
+          border: "1px solid rgba(255,255,255,0.05)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      {/* ─── Main hero content ─── */}
       <div
+        className="hero-main"
         style={{
           flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "3rem clamp(1rem,3vw,2.5rem) 2rem",
-          textAlign: "center",
+          display: "grid",
+          gridTemplateColumns: "auto 1fr auto",
+          position: "relative",
+          zIndex: 1,
+          paddingTop: "80px",
+          minHeight: "100vh",
         }}
       >
-        {/* Availability badge */}
+        {/* ── Far-left vertical label ── */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: "100px",
-            padding: "0.35rem 0.875rem",
-            marginBottom: "2.5rem",
-          }}
-        >
-          <span
-            style={{
-              width: "7px",
-              height: "7px",
-              borderRadius: "50%",
-              background: "#00e676",
-              boxShadow: "0 0 6px #00e676",
-              display: "inline-block",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "0.6875rem",
-              color: "rgba(255,255,255,0.55)",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-            }}
-          >
-            Available for Work
-          </span>
-        </motion.div>
-
-        {/* Main headline — word-by-word slide up */}
-        <h1
-          style={{
-            fontSize: "clamp(3rem,8vw,7rem)",
-            fontWeight: 700,
-            lineHeight: 0.9,
-            letterSpacing: "-0.03em",
-            textTransform: "uppercase",
-            marginBottom: "2.25rem",
-          }}
-        >
-          {HEADLINE_WORDS.map((word, i) => (
-            <div key={i} style={{ overflow: "hidden" }}>
-              <motion.span
-                style={{ display: "inline-block" }}
-                initial={{ y: "110%" }}
-                animate={{ y: "0%" }}
-                transition={{
-                  duration: 0.75,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0.12 + i * 0.1,
-                }}
-              >
-                {word}
-              </motion.span>
-            </div>
-          ))}
-        </h1>
-
-        {/* Name + role + location */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65, duration: 0.6 }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="hero-vertical-left"
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "1rem",
-            marginBottom: "1.5rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <span
-            style={{
-              fontSize: "clamp(0.875rem,1.4vw,1.0625rem)",
-              fontWeight: 600,
-              color: "rgba(255,255,255,0.9)",
-              letterSpacing: "0.04em",
-              textTransform: "uppercase",
-            }}
-          >
-            Ziyaad Adams
-          </span>
-          <span
-            style={{
-              width: "3px",
-              height: "3px",
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.25)",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "0.8125rem",
-              color: "rgba(255,255,255,0.58)",
-              letterSpacing: "0.06em",
-            }}
-          >
-            Senior Salesforce Engineer
-          </span>
-          <span
-            style={{
-              width: "3px",
-              height: "3px",
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.25)",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "0.8125rem",
-              color: "rgba(255,255,255,0.58)",
-              letterSpacing: "0.06em",
-            }}
-          >
-            Cape Town 🇿🇦
-          </span>
-        </motion.div>
-
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.78, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontSize: "clamp(0.875rem,1.2vw,1rem)",
-            color: "rgba(255,255,255,0.72)",
-            lineHeight: 1.75,
-            maxWidth: "38rem",
-            marginBottom: "2.5rem",
-          }}
-        >
-          5 years of enterprise-grade Salesforce development across banking,
-          healthcare, and FMCG — delivering complex Apex, LWC, Marketing Cloud,
-          and integration solutions for Fortune 500 clients.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.92, duration: 0.55 }}
-          style={{
-            display: "flex",
-            gap: "0.75rem",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <a
-            href="#work"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.75rem 1.625rem",
-              background: "#fff",
-              color: "#000",
-              borderRadius: "100px",
-              fontSize: "0.8125rem",
-              fontWeight: 600,
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            View Projects <span style={{ fontSize: "1rem" }}>→</span>
-          </a>
-          <a
-            href="#contact"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.75rem 1.625rem",
-              background: "transparent",
-              color: "#fff",
-              borderRadius: "100px",
-              border: "1px solid rgba(255,255,255,0.2)",
-              fontSize: "0.8125rem",
-              fontWeight: 500,
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              transition: "border-color 0.2s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")
-            }
-          >
-            Get in Touch
-          </a>
-        </motion.div>
-      </div>
-
-      {/* Bottom stats band */}
-      <div style={{ borderTop: "1px solid #666666" }}>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.7 }}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "1.25rem clamp(1rem,3vw,2.5rem)",
-            flexWrap: "wrap",
             gap: "1.5rem",
-            borderBottom: "1px solid #666666",
+            padding: "0 clamp(0.5rem, 1.5vw, 1.5rem)",
           }}
         >
           <span
             style={{
-              fontSize: "13px",
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+              transform: "rotate(180deg)",
+              fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)",
               fontWeight: 500,
-              color: "rgba(255,255,255,0.72)",
+              letterSpacing: "0.4em",
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
+              color: "rgba(255,255,255,0.35)",
             }}
           >
-            Breakthrough
+            Salesforce
           </span>
+          <span
+            style={{
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+              transform: "rotate(180deg)",
+              fontSize: "clamp(0.9rem, 1.4vw, 1.25rem)",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.65)",
+            }}
+          >
+            Engineer
+          </span>
+        </motion.div>
+
+        {/* ── Center: two-column hero layout ── */}
+        <div
+          className="hero-center"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: "center",
+            gap: "clamp(1.5rem, 3vw, 4rem)",
+            padding: "2rem clamp(0.5rem, 2vw, 2rem)",
+          }}
+        >
+          {/* LEFT COLUMN — Portrait + Name composite */}
           <div
             style={{
               display: "flex",
-              gap: "clamp(1.5rem,5vw,5rem)",
-              flexWrap: "wrap",
+              flexDirection: "column",
               alignItems: "center",
+              position: "relative",
             }}
           >
-            {[
-              { v: 5, s: "+", l: "YEARS EXP" },
-              { v: 8, s: "", l: "CERTS" },
-              { v: 30, s: "+", l: "PROJECTS" },
-              { v: 5, s: "", l: "COUNTRIES" },
-            ].map((stat) => (
-              <div key={stat.l} style={{ textAlign: "center" }}>
+            {/* Spaced last name */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              style={{
+                fontSize: "clamp(0.7rem, 1.1vw, 0.95rem)",
+                fontWeight: 300,
+                letterSpacing: "0.65em",
+                textTransform: "lowercase",
+                color: "rgba(255,255,255,0.5)",
+                marginBottom: "0.25rem",
+                alignSelf: "flex-end",
+                paddingRight: "5%",
+              }}
+            >
+              A d a m s
+            </motion.div>
+
+            {/* Photo + big name wrapper */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/* DEVELOPER vertical text on left of photo */}
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 0.8 }}
+                style={{
+                  position: "absolute",
+                  left: "-2%",
+                  top: "50%",
+                  transform: "translateY(-50%) rotate(180deg)",
+                  writingMode: "vertical-rl",
+                  textOrientation: "mixed",
+                  fontSize: "clamp(0.9rem, 1.3vw, 1.15rem)",
+                  fontWeight: 700,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.12)",
+                  zIndex: 3,
+                }}
+              >
+                DEVELOPER
+              </motion.span>
+
+              {/* Portrait photo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: 0.35,
+                  duration: 1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                style={{
+                  position: "relative",
+                  width: "clamp(220px, 24vw, 380px)",
+                  height: "clamp(280px, 32vw, 480px)",
+                  overflow: "hidden",
+                  zIndex: 1,
+                }}
+              >
+                {/* Gradient overlay for photo placeholder */}
                 <div
                   style={{
-                    fontSize: "clamp(1.1rem,2vw,1.5rem)",
+                    width: "100%",
+                    height: "100%",
+                    background:
+                      "linear-gradient(180deg, rgba(40,40,40,0.6) 0%, rgba(60,60,60,0.4) 35%, rgba(20,20,20,0.95) 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "0 0 40% 40% / 0 0 12% 12%",
+                  }}
+                >
+                  {/* Silhouette — replace with: <img src="/images/portrait.webp" alt="Ziyaad Adams" style={{width:'100%',height:'100%',objectFit:'cover',filter:'grayscale(100%)'}} /> */}
+                  <svg
+                    viewBox="0 0 200 280"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ width: "65%", height: "65%", opacity: 0.2 }}
+                  >
+                    <ellipse cx="100" cy="80" rx="45" ry="52" fill="white" />
+                    <path
+                      d="M100 132 C42 138 18 195 12 280 L188 280 C182 195 158 138 100 132Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+
+              {/* Big name overlapping the photo from the right */}
+              <div
+                style={{
+                  position: "absolute",
+                  right: "-15%",
+                  bottom: "18%",
+                  zIndex: 2,
+                }}
+              >
+                <h1
+                  style={{
+                    fontSize: "clamp(3rem, 8vw, 7.5rem)",
                     fontWeight: 700,
+                    lineHeight: 0.85,
+                    letterSpacing: "-0.03em",
                     color: "#fff",
-                    lineHeight: 1,
+                    textShadow: "0 4px 40px rgba(0,0,0,0.8)",
                   }}
                 >
-                  <Counter target={stat.v} suffix={stat.s} />
+                  <div style={{ overflow: "hidden" }}>
+                    <motion.span
+                      style={{ display: "inline-block" }}
+                      initial={{ y: "120%" }}
+                      animate={{ y: "0%" }}
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.15,
+                      }}
+                    >
+                      Ziyaad
+                    </motion.span>
+                  </div>
+                </h1>
+              </div>
+            </div>
+
+            {/* Testimonial below photo */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.7 }}
+              style={{
+                marginTop: "1.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem",
+                alignSelf: "flex-start",
+                paddingLeft: "10%",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "0.4rem",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "rgba(255,255,255,0.18)",
+                    lineHeight: 1,
+                    fontFamily: "Georgia, serif",
+                  }}
+                >
+                  &ldquo;
+                </span>
+                <p
+                  style={{
+                    fontSize: "clamp(0.65rem, 0.8vw, 0.75rem)",
+                    color: "rgba(255,255,255,0.5)",
+                    lineHeight: 1.6,
+                    fontStyle: "italic",
+                  }}
+                >
+                  I have worked with over
+                  <br />
+                  <span
+                    style={{
+                      color: "#fff",
+                      fontWeight: 600,
+                      fontStyle: "normal",
+                    }}
+                  >
+                    25 business teams.
+                  </span>
+                  &rdquo;
+                </p>
+              </div>
+              {/* Client avatar row */}
+              <div style={{ display: "flex", marginLeft: "1rem" }}>
+                {CLIENT_LOGOS.map((logo, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: "26px",
+                      height: "26px",
+                      borderRadius: "50%",
+                      background: "#1a1a1a",
+                      border: "2px solid #000",
+                      marginLeft: i > 0 ? "-5px" : "0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <img
+                      src={logo}
+                      alt=""
+                      style={{
+                        width: "14px",
+                        height: "14px",
+                        objectFit: "contain",
+                        filter: "brightness(0) invert(1)",
+                        opacity: 0.65,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* RIGHT COLUMN — Description + CTA */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: "1.75rem",
+              paddingTop: "4rem",
+            }}
+          >
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.7,
+                duration: 0.65,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              style={{
+                fontSize: "clamp(0.72rem, 0.95vw, 0.85rem)",
+                color: "rgba(255,255,255,0.5)",
+                lineHeight: 1.85,
+                maxWidth: "24rem",
+              }}
+            >
+              My goal is to write clean, maintainable code that enhances the
+              development process and makes coding enjoyable through structured
+              and thoughtful practices.
+            </motion.p>
+
+            <motion.a
+              href="#work"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.55 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                alignSelf: "flex-start",
+                gap: "0.5rem",
+                padding: "0.7rem 2rem",
+                background: "transparent",
+                color: "#fff",
+                borderRadius: "4px",
+                border: "1px solid rgba(255,255,255,0.25)",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                textDecoration: "none",
+                letterSpacing: "0.12em",
+                textTransform: "capitalize",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+              }}
+            >
+              Portfolio
+            </motion.a>
+          </div>
+        </div>
+
+        {/* ── Far-right social icons ── */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="hero-vertical-right"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "1.25rem",
+            padding: "0 clamp(0.5rem, 1.5vw, 1.5rem)",
+          }}
+        >
+          {SOCIAL_LINKS.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                transition: "all 0.25s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                e.currentTarget.style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+              }}
+            >
+              {s.icon}
+            </a>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ─── Bottom wave/mountain decoration ─── */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "140px",
+          zIndex: 0,
+          overflow: "hidden",
+          pointerEvents: "none",
+        }}
+      >
+        <svg
+          viewBox="0 0 1440 140"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: "100%", height: "100%", display: "block" }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 140 Q180 35 360 90 T720 55 T1080 80 T1440 45 L1440 140 Z"
+            fill="rgba(255,255,255,0.02)"
+          />
+          <path
+            d="M0 140 Q240 55 480 100 T960 60 T1440 78 L1440 140 Z"
+            fill="rgba(255,255,255,0.015)"
+          />
+          <path
+            d="M0 140 Q200 80 400 105 T800 70 T1200 92 T1440 65 L1440 140 Z"
+            fill="rgba(255,255,255,0.01)"
+          />
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+// ── About Section ─────────────────────────────────────────────────────────────
+
+function About() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      id="about"
+      style={{
+        padding: "5rem clamp(1rem, 3vw, 2.5rem)",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        position: "relative",
+      }}
+    >
+      {/* Decorative circle */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-3rem",
+          left: "-2rem",
+          width: "120px",
+          height: "120px",
+          borderRadius: "50%",
+          border: "1px solid rgba(255,255,255,0.06)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+        {/* About heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontSize: "clamp(2rem, 4vw, 3.5rem)",
+            fontWeight: 700,
+            color: "#fff",
+            marginBottom: "3rem",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          About
+        </motion.h2>
+
+        <div
+          className="about-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "clamp(2rem, 4vw, 5rem)",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT — Bio + personal info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.15, duration: 0.7 }}
+          >
+            <p
+              style={{
+                fontSize: "clamp(0.8rem, 1vw, 0.9rem)",
+                color: "rgba(255,255,255,0.6)",
+                lineHeight: 1.85,
+                marginBottom: "2.5rem",
+              }}
+            >
+              Hello! I&apos;m Ziyaad Adams, a full-stack Salesforce developer with
+              over 5 years of experience. I&apos;ve built scalable solutions for
+              enterprise clients across banking, healthcare, FMCG, and
+              government. I specialise in Apex, LWC, Marketing Cloud, and
+              MuleSoft integrations. Committed to continuous learning, I
+              prioritise company success and customer satisfaction. Explore my
+              portfolio for innovative solutions. Let&apos;s create something
+              amazing!
+            </p>
+
+            {/* Info rows */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.85rem",
+              }}
+            >
+              {ABOUT_INFO.map((item) => (
+                <div
+                  key={item.label}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                    fontSize: "clamp(0.72rem, 0.9vw, 0.82rem)",
+                  }}
+                >
+                  <span
+                    style={{
+                      color: "rgba(255,255,255,0.4)",
+                      minWidth: "100px",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  <span
+                    style={{
+                      color: "rgba(255,255,255,0.25)",
+                    }}
+                  >
+                    :
+                  </span>
+                  <span style={{ color: "rgba(255,255,255,0.75)" }}>
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT — Skill cards grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1rem",
+            }}
+          >
+            {SKILL_CARDS.map((card, i) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 16 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  delay: 0.2 + i * 0.08,
+                  duration: 0.55,
+                }}
+                style={{
+                  padding: "1.25rem",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "8px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "clamp(0.7rem, 0.85vw, 0.78rem)",
+                    fontWeight: 600,
+                    color: "#fff",
+                    marginBottom: "0.6rem",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {card.title}
                 </div>
                 <div
                   style={{
-                    fontSize: "0.6rem",
-                    color: "rgba(255,255,255,0.55)",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginTop: "0.3rem",
+                    fontSize: "clamp(0.6rem, 0.72vw, 0.67rem)",
+                    color: "rgba(255,255,255,0.45)",
+                    lineHeight: 1.7,
                   }}
                 >
-                  {stat.l}
+                  {card.items}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-          <span
-            style={{
-              fontSize: "13px",
-              fontWeight: 500,
-              color: "rgba(255,255,255,0.72)",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            Technology
-          </span>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -816,7 +1245,7 @@ function Navbar() {
         ))}
       </div>
       <a href="#contact" className="nav-island__cta">
-        CONTACT
+        Get Started
       </a>
     </motion.nav>
   );
@@ -1544,6 +1973,7 @@ export default function Home() {
       <Navbar />
       <main style={{ position: "relative", zIndex: 1 }}>
         <Hero />
+        <About />
         <Experience />
         <Projects />
         <Services />
