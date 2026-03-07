@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ParticleBackground } from "@/components/ui/particle-background";
 import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
+import { Mail, Linkedin, Github, Globe } from "lucide-react";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -1561,10 +1562,11 @@ function Contact() {
                 textTransform: "uppercase",
               }}
             >
-              Email Me →
+              <Mail size={16} />
+              Email Me
             </a>
             <a
-              href="https://linkedin.com/in/ziyaad-adams-8b0b001a2"
+              href="https://github.com/ziyaadsmada"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1583,7 +1585,8 @@ function Contact() {
                 textTransform: "uppercase",
               }}
             >
-              LinkedIn ↗
+              <Github size={16} />
+              GitHub
             </a>
             <a
               href="https://trailblazer.salesforce.com"
@@ -1605,7 +1608,31 @@ function Contact() {
                 textTransform: "uppercase",
               }}
             >
-              Trailhead ↗
+              <Globe size={16} />
+              Trailhead
+            </a>
+            <a
+              href="https://linkedin.com/in/ziyaad-adams-8b0b001a2"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1.625rem",
+                background: "transparent",
+                color: "#fff",
+                borderRadius: "100px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                fontSize: "0.8125rem",
+                fontWeight: 500,
+                textDecoration: "none",
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+              }}
+            >
+              <Linkedin size={16} />
+              LinkedIn
             </a>
           </motion.div>
           <motion.div
