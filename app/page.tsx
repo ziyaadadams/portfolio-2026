@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ParticleBackground } from "@/components/ui/particle-background";
 import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
@@ -105,6 +105,7 @@ const projects = [
     company: "via Digital Modus",
     client: "NHS Professionals",
     logo: "/logos/NHS-01.svg",
+    industry: "Healthcare",
     description:
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
     tags: ["Marketing Cloud", "Mulesoft ", "Apex", "LWC"],
@@ -114,6 +115,7 @@ const projects = [
     company: "via BlueSky",
     client: "Capitec Bank",
     logo: "/logos/CPI.JO_BIG.svg",
+    industry: "Banking",
     description:
       "Engineered and enhanced the Salesforce platform for the Fraud Department, leveraging OmniStudio, Flows, and Lightning Web Components (LWC) to build dynamic fraud-focused features and case automation tools. Delivered solutions that streamlined internal processes and improved efficiency for agents investigating and managing fraud cases — tools currently active in production.",
     tags: ["OmniStudio", "LWC", "Flows", "Service Cloud"],
@@ -123,6 +125,7 @@ const projects = [
     company: "via BlueSky",
     client: "ABSA Bank",
     logo: "/logos/ABSP.JO.svg",
+    industry: "Banking",
     description:
       "Led the development of new CIB Complaints and Credit Application forms as the sole developer, accelerating ABSA Bank's migration of key business processes to Salesforce. Implemented a customer feature for bulk case transfers and ensured UI compliance with external Adobe XD design templates. Successfully enabled the client to manage all complaints and new credit applications within a centralised CRM environment.",
     tags: ["Service Cloud", "Flows", "Apex", "LWC"],
@@ -132,6 +135,7 @@ const projects = [
     company: "via Cloudmuscle B.V.",
     client: "Heineken / Distell",
     logo: "/logos/heineken.svg",
+    industry: "FMCG",
     description:
       "Served as Senior Salesforce Developer, developing new B2B sales features for a nationwide and international liquor distribution platform. Managed complex third-party integrations with SAP, Apigee, and WhatsApp, in addition to developing solutions for Experience Cloud chatbots and ordering processes.",
     tags: ["B2B Commerce", "Experience Cloud", "MuleSoft", "SAP"],
@@ -141,6 +145,7 @@ const projects = [
     company: "via Cloudsmiths",
     client: "Four Paws International",
     logo: "/logos/fourpaws.svg",
+    industry: "Non-Profit",
     description:
       "Managed end-to-end development of migrating an international NPO's global donation platform to Salesforce. Created a single, dynamic donation page capable of routing donors to multiple campaigns based on internal logic. Implemented essential financial and marketing integrations, including Pay Gate, Facebook Pixel, and custom subscription/unsubscribe forms.",
     tags: ["NPSP", "Data Migration", "Apex Triggers", "Pay Gate"],
@@ -150,6 +155,7 @@ const projects = [
     company: "via Cloudsmiths",
     client: "Main One",
     logo: "/logos/mainone.svg",
+    industry: "Telecom",
     description:
       "Automated core customer opportunity processes across Africa by developing efficient Workflow Rules and optimized Apex Triggers, ensuring high performance and compliance with Salesforce CPU limits. Created a custom Home Page component displaying the top 10 opportunities with an export feature for ad-hoc analysis (CSV output).",
     tags: ["Apex", "Workflow Rules", "Custom Components", "LWC"],
@@ -159,6 +165,7 @@ const projects = [
     company: "via BlueSky",
     client: "Philip Morris / IQOS",
     logo: "/logos/pmi.svg",
+    industry: "FMCG",
     description:
       "Developed the IQOS Customer Portal, focusing on building the user account, rewards, and inventory/sales tracking systems. Managed a critical MuleSoft integration that required decrypting and synchronising encrypted data across servers. Built various custom components and forms (LWC, Aura, Visualforce) and ensured proper Google Tag processing for analytics.",
     tags: ["Experience Cloud", "MuleSoft", "LWC", "REST API"],
@@ -168,6 +175,7 @@ const projects = [
     company: "via BlueSky",
     client: "CAFU",
     logo: "/logos/cafu.svg",
+    industry: "Field Service",
     description:
       "Automated and optimised mechanic dispatching within Salesforce Field Service Lightning (FSL) for a major UAE service provider. Developed a custom AWS integration for storing job completion images and implemented sophisticated geolocation-based polygon map logic to automatically assign drivers.",
     tags: ["Field Service Lightning", "AWS", "Apex", "Geolocation"],
@@ -177,6 +185,7 @@ const projects = [
     company: "via BlueSky",
     client: "Sygnia",
     logo: "/logos/sygnia.svg",
+    industry: "Finance",
     description:
       "Developed custom features to enhance lead generation and customer service, including automating lead processes based on site entry and Google Ad click data. Implemented a complex automation trigger to notify agents, with dynamic retrieval and display of relevant agent information by securely passing data via URL parameters.",
     tags: ["Sales Cloud", "Apex", "Automation", "Google Ads API"],
@@ -186,6 +195,7 @@ const projects = [
     company: "via BlueSky",
     client: "Urban MGT",
     logo: "/logos/urbanmgt.svg",
+    industry: "Property",
     description:
       "Designed and built a live Client Satisfaction Form within the Lightning Experience Builder using Lightning frameworks. The solution dynamically retrieved and displayed relevant agent information by securely passing data via URL parameters.",
     tags: ["Lightning Experience", "LWC", "Aura", "Flows"],
@@ -197,6 +207,7 @@ const freelanceProjects = [
   {
     client: "Personal",
     logo: "/logos/portfolio.svg",
+    industry: "Portfolio",
     description:
       "This portfolio — built with Next.js 14, TypeScript, Framer Motion, Three.js, shadcn/ui, and a custom hexagon background. Designed to showcase enterprise Salesforce engineering work with a premium, animation-driven aesthetic.",
     tags: ["Next.js", "TypeScript", "Three.js", "Framer Motion", "shadcn/ui"],
@@ -205,6 +216,7 @@ const freelanceProjects = [
   {
     client: "Veloracer",
     logo: "/logos/veloracer.svg",
+    industry: "E-Commerce",
     description:
       "End-to-end WordPress WooCommerce store for a custom cycling apparel brand. Includes product configurator, custom order forms, and payment gateway integration.",
     tags: ["WordPress", "WooCommerce", "PHP", "E-Commerce"],
@@ -213,6 +225,7 @@ const freelanceProjects = [
   {
     client: "Side Project",
     logo: "/logos/invoiceapp.svg",
+    industry: "SaaS",
     description:
       "Full-stack invoice generation and management web application. Create, send, and track professional invoices with PDF export, client management, and payment status tracking.",
     tags: ["React", "Next.js", "TypeScript", "Vercel"],
@@ -1244,136 +1257,386 @@ function Navbar() {
 
 // ── Projects ──────────────────────────────────────────────────────────────────
 
+// ── Tech tag colour map ────────────────────────────────────────────────────────
+const TAG_COLORS: Record<string, string> = {
+  "Marketing Cloud": "#00A1E0",
+  "MuleSoft": "#00A0DF",
+  "Apex": "#1798C1",
+  "LWC": "#032D60",
+  "OmniStudio": "#0070D2",
+  "Flows": "#4F7FBF",
+  "Service Cloud": "#005FB2",
+  "NPSP": "#00857D",
+  "Salesforce": "#00A1E0",
+  "Experience Cloud": "#1B96FF",
+  "REST API": "#4CAF50",
+  "B2B Commerce": "#F5A623",
+  "SAP": "#0070F2",
+  "AWS": "#FF9900",
+  "Geolocation": "#34A853",
+  "Sales Cloud": "#0676C8",
+  "Automation": "#8A4FFF",
+  "Data Migration": "#E74C3C",
+  "Apex Triggers": "#1798C1",
+  "Workflow Rules": "#8E44AD",
+  "Custom Components": "#2ECC71",
+  "Google Ads API": "#4285F4",
+  "Lightning Experience": "#0070D2",
+  "Aura": "#00A1E0",
+  "Field Service Lightning": "#F4B400",
+  "Pay Gate": "#27AE60",
+  "Facebook Pixel": "#1877F2",
+  "Next.js": "#fff",
+  "TypeScript": "#3178C6",
+  "Three.js": "#49ef4f",
+  "Framer Motion": "#BB4B96",
+  "WordPress": "#21759B",
+  "WooCommerce": "#96588A",
+  "React": "#61DAFB",
+  "Vercel": "#fff",
+};
+
+function tagColor(tag: string) {
+  for (const key of Object.keys(TAG_COLORS)) {
+    if (tag.toLowerCase().includes(key.toLowerCase())) return TAG_COLORS[key];
+  }
+  return "rgba(255,255,255,0.55)";
+}
+
+// ── Project Modal ──────────────────────────────────────────────────────────────
+type AnyProject = {
+  logo: string;
+  description: string;
+  tags: string[];
+  industry?: string;
+  company?: string;
+  client?: string;
+  bg?: string;
+  link?: string | null;
+};
+
+function ProjectModal({
+  p,
+  onClose,
+}: {
+  p: AnyProject;
+  onClose: () => void;
+}) {
+  const name = (p as any).client ?? (p as any).company ?? "";
+  const company = (p as any).company ?? "";
+
+  // close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.75)",
+        backdropFilter: "blur(8px)",
+        zIndex: 10000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "1rem",
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.94, y: 16 }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#0d0d0d",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "16px",
+          width: "100%",
+          maxWidth: "580px",
+          maxHeight: "90vh",
+          overflowY: "auto",
+          padding: "2rem",
+          position: "relative",
+        }}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            width: "32px",
+            height: "32px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: "rgba(255,255,255,0.6)",
+            fontSize: "1rem",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            lineHeight: 1,
+          }}
+        >
+          ×
+        </button>
+
+        {/* Logo */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1.5rem 0 1rem",
+          }}
+        >
+          <img
+            src={p.logo}
+            alt={name}
+            style={{
+              height: "56px",
+              maxWidth: "180px",
+              objectFit: "contain",
+              opacity: 0.95,
+            }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        </div>
+
+        {/* Name + meta */}
+        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+          <h3
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: 700,
+              color: "#fff",
+              marginBottom: "0.3rem",
+            }}
+          >
+            {name}
+          </h3>
+          {company && company !== name && (
+            <div
+              style={{
+                fontSize: "0.72rem",
+                color: "rgba(255,255,255,0.4)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              {company}
+            </div>
+          )}
+          {p.industry && (
+            <span
+              style={{
+                display: "inline-block",
+                marginTop: "0.5rem",
+                padding: "0.2rem 0.75rem",
+                borderRadius: "20px",
+                border: "1px solid rgba(255,255,255,0.15)",
+                color: "rgba(255,255,255,0.6)",
+                fontSize: "0.625rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              {p.industry}
+            </span>
+          )}
+        </div>
+
+        {/* Divider */}
+        <div
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.07)",
+            marginBottom: "1.25rem",
+          }}
+        />
+
+        {/* Description */}
+        <p
+          style={{
+            fontSize: "0.82rem",
+            color: "rgba(255,255,255,0.65)",
+            lineHeight: 1.85,
+            marginBottom: "1.75rem",
+          }}
+        >
+          {p.description}
+        </p>
+
+        {/* Tech stack */}
+        <div
+          style={{
+            fontSize: "0.6rem",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.3)",
+            marginBottom: "0.75rem",
+          }}
+        >
+          Tech Stack
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          {p.tags.map((tag) => {
+            const color = tagColor(tag.trim());
+            return (
+              <span
+                key={tag}
+                style={{
+                  padding: "0.3rem 0.85rem",
+                  borderRadius: "20px",
+                  background: `${color}18`,
+                  border: `1px solid ${color}55`,
+                  color: color,
+                  fontSize: "0.65rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.04em",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {tag.trim()}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* External link */}
+        {p.link && (
+          <a
+            href={p.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              marginTop: "1.5rem",
+              fontSize: "0.72rem",
+              color: "rgba(0,200,180,0.85)",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+            }}
+          >
+            View Live Project →
+          </a>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ── Project Card (compact) ────────────────────────────────────────────────────
 function ProjectCard({
   p,
   i,
-  link,
+  onOpen,
 }: {
-  p: (typeof projects)[0] & { link?: string | null };
+  p: AnyProject;
   i: number;
-  link?: string | null;
+  onOpen: () => void;
 }) {
-  const card = (
+  const name = (p as any).client ?? (p as any).company ?? "";
+
+  return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.6, delay: i * 0.05 }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      onClick={onOpen}
       style={{
         ...CARD,
         display: "flex",
         flexDirection: "column",
-        gap: "1.125rem",
-        cursor: link ? "pointer" : "default",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: "0.75rem",
+        cursor: "pointer",
+        padding: "1.5rem 1.25rem 1.25rem",
+        minHeight: "160px",
       }}
     >
       {/* Logo */}
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          padding: "1.5rem 0",
+          justifyContent: "center",
+          flex: 1,
         }}
       >
         <img
           src={p.logo}
-          alt={(p as any).client ?? p.company}
+          alt={name}
           style={{
-            height: "52px",
+            height: "44px",
             width: "auto",
-            maxWidth: "150px",
+            maxWidth: "140px",
             objectFit: "contain",
-            borderRadius: "4px",
-            opacity: 0.95,
+            opacity: 0.92,
           }}
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
       </div>
-      {/* Meta row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "0.5rem",
-          marginBottom: "0.5rem",
-        }}
-      >
+
+      {/* Company + Industry */}
+      <div style={{ textAlign: "center", width: "100%" }}>
         <div
           style={{
-            fontSize: "0.6875rem",
-            color: "rgba(255,255,255,0.55)",
-            letterSpacing: "0.12em",
+            fontSize: "0.65rem",
+            color: "rgba(255,255,255,0.45)",
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
+            marginBottom: "0.35rem",
           }}
         >
-          {p.company}
+          {name}
         </div>
-      </div>
-      <p
-        style={{
-          color: "rgba(255,255,255,0.72)",
-          fontSize: "0.8125rem",
-          lineHeight: 1.7,
-          flex: 1,
-        }}
-      >
-        {p.description}
-      </p>
-      {/* Tags */}
-      <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
-        {p.tags.map((tag) => (
+        {(p as any).industry && (
           <span
-            key={tag}
             style={{
-              padding: "0.18rem 0.7rem",
+              display: "inline-block",
+              padding: "0.15rem 0.6rem",
               borderRadius: "20px",
-              border: "1px solid rgba(255,255,255,0.12)",
-              color: "rgba(255,255,255,0.72)",
-              fontSize: "0.625rem",
-              letterSpacing: "0.05em",
+              border: "1px solid rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.4)",
+              fontSize: "0.575rem",
+              letterSpacing: "0.1em",
               textTransform: "uppercase",
             }}
           >
-            {tag}
+            {(p as any).industry}
           </span>
-        ))}
+        )}
       </div>
-      {link && (
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: "rgba(0,200,180,0.7)",
-            letterSpacing: "0.04em",
-          }}
-        >
-          View Project →
-        </div>
-      )}
     </motion.div>
   );
-
-  if (link) {
-    return (
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{ textDecoration: "none" }}
-      >
-        {card}
-      </a>
-    );
-  }
-  return card;
 }
 
 function Projects() {
   const [tab, setTab] = useState<"enterprise" | "personal">("enterprise");
+  const [modalProject, setModalProject] = useState<AnyProject | null>(null);
 
   return (
     <section
@@ -1427,12 +1690,17 @@ function Projects() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill,minmax(340px,1fr))",
+              gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
               gap: "1rem",
             }}
           >
             {projects.map((p, i) => (
-              <ProjectCard key={i} p={p} i={i} />
+              <ProjectCard
+                key={i}
+                p={p as AnyProject}
+                i={i}
+                onOpen={() => setModalProject(p as AnyProject)}
+              />
             ))}
           </div>
         )}
@@ -1441,16 +1709,31 @@ function Projects() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill,minmax(340px,1fr))",
+              gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
               gap: "1rem",
             }}
           >
             {freelanceProjects.map((p, i) => (
-              <ProjectCard key={i} p={p as any} i={i} link={(p as any).link} />
+              <ProjectCard
+                key={i}
+                p={p as AnyProject}
+                i={i}
+                onOpen={() => setModalProject(p as AnyProject)}
+              />
             ))}
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {modalProject && (
+          <ProjectModal
+            p={modalProject}
+            onClose={() => setModalProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
