@@ -105,7 +105,6 @@ const projects = [
     company: "via Digital Modus",
     client: "NHS Professionals",
     logo: "/logos/NHS-01.svg",
-    title: "NHS Professionals",
     description:
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
     tags: ["Marketing Cloud", "Mulesoft ", "Apex", "LWC"],
@@ -116,7 +115,6 @@ const projects = [
     company: "via BlueSky",
     client: "Capitec Bank",
     logo: "/logos/CPI.JO_BIG.svg",
-    title: "Fraud Detection System",
     description:
       "Engineered and enhanced the Salesforce platform for the Fraud Department, leveraging OmniStudio, Flows, and Lightning Web Components (LWC) to build dynamic fraud-focused features and case automation tools. Delivered solutions that streamlined internal processes and improved efficiency for agents investigating and managing fraud cases — tools currently active in production.",
     tags: ["OmniStudio", "LWC", "Flows", "Service Cloud"],
@@ -127,7 +125,6 @@ const projects = [
     company: "via BlueSky",
     client: "ABSA Bank",
     logo: "/logos/ABSP.JO.svg",
-    title: "Credit & Complaints Platform",
     description:
       "Led the development of new CIB Complaints and Credit Application forms as the sole developer, accelerating ABSA Bank's migration of key business processes to Salesforce. Implemented a customer feature for bulk case transfers and ensured UI compliance with external Adobe XD design templates. Successfully enabled the client to manage all complaints and new credit applications within a centralised CRM environment.",
     tags: ["Service Cloud", "Flows", "Apex", "LWC"],
@@ -138,7 +135,6 @@ const projects = [
     company: "via Cloudmuscle B.V.",
     client: "Heineken / Distell",
     logo: "/logos/heineken.svg",
-    title: "B2B Distribution Platform",
     description:
       "Served as Senior Salesforce Developer, developing new B2B sales features for a nationwide and international liquor distribution platform. Managed complex third-party integrations with SAP, Apigee, and WhatsApp, in addition to developing solutions for Experience Cloud chatbots and ordering processes.",
     tags: ["B2B Commerce", "Experience Cloud", "MuleSoft", "SAP"],
@@ -149,7 +145,6 @@ const projects = [
     company: "via Cloudsmiths",
     client: "Four Paws International",
     logo: "/logos/fourpaws.svg",
-    title: "Global NPO Donation Platform",
     description:
       "Managed end-to-end development of migrating an international NPO's global donation platform to Salesforce. Created a single, dynamic donation page capable of routing donors to multiple campaigns based on internal logic. Implemented essential financial and marketing integrations, including Pay Gate, Facebook Pixel, and custom subscription/unsubscribe forms.",
     tags: ["NPSP", "Data Migration", "Apex Triggers", "Pay Gate"],
@@ -160,7 +155,6 @@ const projects = [
     company: "via Cloudsmiths",
     client: "Main One",
     logo: "/logos/mainone.svg",
-    title: "ISP Opportunity Automation",
     description:
       "Automated core customer opportunity processes across Africa by developing efficient Workflow Rules and optimized Apex Triggers, ensuring high performance and compliance with Salesforce CPU limits. Created a custom Home Page component displaying the top 10 opportunities with an export feature for ad-hoc analysis (CSV output).",
     tags: ["Apex", "Workflow Rules", "Custom Components", "LWC"],
@@ -171,7 +165,6 @@ const projects = [
     company: "via BlueSky",
     client: "Philip Morris / IQOS",
     logo: "/logos/pmi.svg",
-    title: "IQOS Customer Portal",
     description:
       "Developed the IQOS Customer Portal, focusing on building the user account, rewards, and inventory/sales tracking systems. Managed a critical MuleSoft integration that required decrypting and synchronising encrypted data across servers. Built various custom components and forms (LWC, Aura, Visualforce) and ensured proper Google Tag processing for analytics.",
     tags: ["Experience Cloud", "MuleSoft", "LWC", "REST API"],
@@ -182,7 +175,6 @@ const projects = [
     company: "via BlueSky",
     client: "CAFU",
     logo: "/logos/cafu.svg",
-    title: "Field Service Dispatching",
     description:
       "Automated and optimised mechanic dispatching within Salesforce Field Service Lightning (FSL) for a major UAE service provider. Developed a custom AWS integration for storing job completion images and implemented sophisticated geolocation-based polygon map logic to automatically assign drivers.",
     tags: ["Field Service Lightning", "AWS", "Apex", "Geolocation"],
@@ -193,7 +185,6 @@ const projects = [
     company: "via BlueSky",
     client: "Sygnia",
     logo: "/logos/sygnia.svg",
-    title: "Investment Lead Generation",
     description:
       "Developed custom features to enhance lead generation and customer service, including automating lead processes based on site entry and Google Ad click data. Implemented a complex automation trigger to notify agents, with dynamic retrieval and display of relevant agent information by securely passing data via URL parameters.",
     tags: ["Sales Cloud", "Apex", "Automation", "Google Ads API"],
@@ -204,7 +195,6 @@ const projects = [
     company: "via BlueSky",
     client: "Urban MGT",
     logo: "/logos/urbanmgt.svg",
-    title: "Client Satisfaction Portal",
     description:
       "Designed and built a live Client Satisfaction Form within the Lightning Experience Builder using Lightning frameworks. The solution dynamically retrieved and displayed relevant agent information by securely passing data via URL parameters.",
     tags: ["Lightning Experience", "LWC", "Aura", "Flows"],
@@ -217,7 +207,6 @@ const freelanceProjects = [
   {
     client: "Personal",
     logo: "/logos/portfolio.svg",
-    title: "Portfolio 2026",
     description:
       "This portfolio — built with Next.js 14, TypeScript, Framer Motion, Three.js, shadcn/ui, and a custom hexagon background. Designed to showcase enterprise Salesforce engineering work with a premium, animation-driven aesthetic.",
     tags: ["Next.js", "TypeScript", "Three.js", "Framer Motion", "shadcn/ui"],
@@ -227,7 +216,6 @@ const freelanceProjects = [
   {
     client: "Veloracer",
     logo: "/logos/veloracer.svg",
-    title: "Custom Cycle Wear E-Commerce",
     description:
       "End-to-end WordPress WooCommerce store for a custom cycling apparel brand. Includes product configurator, custom order forms, and payment gateway integration.",
     tags: ["WordPress", "WooCommerce", "PHP", "E-Commerce"],
@@ -237,7 +225,6 @@ const freelanceProjects = [
   {
     client: "Side Project",
     logo: "/logos/invoiceapp.svg",
-    title: "Invoice Platform",
     description:
       "Full-stack invoice generation and management web application. Create, send, and track professional invoices with PDF export, client management, and payment status tracking.",
     tags: ["React", "Next.js", "TypeScript", "Vercel"],
@@ -924,17 +911,6 @@ function ProjectCard({
         >
           {p.company}
         </div>
-        <h3
-          style={{
-            fontSize: "1.075rem",
-            fontWeight: 600,
-            color: "#fff",
-            letterSpacing: "-0.01em",
-            lineHeight: 1.3,
-          }}
-        >
-          {p.title}
-        </h3>
       </div>
       <p
         style={{
