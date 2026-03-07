@@ -129,8 +129,9 @@ main, section, footer, nav {
 .nav-island {
   position: fixed;
   top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,7 +146,7 @@ main, section, footer, nav {
     0 4px 24px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   z-index: 9999;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   width: max-content;
   max-width: calc(100vw - 2rem);
 }
