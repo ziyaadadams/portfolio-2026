@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
+import { HexagonBackground } from '@/components/ui/hexagon-background';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -535,11 +536,15 @@ function Footer() {
 export default function Home() {
   return (
     <>
+      {/* Fixed hexagon grid background */}
+      <div className="fixed inset-0 z-0" aria-hidden="true">
+        <HexagonBackground />
+      </div>
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />
       <Navbar />
-      <main>
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <Marquee />
         <About />

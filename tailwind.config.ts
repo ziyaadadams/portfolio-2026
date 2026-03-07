@@ -10,29 +10,44 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border:     'rgba(255,255,255,0.08)',
-        background: '#000000',
-        foreground: '#ffffff',
-        card: {
-          DEFAULT:     'rgba(255,255,255,0.03)',
-          foreground:  '#ffffff',
+        border:     'hsl(var(--border))',
+        input:      'hsl(var(--input))',
+        ring:       'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT:    'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT:    'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT:    'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
-          DEFAULT:    'rgba(255,255,255,0.06)',
-          foreground: 'rgba(255,255,255,0.45)',
+          DEFAULT:    'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT:    'rgba(255,255,255,0.08)',
-          foreground: '#ffffff',
+          DEFAULT:    'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT:    'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT:    'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
         },
       },
-      borderColor: {
-        DEFAULT: 'rgba(255,255,255,0.08)',
-      },
       borderRadius: {
-        lg: '10px',
-        md: '8px',
-        sm: '6px',
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'Space Grotesk', 'Arial', 'sans-serif'],
