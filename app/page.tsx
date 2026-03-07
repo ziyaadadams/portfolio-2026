@@ -464,6 +464,7 @@ function Hero() {
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
+        minHeight: "100vh",
       }}
     >
       {/* ═══════════════════════════════════════════════════════════════════════
@@ -477,6 +478,7 @@ function Hero() {
           position: "relative",
           zIndex: 1,
           paddingTop: "70px",
+          flex: "1 1 55%",
         }}
       >
         {/* Far-left: vertical labels */}
@@ -893,6 +895,10 @@ function Hero() {
           zIndex: 1,
           padding: "2rem clamp(1.5rem, 4vw, 4rem) 3rem",
           borderTop: "1px solid rgba(255,255,255,0.06)",
+          flex: "1 1 45%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
         {/* Decorative circle */}
