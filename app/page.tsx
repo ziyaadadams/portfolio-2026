@@ -407,12 +407,16 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    href: "https://trailblazer.me/id/zadams",
+    href: "https://www.salesforce.com/trailblazer/zadams4",
     label: "Trailhead",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
+      <img
+        src="/logos/trailhead-alt-svgrepo-com.svg"
+        alt="Trailhead"
+        width={18}
+        height={18}
+        style={{ filter: "invert(1) opacity(0.75)", display: "block" }}
+      />
     ),
   },
   {
@@ -810,38 +814,79 @@ function Hero() {
                 and thoughtful practices.
               </motion.p>
 
-              <motion.a
-                href="#work"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.55 }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  alignSelf: "flex-start",
-                  gap: "0.5rem",
-                  padding: "0.6rem 1.75rem",
-                  background: "transparent",
-                  color: "#fff",
-                  borderRadius: "4px",
-                  border: "1px solid rgba(255,255,255,0.25)",
-                  fontSize: "0.72rem",
-                  fontWeight: 500,
-                  textDecoration: "none",
-                  letterSpacing: "0.12em",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-                }}
-              >
-                Portfolio
-              </motion.a>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <motion.a
+                  href="#work"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9, duration: 0.55 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.6rem 1.75rem",
+                    background: "transparent",
+                    color: "#fff",
+                    borderRadius: "4px",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    fontSize: "0.72rem",
+                    fontWeight: 500,
+                    textDecoration: "none",
+                    letterSpacing: "0.12em",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                  }}
+                >
+                  Portfolio
+                </motion.a>
+
+                <motion.a
+                  href="/resume.pdf"
+                  download
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0, duration: 0.55 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.6rem 1.75rem",
+                    background: "transparent",
+                    color: "rgba(255,255,255,0.6)",
+                    borderRadius: "4px",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    fontSize: "0.72rem",
+                    fontWeight: 500,
+                    textDecoration: "none",
+                    letterSpacing: "0.12em",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+                    e.currentTarget.style.color = "#fff";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                  }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Resume
+                </motion.a>
+              </div>
             </div>
           </div>
         </div>
@@ -2121,7 +2166,7 @@ function Contact() {
               GitHub
             </a>
             <a
-              href="https://trailblazer.salesforce.com"
+              href="https://www.salesforce.com/trailblazer/zadams4"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -2140,7 +2185,13 @@ function Contact() {
                 textTransform: "uppercase",
               }}
             >
-              <Globe size={16} />
+              <img
+                src="/logos/trailhead-alt-svgrepo-com.svg"
+                alt="Trailhead"
+                width={16}
+                height={16}
+                style={{ filter: "invert(1)", display: "block" }}
+              />
               Trailhead
             </a>
             <a
