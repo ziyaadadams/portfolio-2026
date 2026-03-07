@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
-import { FluidGradientBackground } from '@/components/ui/fluid-gradient-background';
+import { ParticleBackground } from '@/components/ui/particle-background';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -818,8 +818,8 @@ function Footer() {
 export default function Home() {
   return (
     <>
-      {/* Fixed fluid gradient background */}
-      <FluidGradientBackground />
+      {/* Particle background */}
+      <ParticleBackground />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />
