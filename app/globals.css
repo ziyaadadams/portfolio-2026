@@ -306,13 +306,9 @@ main, section, footer, nav {
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-composition {
-    flex-direction: column !important;
-    align-items: center !important;
+    grid-template-columns: 1fr !important;
+    justify-items: center;
     text-align: center;
-  }
-
-  .hero-composition > div:last-child {
-    align-items: center !important;
   }
 
   .about-grid {

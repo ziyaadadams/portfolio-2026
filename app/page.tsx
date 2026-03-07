@@ -476,8 +476,7 @@ function Hero() {
           gridTemplateColumns: "auto 1fr auto",
           position: "relative",
           zIndex: 1,
-          paddingTop: "80px",
-          minHeight: "100vh",
+          paddingTop: "70px",
         }}
       >
         {/* Far-left: vertical labels */}
@@ -533,21 +532,22 @@ function Hero() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "2rem clamp(1rem, 3vw, 3rem)",
+            padding: "1rem clamp(1rem, 3vw, 3rem)",
             position: "relative",
           }}
         >
           <div
             className="hero-composition"
             style={{
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "clamp(2rem, 4vw, 5rem)",
+              display: "grid",
+              gridTemplateColumns: "auto 1fr",
+              gap: "0",
               maxWidth: "1100px",
               width: "100%",
+              alignItems: "center",
             }}
           >
-            {/* LEFT: Photo block */}
+            {/* ─── LEFT COLUMN: Photo with name overlay + testimonial ─── */}
             <div style={{ position: "relative", flexShrink: 0 }}>
               {/* DEVELOPER vertical text */}
               <motion.span
@@ -572,48 +572,111 @@ function Hero() {
                 DEVELOPER
               </motion.span>
 
-              {/* Portrait */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  delay: 0.35,
-                  duration: 1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                style={{
-                  width: "clamp(260px, 26vw, 400px)",
-                  height: "clamp(320px, 34vw, 520px)",
-                  overflow: "hidden",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <div
+              {/* Photo + overlapping name container */}
+              <div style={{ position: "relative" }}>
+                {/* Portrait */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    delay: 0.35,
+                    duration: 1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    background:
-                      "linear-gradient(180deg, rgba(40,40,40,0.5) 0%, rgba(55,55,55,0.35) 40%, rgba(15,15,15,0.95) 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    width: "clamp(220px, 22vw, 340px)",
+                    height: "clamp(270px, 28vw, 420px)",
+                    overflow: "hidden",
+                    position: "relative",
+                    zIndex: 1,
                   }}
                 >
-                  <svg
-                    viewBox="0 0 200 280"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ width: "60%", height: "60%", opacity: 0.18 }}
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      background:
+                        "linear-gradient(180deg, rgba(40,40,40,0.5) 0%, rgba(55,55,55,0.35) 40%, rgba(15,15,15,0.95) 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                   >
-                    <ellipse cx="100" cy="80" rx="45" ry="52" fill="white" />
-                    <path
-                      d="M100 132 C42 138 18 195 12 280 L188 280 C182 195 158 138 100 132Z"
-                      fill="white"
-                    />
-                  </svg>
+                    <svg
+                      viewBox="0 0 200 280"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{ width: "60%", height: "60%", opacity: 0.18 }}
+                    >
+                      <ellipse cx="100" cy="80" rx="45" ry="52" fill="white" />
+                      <path
+                        d="M100 132 C42 138 18 195 12 280 L188 280 C182 195 158 138 100 132Z"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                </motion.div>
+
+                {/* ── Name overlay — positioned over the photo's right side ── */}
+                <div
+                  style={{
+                    position: "absolute",
+                    right: "-40%",
+                    top: "28%",
+                    zIndex: 2,
+                    pointerEvents: "none",
+                  }}
+                >
+                  {/* Spaced last name */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.3,
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    style={{
+                      fontSize: "clamp(0.6rem, 0.8vw, 0.75rem)",
+                      fontWeight: 300,
+                      letterSpacing: "0.55em",
+                      textTransform: "lowercase",
+                      color: "rgba(255,255,255,0.45)",
+                      marginBottom: "0.15rem",
+                      textShadow: "0 2px 20px rgba(0,0,0,0.8)",
+                    }}
+                  >
+                    A d a m s
+                  </motion.div>
+
+                  {/* Big first name */}
+                  <h1
+                    style={{
+                      fontSize: "clamp(3rem, 6vw, 7rem)",
+                      fontWeight: 700,
+                      lineHeight: 0.85,
+                      letterSpacing: "-0.03em",
+                      color: "#fff",
+                      textShadow: "0 4px 40px rgba(0,0,0,0.9)",
+                    }}
+                  >
+                    <div style={{ overflow: "hidden" }}>
+                      <motion.span
+                        style={{ display: "inline-block" }}
+                        initial={{ y: "120%" }}
+                        animate={{ y: "0%" }}
+                        transition={{
+                          duration: 0.85,
+                          ease: [0.16, 1, 0.3, 1],
+                          delay: 0.15,
+                        }}
+                      >
+                        Ziyaad
+                      </motion.span>
+                    </div>
+                  </h1>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Testimonial below photo */}
               <motion.div
@@ -621,10 +684,10 @@ function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.1, duration: 0.7 }}
                 style={{
-                  marginTop: "1.5rem",
+                  marginTop: "0.75rem",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.5rem",
+                  gap: "0.35rem",
                 }}
               >
                 <div
@@ -700,63 +763,17 @@ function Hero() {
               </motion.div>
             </div>
 
-            {/* RIGHT: Name + Description + Button */}
+            {/* ─── RIGHT COLUMN: Description + Button (below name overlap area) ─── */}
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                paddingTop: "clamp(2rem, 6vw, 5rem)",
-                flex: 1,
-                minWidth: 0,
+                justifyContent: "flex-end",
+                paddingLeft: "clamp(1rem, 2vw, 2.5rem)",
+                paddingBottom: "clamp(2rem, 4vw, 4rem)",
+                alignSelf: "end",
               }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.3,
-                  duration: 0.7,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                style={{
-                  fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
-                  fontWeight: 300,
-                  letterSpacing: "0.6em",
-                  textTransform: "lowercase",
-                  color: "rgba(255,255,255,0.45)",
-                  marginBottom: "0.25rem",
-                }}
-              >
-                A d a m s
-              </motion.div>
-
-              <h1
-                style={{
-                  fontSize: "clamp(3.5rem, 7.5vw, 8rem)",
-                  fontWeight: 700,
-                  lineHeight: 0.85,
-                  letterSpacing: "-0.03em",
-                  color: "#fff",
-                  marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
-                }}
-              >
-                <div style={{ overflow: "hidden" }}>
-                  <motion.span
-                    style={{ display: "inline-block" }}
-                    initial={{ y: "120%" }}
-                    animate={{ y: "0%" }}
-                    transition={{
-                      duration: 0.85,
-                      ease: [0.16, 1, 0.3, 1],
-                      delay: 0.15,
-                    }}
-                  >
-                    Ziyaad
-                  </motion.span>
-                </div>
-              </h1>
-
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -766,11 +783,11 @@ function Hero() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 style={{
-                  fontSize: "clamp(0.72rem, 0.88vw, 0.82rem)",
+                  fontSize: "clamp(0.72rem, 0.85vw, 0.8rem)",
                   color: "rgba(255,255,255,0.48)",
                   lineHeight: 1.85,
                   maxWidth: "22rem",
-                  marginBottom: "clamp(1.25rem, 2vw, 2rem)",
+                  marginBottom: "clamp(0.75rem, 1.2vw, 1.25rem)",
                 }}
               >
                 My goal is to write clean, maintainable code that enhances the
@@ -788,7 +805,7 @@ function Hero() {
                   alignItems: "center",
                   alignSelf: "flex-start",
                   gap: "0.5rem",
-                  padding: "0.65rem 2rem",
+                  padding: "0.6rem 1.75rem",
                   background: "transparent",
                   color: "#fff",
                   borderRadius: "4px",
@@ -874,7 +891,7 @@ function Hero() {
         style={{
           position: "relative",
           zIndex: 1,
-          padding: "4rem clamp(1.5rem, 4vw, 4rem) 5rem",
+          padding: "2rem clamp(1.5rem, 4vw, 4rem) 3rem",
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
       >
@@ -899,10 +916,10 @@ function Hero() {
             animate={aboutInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
+              fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
               fontWeight: 700,
               color: "#fff",
-              marginBottom: "2.5rem",
+              marginBottom: "1.5rem",
               letterSpacing: "-0.02em",
             }}
           >
@@ -914,7 +931,7 @@ function Hero() {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "clamp(2rem, 4vw, 4rem)",
+              gap: "clamp(1.5rem, 3vw, 3rem)",
               alignItems: "start",
             }}
           >
@@ -928,8 +945,8 @@ function Hero() {
                 style={{
                   fontSize: "clamp(0.78rem, 0.95vw, 0.88rem)",
                   color: "rgba(255,255,255,0.6)",
-                  lineHeight: 1.85,
-                  marginBottom: "2rem",
+                  lineHeight: 1.75,
+                  marginBottom: "1.25rem",
                 }}
               >
                 Hello! I&apos;m Ziyaad Adams, a full-stack Salesforce developer
@@ -993,7 +1010,7 @@ function Hero() {
                   animate={aboutInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.2 + i * 0.08, duration: 0.55 }}
                   style={{
-                    padding: "1.15rem",
+                    padding: "0.85rem",
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "8px",
