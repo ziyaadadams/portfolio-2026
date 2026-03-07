@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ParticleBackground } from '@/components/ui/particle-background';
+import { Paper, Category, Send, Swap, InfoSquare, Graph } from 'react-iconly';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -259,118 +260,87 @@ function CustomCursor() {
   );
 }
 
-// ── Floating Tech Card (hero right) ──────────────────────────────────────────
+// ── Hero ──────────────────────────────────────────────────────────────────────
 
-const CERTS = [
-  { label: 'Salesforce Administrator',       abbr: 'ADM',  color: '#00A1E0' },
-  { label: 'Platform Developer I',           abbr: 'PD1',  color: '#00A1E0' },
-  { label: 'Platform Developer II',          abbr: 'PD2',  color: '#032D60' },
-  { label: 'Marketing Cloud Developer',      abbr: 'MCD',  color: '#F97316' },
-  { label: 'Marketing Cloud Email Spec.',    abbr: 'MCE',  color: '#F97316' },
-  { label: 'OmniStudio Developer',           abbr: 'OSD',  color: '#8B5CF6' },
-  { label: 'Data Cloud Consultant',          abbr: 'DCC',  color: '#10B981' },
-  { label: 'AI Associate',                   abbr: 'AIA',  color: '#06B6D4' },
-];
+const HEADLINE_WORDS = ['BUILDING', 'ENTERPRISE', 'SALESFORCE', 'SOLUTIONS'];
 
-const TECH_BADGES = ['Apex', 'LWC', 'SOQL', 'MuleSoft', 'REST', 'AWS', 'React', 'Next.js'];
-
-function FloatingTechCard() {
+function Hero() {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-      style={{
-        position: 'relative',
-        width: 'clamp(260px, 26vw, 400px)',
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75rem',
-      }}
-    >
-      {/* Certifications card */}
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 6, ease: 'easeInOut', repeat: Infinity }}
-        style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '16px',
-          padding: '1.25rem 1.375rem',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-        }}
-      >
-        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-          Salesforce Certifications
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          {CERTS.map((c, i) => (
-            <motion.div
-              key={c.abbr}
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 + i * 0.07, duration: 0.45 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}
-            >
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                width: '30px', height: '20px', borderRadius: '4px',
-                background: c.color + '22', border: `1px solid ${c.color}44`,
-                fontSize: '0.55rem', fontWeight: 700, color: c.color,
-                letterSpacing: '0.04em', flexShrink: 0,
-              }}>
-                {c.abbr}
-              </span>
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.02em' }}>{c.label}</span>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+    <section id="hero" style={{ minHeight: '100vh', background: '#000', display: 'flex', flexDirection: 'column', paddingTop: '76px', position: 'relative', overflow: 'hidden' }}>
 
-      {/* Tech badges card */}
-      <motion.div
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 5, ease: 'easeInOut', repeat: Infinity, delay: 1 }}
-        style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '12px',
-          padding: '1rem 1.125rem',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-        }}
-      >
-        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-          Core Stack
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-          {TECH_BADGES.map((t, i) => (
-            <motion.span
-              key={t}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 + i * 0.06 }}
-              style={{
-                padding: '0.25rem 0.65rem',
-                borderRadius: '20px',
-                border: '1px solid rgba(255,255,255,0.12)',
-                fontSize: '0.65rem', fontWeight: 500,
-                color: 'rgba(255,255,255,0.6)',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {t}
-            </motion.span>
+      {/* Main content — centered */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem clamp(1rem,3vw,2.5rem) 2rem', textAlign: 'center' }}>
+
+        {/* Availability badge */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16,1,0.3,1] }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '100px', padding: '0.35rem 0.875rem', marginBottom: '2.5rem' }}>
+          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00e676', boxShadow: '0 0 6px #00e676', display: 'inline-block', flexShrink: 0 }} />
+          <span style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Available for Work</span>
+        </motion.div>
+
+        {/* Main headline — word-by-word slide up */}
+        <h1 style={{ fontSize: 'clamp(3rem,8vw,7rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.03em', textTransform: 'uppercase', marginBottom: '2.25rem' }}>
+          {HEADLINE_WORDS.map((word, i) => (
+            <div key={i} style={{ overflow: 'hidden' }}>
+              <motion.span style={{ display: 'inline-block' }} initial={{ y: '110%' }} animate={{ y: '0%' }}
+                transition={{ duration: 0.75, ease: [0.16,1,0.3,1], delay: 0.12 + i * 0.1 }}>
+                {word}
+              </motion.span>
+            </div>
           ))}
-        </div>
-      </motion.div>
-    </motion.div>
+        </h1>
+
+        {/* Name + role + location */}
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65, duration: 0.6 }}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: 'clamp(0.875rem,1.4vw,1.0625rem)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Ziyaad Adams</span>
+          <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
+          <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Senior Salesforce Engineer</span>
+          <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
+          <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Cape Town 🇿🇦</span>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.65, ease: [0.16,1,0.3,1] }}
+          style={{ fontSize: 'clamp(0.875rem,1.2vw,1rem)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, maxWidth: '38rem', marginBottom: '2.5rem' }}>
+          5 years of enterprise-grade Salesforce development across banking, healthcare, and FMCG — delivering complex Apex, LWC, Marketing Cloud, and integration solutions for Fortune 500 clients.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.92, duration: 0.55 }}
+          style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <a href="#work" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: '#fff', color: '#000', borderRadius: '100px', fontSize: '0.8125rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase', transition: 'opacity 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
+            View Projects <span style={{ fontSize: '1rem' }}>→</span>
+          </a>
+          <a href="#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: 'transparent', color: '#fff', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.8125rem', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase', transition: 'border-color 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)')}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)')}>
+            Get in Touch
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Bottom stats band */}
+      <div style={{ borderTop: '1px solid #666666' }}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.7 }}
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem clamp(1rem,3vw,2.5rem)', flexWrap: 'wrap', gap: '1.5rem', borderBottom: '1px solid #666666' }}>
+          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Breakthrough</span>
+          <div style={{ display: 'flex', gap: 'clamp(1.5rem,5vw,5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
+            {[{ v: 5, s: '+', l: 'YEARS EXP' }, { v: 8, s: '', l: 'CERTS' }, { v: 30, s: '+', l: 'PROJECTS' }, { v: 5, s: '', l: 'COUNTRIES' }].map(stat => (
+              <div key={stat.l} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 'clamp(1.1rem,2vw,1.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}><Counter target={stat.v} suffix={stat.s} /></div>
+                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '0.3rem' }}>{stat.l}</div>
+              </div>
+            ))}
+          </div>
+          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technology</span>
+        </motion.div>
+      </div>
+    </section>
   );
 }
-
-// ── Animated word reveal ──────────────────────────────────────────────────────
 
 function RevealWords({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -434,95 +404,6 @@ function Navbar() {
         </a>
       </div>
     </motion.nav>
-  );
-}
-
-// ── Hero ──────────────────────────────────────────────────────────────────────
-
-const HEADLINE_WORDS = ['BUILDING', 'ENTERPRISE', 'SALESFORCE', 'SOLUTIONS'];
-
-function Hero() {
-  return (
-    <section id="hero" style={{ minHeight: '100vh', background: '#000', display: 'flex', flexDirection: 'column', paddingTop: '76px', position: 'relative', overflow: 'hidden' }}>
-
-      {/* Main content */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '3rem clamp(1rem,3vw,2.5rem) 2rem', gap: '3rem', flexWrap: 'wrap' }}>
-
-        {/* Left: statement + meta + CTAs */}
-        <div style={{ flex: '1 1 420px', minWidth: 0 }}>
-
-          {/* Availability badge */}
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16,1,0.3,1] }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '100px', padding: '0.35rem 0.875rem', marginBottom: '2.5rem' }}>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00e676', boxShadow: '0 0 6px #00e676', display: 'inline-block', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Available for Work</span>
-          </motion.div>
-
-          {/* Main headline — word-by-word slide up */}
-          <h1 style={{ fontSize: 'clamp(2.75rem,6.5vw,6rem)', fontWeight: 700, lineHeight: 0.92, letterSpacing: '-0.03em', textTransform: 'uppercase', marginBottom: '2rem' }}>
-            {HEADLINE_WORDS.map((word, i) => (
-              <div key={i} style={{ overflow: 'hidden' }}>
-                <motion.span style={{ display: 'inline-block' }} initial={{ y: '110%' }} animate={{ y: '0%' }}
-                  transition={{ duration: 0.75, ease: [0.16,1,0.3,1], delay: 0.12 + i * 0.1 }}>
-                  {word}
-                </motion.span>
-              </div>
-            ))}
-          </h1>
-
-          {/* Name + location */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.6 }}
-            style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 'clamp(0.875rem,1.4vw,1.0625rem)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Ziyaad Adams</span>
-            <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Senior Salesforce Engineer</span>
-            <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Cape Town 🇿🇦</span>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.65, ease: [0.16,1,0.3,1] }}
-            style={{ fontSize: 'clamp(0.875rem,1.2vw,1rem)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, maxWidth: '36rem', marginBottom: '2.5rem' }}>
-            5 years of enterprise-grade Salesforce development across banking, healthcare, and FMCG — delivering complex Apex, LWC, Marketing Cloud, and integration solutions for Fortune 500 clients.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.92, duration: 0.55 }}
-            style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <a href="#work" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: '#fff', color: '#000', borderRadius: '100px', fontSize: '0.8125rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase', transition: 'opacity 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-              View Projects <span style={{ fontSize: '1rem' }}>→</span>
-            </a>
-            <a href="#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: 'transparent', color: '#fff', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.8125rem', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase', transition: 'border-color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)')}>
-              Get in Touch
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Right: floating cert/tech card */}
-        <FloatingTechCard />
-      </div>
-
-      {/* Bottom stats band */}
-      <div style={{ borderTop: '1px solid #666666' }}>
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.7 }}
-          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem clamp(1rem,3vw,2.5rem)', flexWrap: 'wrap', gap: '1.5rem', borderBottom: '1px solid #666666' }}>
-          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Breakthrough</span>
-          <div style={{ display: 'flex', gap: 'clamp(1.5rem,5vw,5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
-            {[{ v: 5, s: '+', l: 'YEARS EXP' }, { v: 8, s: '', l: 'CERTS' }, { v: 30, s: '+', l: 'PROJECTS' }, { v: 5, s: '', l: 'COUNTRIES' }].map(stat => (
-              <div key={stat.l} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 'clamp(1.1rem,2vw,1.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}><Counter target={stat.v} suffix={stat.s} /></div>
-                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '0.3rem' }}>{stat.l}</div>
-              </div>
-            ))}
-          </div>
-          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technology</span>
-        </motion.div>
-      </div>
-    </section>
   );
 }
 
@@ -668,10 +549,12 @@ function Projects() {
 
 // ── Shared card style ─────────────────────────────────────────────────────────
 const CARD: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.08)',
+  background: 'rgba(255,255,255,0.05)',
+  border: '1px solid rgba(255,255,255,0.1)',
   borderRadius: '10px',
   padding: '1.75rem 2rem',
+  backdropFilter: 'blur(32px)',
+  WebkitBackdropFilter: 'blur(32px)',
 };
 
 // ── Section header ─────────────────────────────────────────────────────────────
@@ -687,7 +570,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
   );
 }
 
-// ── Services ──────────────────────────────────────────────────────────────────
+const SERVICE_ICONS = [Paper, Category, Send, Swap, InfoSquare, Graph];
 
 function Services() {
   return (
@@ -695,18 +578,21 @@ function Services() {
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <SectionHeader label="CORE EXPERTISE" title="WHAT I DO" />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: '0' }}>
-          {services.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-20px' }} transition={{ duration: 0.45, delay: i * 0.05 }}
-              style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <span style={{ fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem' }}>
-                {['⚡','🖥️','📧','🔗','💡','📊'][i]}
-              </span>
-              <div>
-                <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#fff', marginBottom: '0.35rem' }}>{s.title}</div>
-                <div style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.68)', lineHeight: 1.65 }}>{s.description}</div>
-              </div>
-            </motion.div>
-          ))}
+          {services.map((s, i) => {
+            const Icon = SERVICE_ICONS[i];
+            return (
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-20px' }} transition={{ duration: 0.45, delay: i * 0.05 }}
+                style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                <span style={{ flexShrink: 0, marginTop: '0.05rem', color: 'rgba(255,255,255,0.7)' }}>
+                  <Icon set="bulk" size={22} />
+                </span>
+                <div>
+                  <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#fff', marginBottom: '0.35rem' }}>{s.title}</div>
+                  <div style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.68)', lineHeight: 1.65 }}>{s.description}</div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -822,9 +708,9 @@ export default function Home() {
       <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <About />
+        <Experience />
         <Projects />
         <Services />
-        <Experience />
         <Contact />
       </main>
       <Footer />
