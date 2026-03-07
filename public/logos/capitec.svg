@@ -1,0 +1,7 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="80" rx="8" fill="#002E5F"/>
+  <circle cx="40" cy="40" r="18" fill="none" stroke="#00C3F0" stroke-width="2.5"/>
+  <text x="40" y="46" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#00C3F0" text-anchor="middle">C</text>
+  <text x="95" y="36" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">CAPITEC</text>
+  <text x="95" y="52" font-family="Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="1">BANK</text>
+</svg>

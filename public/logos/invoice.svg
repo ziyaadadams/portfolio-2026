@@ -1,0 +1,10 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="80" rx="8" fill="#0D1117"/>
+  <rect x="20" y="15" width="38" height="50" rx="3" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <line x1="26" y1="27" x2="52" y2="27" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="26" y1="34" x2="52" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <line x1="26" y1="40" x2="44" y2="40" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <line x1="26" y1="52" x2="52" y2="52" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="105" y="36" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">INVOICE</text>
+  <text x="105" y="52" font-family="Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle" letter-spacing="1">PLATFORM</text>
+</svg>

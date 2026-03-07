@@ -1,0 +1,6 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="80" rx="8" fill="#0F0F0F"/>
+  <polygon points="30,55 55,20 65,20 45,50 80,50 60,70 50,70 65,55" fill="#E8FF00"/>
+  <text x="105" y="38" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">VELO</text>
+  <text x="105" y="55" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#E8FF00" text-anchor="middle">RACER</text>
+</svg>

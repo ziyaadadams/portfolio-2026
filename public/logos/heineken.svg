@@ -1,0 +1,6 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="80" rx="8" fill="#1A5C2A"/>
+  <text x="80" y="38" font-family="Arial,sans-serif" font-size="26" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">HEINEKEN</text>
+  <text x="80" y="56" font-family="Arial,sans-serif" font-size="8" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="3">× DISTELL</text>
+  <rect x="55" y="62" width="50" height="1.5" rx="1" fill="rgba(255,255,255,0.3)"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="80" rx="8" fill="#2D6A2D"/>
+  <circle cx="68" cy="30" r="5" fill="#A8E63D"/>
+  <circle cx="80" cy="24" r="5" fill="#A8E63D"/>
+  <circle cx="92" cy="30" r="5" fill="#A8E63D"/>
+  <ellipse cx="80" cy="44" rx="10" ry="12" fill="#A8E63D"/>
+  <text x="80" y="66" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">FOUR PAWS</text>
+</svg>
