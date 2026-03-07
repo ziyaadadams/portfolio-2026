@@ -104,7 +104,7 @@ const projects = [
   {
     company: "via Digital Modus",
     client: "NHS Professionals",
-    logo: "/logos/nhsp.svg",
+    logo: "/logos/NHS-01.svg",
     title: "NHSP",
     description:
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
@@ -115,7 +115,7 @@ const projects = [
   {
     company: "via BlueSky",
     client: "Capitec Bank",
-    logo: "/logos/capitec.svg",
+    logo: "/logos/CPI.JO_BIG.svg",
     title: "Fraud Detection System",
     description:
       "Engineered and enhanced the Salesforce platform for the Fraud Department, leveraging OmniStudio, Flows, and Lightning Web Components (LWC) to build dynamic fraud-focused features and case automation tools. Delivered solutions that streamlined internal processes and improved efficiency for agents investigating and managing fraud cases — tools currently active in production.",
@@ -126,7 +126,7 @@ const projects = [
   {
     company: "via BlueSky",
     client: "ABSA Bank",
-    logo: "/logos/absa.svg",
+    logo: "/logos/ABSP.JO.svg",
     title: "Credit & Complaints Platform",
     description:
       "Led the development of new CIB Complaints and Credit Application forms as the sole developer, accelerating ABSA Bank's migration of key business processes to Salesforce. Implemented a customer feature for bulk case transfers and ensured UI compliance with external Adobe XD design templates. Successfully enabled the client to manage all complaints and new credit applications within a centralised CRM environment.",
@@ -785,6 +785,14 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 
 function Navbar() {
   const [active, setActive] = useState("hero");
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     const fn = () => {
       for (const id of [
@@ -814,78 +822,28 @@ function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        height: "76px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 clamp(1rem,3vw,2.5rem)",
-        background: "rgba(0,0,0,0.6)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        borderBottom: "1px solid #666666",
-      }}
+      className={`nav-island ${scrolled ? 'nav-island--scrolled' : ''}`}
     >
-      <a href="#hero" style={{ textDecoration: "none" }}>
-        <span
-          style={{
-            fontSize: "1.05rem",
-            fontWeight: 700,
-            color: "#fff",
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-          }}
-        >
-          ZIYAAD ADAMS
-        </span>
+      <a href="#hero" className="nav-island__logo">
+        Z<span>.</span>
       </a>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "clamp(1rem,2.5vw,2.5rem)",
-        }}
-      >
+      <div className="nav-island__links">
         {navItems.map((item) => (
           <a
             key={item.label}
             href={item.href}
-            className="nav-link"
+            className="nav-island__link"
             style={{
-              fontSize: "14px",
-              fontWeight: 400,
-              letterSpacing: "0.04em",
-              textDecoration: "none",
-              color: "#ffffff",
-              textTransform: "uppercase",
-              opacity: active === item.href.slice(1) ? 1 : 0.65,
+              opacity: active === item.href.slice(1) ? 1 : 0.7,
             }}
           >
             {item.label}
           </a>
         ))}
-        <a
-          href="#contact"
-          className="nav-link"
-          style={{
-            fontSize: "14px",
-            fontWeight: 400,
-            color: "#ffffff",
-            textDecoration: "none",
-            borderBottom: "1px solid #ffffff",
-            paddingBottom: "2px",
-            letterSpacing: "0.04em",
-            textTransform: "uppercase",
-          }}
-        >
-          CONTACT US
-        </a>
       </div>
+      <a href="#contact" className="nav-island__cta">
+        CONTACT
+      </a>
     </motion.nav>
   );
 }

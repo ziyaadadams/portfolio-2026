@@ -221,6 +221,25 @@ main, section, footer, nav {
   background: rgba(255, 255, 255, 0.15);
 }
 
+.nav-island__cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  background: #fff;
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background 0.2s ease;
+}
+
+.nav-island__cta:hover {
+  background: #e0e0e0;
+}
+
 /* ── Mobile Menu Overlay ───────────────────────────────────────────────── */
 .menu-overlay {
   position: fixed;
