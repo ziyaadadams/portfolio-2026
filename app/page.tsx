@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
-import { ParticleBackground } from '@/components/ui/particle-background';
+import { HexagonBackground } from '@/components/ui/hexagon-background';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -302,7 +302,7 @@ function FloatingTechCard() {
           WebkitBackdropFilter: 'blur(24px)',
         }}
       >
-        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>
           Salesforce Certifications
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -342,7 +342,7 @@ function FloatingTechCard() {
           WebkitBackdropFilter: 'blur(24px)',
         }}
       >
-        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
           Core Stack
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
@@ -402,24 +402,6 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
     requestAnimationFrame(step);
   }, [isInView, target]);
   return <span ref={ref}>{count}{suffix}</span>;
-}
-
-// ── Marquee ticker ────────────────────────────────────────────────────────────
-
-const TICKER = ['BREAKTHROUGH', '/', 'INSPIRE', '/', 'TECHNOLOGY', '/', 'SALESFORCE', '/', 'INNOVATION', '/', 'ENTERPRISE', '/', 'BREAKTHROUGH', '/', 'INSPIRE', '/', 'TECHNOLOGY', '/', 'SALESFORCE', '/', 'INNOVATION', '/', 'ENTERPRISE', '/'];
-
-function Marquee() {
-  return (
-    <div style={{ overflow: 'hidden', whiteSpace: 'nowrap', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '1rem 0' }}>
-      <div className="marquee-track" style={{ display: 'inline-flex', gap: '2rem', paddingRight: '2rem' }}>
-        {TICKER.map((item, i) => (
-          <span key={i} style={{ fontSize: '0.6875rem', fontWeight: item === '/' ? 300 : 500, color: item === '/' ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
@@ -493,14 +475,14 @@ function Hero() {
             style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
             <span style={{ fontSize: 'clamp(0.875rem,1.4vw,1.0625rem)', fontWeight: 600, color: 'rgba(255,255,255,0.9)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Ziyaad Adams</span>
             <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.32)', letterSpacing: '0.06em' }}>Senior Salesforce Engineer</span>
+            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Senior Salesforce Engineer</span>
             <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.32)', letterSpacing: '0.06em' }}>Cape Town 🇿🇦</span>
+            <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.06em' }}>Cape Town 🇿🇦</span>
           </motion.div>
 
           {/* Description */}
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.65, ease: [0.16,1,0.3,1] }}
-            style={{ fontSize: 'clamp(0.875rem,1.2vw,1rem)', color: 'rgba(255,255,255,0.36)', lineHeight: 1.75, maxWidth: '36rem', marginBottom: '2.5rem' }}>
+            style={{ fontSize: 'clamp(0.875rem,1.2vw,1rem)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, maxWidth: '36rem', marginBottom: '2.5rem' }}>
             5 years of enterprise-grade Salesforce development across banking, healthcare, and FMCG — delivering complex Apex, LWC, Marketing Cloud, and integration solutions for Fortune 500 clients.
           </motion.p>
 
@@ -528,16 +510,16 @@ function Hero() {
       <div style={{ borderTop: '1px solid #666666' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.7 }}
           style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem clamp(1rem,3vw,2.5rem)', flexWrap: 'wrap', gap: '1.5rem', borderBottom: '1px solid #666666' }}>
-          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Breakthrough</span>
+          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Breakthrough</span>
           <div style={{ display: 'flex', gap: 'clamp(1.5rem,5vw,5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
             {[{ v: 5, s: '+', l: 'YEARS EXP' }, { v: 8, s: '', l: 'CERTS' }, { v: 30, s: '+', l: 'PROJECTS' }, { v: 5, s: '', l: 'COUNTRIES' }].map(stat => (
               <div key={stat.l} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 'clamp(1.1rem,2vw,1.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}><Counter target={stat.v} suffix={stat.s} /></div>
-                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '0.3rem' }}>{stat.l}</div>
+                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '0.3rem' }}>{stat.l}</div>
               </div>
             ))}
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technology</span>
+          <span style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technology</span>
         </motion.div>
       </div>
     </section>
@@ -548,7 +530,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" style={{ padding: '5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="about" style={{ padding: '3.5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <SectionHeader label="ABOUT ME" title="WHO I AM" />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: '1rem', marginBottom: '1rem' }}>
@@ -558,7 +540,7 @@ function About() {
             <RevealWords text="SENIOR SALESFORCE ENGINEER INSPIRED BY CUTTING-EDGE TECHNOLOGIES AND ENTERPRISE PRODUCT DEVELOPMENT"
               style={{ fontSize: 'clamp(1.1rem,2.2vw,1.5rem)', fontWeight: 500, color: '#fff', lineHeight: 1.45, textTransform: 'uppercase', marginBottom: '1.25rem' }} />
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }}
-              style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.75 }}>
+              style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75 }}>
               I build scalable, enterprise-grade solutions on the Salesforce platform — from complex Apex back-end logic and LWC interfaces to Marketing Cloud journeys and MuleSoft integrations. Certified across 8 Salesforce disciplines and deployed across 5 countries.
             </motion.p>
           </motion.div>
@@ -569,7 +551,7 @@ function About() {
               <div style={{ fontSize: 'clamp(2.5rem,4vw,3.5rem)', fontWeight: 500, color: '#fff', lineHeight: 1, marginBottom: '0.5rem' }}>
                 <Counter target={stat.v} suffix={stat.s} />
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.32)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{stat.l}</div>
+              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{stat.l}</div>
             </motion.div>
           ))}
         </div>
@@ -598,22 +580,22 @@ function ProjectCard({ p, i, link }: { p: typeof projects[0] & { link?: string |
           style={{ height: '36px', width: 'auto', maxWidth: '100px', objectFit: 'contain', borderRadius: '4px', opacity: 0.9 }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
         />
-        <span style={{ fontSize: '0.625rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.14em', textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: '2px' }}>
+        <span style={{ fontSize: '0.625rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em', textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: '2px' }}>
           {(p as any).industry ?? ''}
         </span>
       </div>
       {/* Title + via */}
       <div>
-        <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
+        <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
           {p.company}
         </div>
         <h3 style={{ fontSize: '1.075rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>{p.title}</h3>
       </div>
-      <p style={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.8125rem', lineHeight: 1.7, flex: 1 }}>{p.description}</p>
+      <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.8125rem', lineHeight: 1.7, flex: 1 }}>{p.description}</p>
       {/* Tags */}
       <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
         {p.tags.map(tag => (
-          <span key={tag} style={{ padding: '0.18rem 0.7rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.48)', fontSize: '0.625rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{tag}</span>
+          <span key={tag} style={{ padding: '0.18rem 0.7rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.72)', fontSize: '0.625rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{tag}</span>
         ))}
       </div>
       {link && (
@@ -634,7 +616,7 @@ function Projects() {
   const [tab, setTab] = useState<'enterprise' | 'personal'>('enterprise');
 
   return (
-    <section id="work" style={{ padding: '5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="work" style={{ padding: '3.5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <SectionHeader label="SELECTED WORK" title="PROJECTS" />
 
@@ -649,7 +631,7 @@ function Projects() {
                 background: 'none',
                 border: 'none',
                 borderBottom: tab === t ? '2px solid #fff' : '2px solid transparent',
-                color: tab === t ? '#fff' : 'rgba(255,255,255,0.35)',
+                color: tab === t ? '#fff' : 'rgba(255,255,255,0.58)',
                 fontSize: '0.6875rem',
                 fontWeight: 600,
                 letterSpacing: '0.14em',
@@ -697,7 +679,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
   return (
     <div style={{ marginBottom: '2.5rem' }}>
       <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        style={{ display: 'block', fontSize: '0.6875rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        style={{ display: 'block', fontSize: '0.6875rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         {label}
       </motion.span>
       <RevealWords text={title} style={{ fontSize: 'clamp(1.5rem,3vw,2.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', textTransform: 'uppercase' }} />
@@ -709,16 +691,20 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
 
 function Services() {
   return (
-    <section id="skills" style={{ padding: '5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="skills" style={{ padding: '3.5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <SectionHeader label="CORE EXPERTISE" title="WHAT I DO" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: '0' }}>
           {services.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-30px' }} transition={{ duration: 0.55, delay: i * 0.06 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              style={CARD}>
-              <h3 style={{ fontSize: '1.0625rem', fontWeight: 600, color: '#fff', marginBottom: '0.625rem' }}>{s.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: '0.875rem', lineHeight: 1.7 }}>{s.description}</p>
+            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-20px' }} transition={{ duration: 0.45, delay: i * 0.05 }}
+              style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+              <span style={{ fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem' }}>
+                {['⚡','🖥️','📧','🔗','💡','📊'][i]}
+              </span>
+              <div>
+                <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#fff', marginBottom: '0.35rem' }}>{s.title}</div>
+                <div style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.68)', lineHeight: 1.65 }}>{s.description}</div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -731,31 +717,38 @@ function Services() {
 
 function Experience() {
   return (
-    <section id="experience" style={{ padding: '5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="experience" style={{ padding: '3.5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <SectionHeader label="CAREER" title="WHERE I'VE WORKED" />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {workHistory.map((job, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-30px' }} transition={{ duration: 0.6, delay: i * 0.08 }}
-              style={{ ...CARD, display: 'grid', gridTemplateColumns: '1fr auto', gap: '2rem', alignItems: 'start' }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.375rem', flexWrap: 'wrap' }}>
-                  <h3 style={{ fontSize: '1.0625rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em' }}>{job.company}</h3>
-                  <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.35)', fontWeight: 400 }}>· {job.role}</span>
+        <SectionHeader label="CAREER" title="EXPERIENCE" />
+        <div style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+          {/* Vertical line */}
+          <div style={{ position: 'absolute', left: 0, top: '6px', bottom: '6px', width: '1px', background: 'rgba(255,255,255,0.1)' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            {workHistory.map((job, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-30px' }} transition={{ duration: 0.5, delay: i * 0.07 }}
+                style={{ position: 'relative' }}>
+                {/* Timeline dot */}
+                <div style={{ position: 'absolute', left: '-1.75rem', top: '6px', width: '8px', height: '8px', borderRadius: '50%', background: '#fff', boxShadow: '0 0 8px rgba(255,255,255,0.4)', flexShrink: 0 }} />
+                {/* Header row */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.375rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: '1rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em' }}>{job.company}</span>
+                    <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.58)', fontWeight: 400 }}>· {job.role}</span>
+                  </div>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.62)', whiteSpace: 'nowrap' }}>{job.date}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.2rem', whiteSpace: 'nowrap' }}>{job.location}</div>
+                  </div>
                 </div>
-                <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '0.875rem', maxWidth: '48rem' }}>{job.description}</p>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '0.625rem', maxWidth: '56rem' }}>{job.description}</p>
+                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
                   {job.clients.map(c => (
-                    <span key={c} style={{ padding: '0.2rem 0.75rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.45)', fontSize: '0.6875rem', letterSpacing: '0.04em' }}>{c}</span>
+                    <span key={c} style={{ padding: '0.15rem 0.65rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.68)', fontSize: '0.6875rem', letterSpacing: '0.04em' }}>{c}</span>
                   ))}
                 </div>
-              </div>
-              <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                <div style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.35)', whiteSpace: 'nowrap' }}>{job.date}</div>
-                <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.2)', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>{job.location}</div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -766,33 +759,35 @@ function Experience() {
 
 function Contact() {
   return (
-    <section id="contact" style={{ padding: '5rem clamp(1rem,3vw,2.5rem) 4rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="contact" style={{ padding: '3.5rem clamp(1rem,3vw,2.5rem) 3rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <SectionHeader label="GET IN TOUCH" title="LET'S TALK" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: '1rem' }}>
-          <motion.a href="mailto:ziyaada22@gmail.com" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            style={{ ...CARD, textDecoration: 'none', display: 'block' }}>
-            <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>EMAIL</div>
-            <div style={{ color: '#fff', fontSize: '0.9375rem' }}>ziyaada22@gmail.com</div>
-          </motion.a>
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 }}
-            style={CARD}>
-            <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>LOCATION</div>
-            <div style={{ color: '#fff', fontSize: '0.9375rem' }}>Cape Town, South Africa 🇿🇦</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'flex-start' }}>
+          <div>
+            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+              style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+              GET IN TOUCH
+            </motion.p>
+            <RevealWords text="LET'S BUILD SOMETHING" style={{ fontSize: 'clamp(1.75rem,4vw,3rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.03em', textTransform: 'uppercase' }} />
+          </div>
+          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+            style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a href="mailto:ziyaada22@gmail.com"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: '#fff', color: '#000', borderRadius: '100px', fontSize: '0.8125rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Email Me →
+            </a>
+            <a href="https://linkedin.com/in/ziyaad-adams-8b0b001a2" target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: 'transparent', color: '#fff', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.8125rem', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              LinkedIn ↗
+            </a>
+            <a href="https://trailblazer.salesforce.com" target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.625rem', background: 'transparent', color: '#fff', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.8125rem', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Trailhead ↗
+            </a>
           </motion.div>
-          <motion.a href="https://linkedin.com/in/ziyaad-adams-8b0b001a2" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.16 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            style={{ ...CARD, textDecoration: 'none', display: 'block' }}>
-            <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>LINKEDIN</div>
-            <div style={{ color: '#fff', fontSize: '0.9375rem' }}>ziyaad-adams-8b0b001a2 ↗</div>
-          </motion.a>
-          <motion.a href="https://trailblazer.salesforce.com" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.24 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            style={{ ...CARD, textDecoration: 'none', display: 'block' }}>
-            <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>TRAILHEAD</div>
-            <div style={{ color: '#fff', fontSize: '0.9375rem' }}>View Certifications ↗</div>
-          </motion.a>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+            style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.58)', letterSpacing: '0.02em' }}>
+            Cape Town, South Africa 🇿🇦 · Available for remote & on-site engagements
+          </motion.div>
         </div>
       </div>
     </section>
@@ -805,9 +800,9 @@ function Footer() {
   return (
     <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '1.5rem clamp(1rem,3vw,2.5rem)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.06em' }}>© {new Date().getFullYear()} Ziyaad Adams</div>
-        <a href="mailto:ziyaada22@gmail.com" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', textDecoration: 'none', letterSpacing: '0.06em' }}>ziyaada22@gmail.com</a>
-        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Privacy Policy</div>
+        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.50)', letterSpacing: '0.06em' }}>© {new Date().getFullYear()} Ziyaad Adams</div>
+        <a href="mailto:ziyaada22@gmail.com" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.50)', textDecoration: 'none', letterSpacing: '0.06em' }}>ziyaada22@gmail.com</a>
+        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.50)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Privacy Policy</div>
       </div>
     </footer>
   );
@@ -818,15 +813,14 @@ function Footer() {
 export default function Home() {
   return (
     <>
-      {/* Particle background */}
-      <ParticleBackground />
+      {/* Hexagon background */}
+      <HexagonBackground className="z-0" aria-hidden="true" />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />
       <Navbar />
       <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
-        <Marquee />
         <About />
         <Projects />
         <Services />

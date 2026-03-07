@@ -50,8 +50,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-space-grotesk)', 'Space Grotesk', 'Arial', 'sans-serif'],
-        mono: ['monospace'],
+        sans: ['var(--font-geist-sans)', 'Geist', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'Geist Mono', 'monospace'],
       },
       keyframes: {
         marquee: {

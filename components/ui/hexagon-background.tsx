@@ -1,158 +1,144 @@
-'use client';
+"use client"
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { cn } from '@/lib/utils';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { cn } from "@/lib/utils"
 
-interface HexCell {
-  id: number;
-  x: number;
-  y: number;
-  glow: number; // 0–1, fades out over time
+export interface HexagonBackgroundProps {
+  className?: string
+  children?: React.ReactNode
+  /** Base hexagon width in pixels */
+  hexagonSize?: number
+  /** Gap between hexagons in pixels */
+  hexagonMargin?: number
+  /** Glow color on hover */
+  glowColor?: string
+  /** Base border color */
+  borderColor?: string
 }
 
-const HEX_SIZE = 40;        // flat-to-flat width in px
-const GAP = 2;              // gap between hexagons
-const FADE_SPEED = 0.025;   // per frame fade rate
-const GLOW_COLOR = '0, 255, 200'; // cyan-ish glow in RGB
+export function HexagonBackground({
+  className,
+  children,
+  hexagonSize = 60,
+  hexagonMargin = 2,
+  glowColor = "rgba(34, 211, 238, 0.6)",
+  borderColor = "rgba(63, 63, 70, 0.5)",
+}: HexagonBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [grid, setGrid] = useState({ rows: 0, cols: 0, scale: 1 })
 
-function buildGrid(w: number, h: number) {
-  const cells: HexCell[] = [];
-  // Pointy-top hexagonal grid
-  const hexW = HEX_SIZE + GAP;
-  const hexH = (HEX_SIZE * Math.sqrt(3)) / 2 + GAP;
-  const cols = Math.ceil(w / hexW) + 2;
-  const rows = Math.ceil(h / hexH) + 2;
+  const hexWidth = hexagonSize
+  const hexHeight = hexagonSize * 1.15
+  const rowSpacing = hexagonSize * 0.86
 
-  let id = 0;
-  for (let row = -1; row < rows; row++) {
-    for (let col = -1; col < cols; col++) {
-      const offset = col % 2 === 0 ? 0 : hexH / 2;
-      cells.push({
-        id: id++,
-        x: col * hexW,
-        y: row * hexH + offset,
-        glow: 0,
-      });
-    }
-  }
-  return cells;
-}
+  const updateGrid = useCallback(() => {
+    const container = containerRef.current
+    if (!container) return
 
-function hexClipPath(size: number): string {
-  const r = size / 2;
-  const h = (size * Math.sqrt(3)) / 4;
-  // Flat-top hex: 6 points
-  return `polygon(${r}px 0%, ${size}px ${h}px, ${size}px ${h * 3}px, ${r}px ${size * 0.866}px, 0% ${h * 3}px, 0% ${h}px)`;
-}
+    const { width, height } = container.getBoundingClientRect()
+    const scale = Math.max(1, Math.min(width, height) / 800)
+    const scaledSize = hexagonSize * scale
 
-export function HexagonBackground({ className }: { className?: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cellsRef = useRef<HexCell[]>([]);
-  const rafRef = useRef<number>(0);
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [, forceUpdate] = useState(0);
+    const cols = Math.ceil(width / scaledSize) + 2
+    const rows = Math.ceil(height / (scaledSize * 0.86)) + 2
+
+    setGrid({ rows, cols, scale })
+  }, [hexagonSize])
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const obs = new ResizeObserver(() => {
-      setDims({ w: el.offsetWidth, h: el.offsetHeight });
-    });
-    obs.observe(el);
-    setDims({ w: el.offsetWidth, h: el.offsetHeight });
-    return () => obs.disconnect();
-  }, []);
+    updateGrid()
+    const container = containerRef.current
+    if (!container) return
 
-  useEffect(() => {
-    if (dims.w && dims.h) {
-      cellsRef.current = buildGrid(dims.w, dims.h);
-    }
-  }, [dims]);
+    const ro = new ResizeObserver(updateGrid)
+    ro.observe(container)
+    return () => ro.disconnect()
+  }, [updateGrid])
 
-  // Animate fade-out loop
-  useEffect(() => {
-    let active = true;
-    const tick = () => {
-      if (!active) return;
-      let changed = false;
-      cellsRef.current = cellsRef.current.map((c) => {
-        if (c.glow > 0) {
-          changed = true;
-          return { ...c, glow: Math.max(0, c.glow - FADE_SPEED) };
-        }
-        return c;
-      });
-      if (changed) forceUpdate((n) => n + 1);
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      active = false;
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
+  const scaledHexWidth = hexWidth * grid.scale
+  const scaledHexHeight = hexHeight * grid.scale
+  const scaledRowSpacing = rowSpacing * grid.scale
+  const scaledMargin = hexagonMargin * grid.scale
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-
-    const hexW = HEX_SIZE + GAP;
-    const hexH = (HEX_SIZE * Math.sqrt(3)) / 2 + GAP;
-
-    // Find the closest cell
-    let closest = -1;
-    let closestDist = Infinity;
-    cellsRef.current.forEach((c, i) => {
-      const cx = c.x + HEX_SIZE / 2;
-      const cy = c.y + (HEX_SIZE * Math.sqrt(3)) / 4;
-      const dist = Math.hypot(mx - cx, my - cy);
-      if (dist < closestDist) {
-        closestDist = dist;
-        closest = i;
-      }
-    });
-
-    if (closest !== -1 && closestDist < Math.max(hexW, hexH)) {
-      cellsRef.current = cellsRef.current.map((c, i) =>
-        i === closest ? { ...c, glow: 1 } : c
-      );
-    }
-  }, []);
-
-  const clipPath = hexClipPath(HEX_SIZE);
+  const hexagonStyle = useMemo(
+    () => ({
+      width: scaledHexWidth,
+      height: scaledHexHeight,
+      marginLeft: scaledMargin,
+      "--glow-color": glowColor,
+      "--border-color": borderColor,
+      "--margin": `${scaledMargin}px`,
+    }),
+    [scaledHexWidth, scaledHexHeight, scaledMargin, glowColor, borderColor],
+  )
 
   return (
     <div
       ref={containerRef}
-      className={cn('absolute inset-0 overflow-hidden pointer-events-none', className)}
-      onMouseMove={handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>}
-      style={{ pointerEvents: 'auto' }}
+      className={cn("fixed inset-0 overflow-hidden bg-neutral-950", className)}
     >
-      {cellsRef.current.map((cell) => (
-        <div
-          key={cell.id}
-          style={{
-            position: 'absolute',
-            left: cell.x,
-            top: cell.y,
-            width: HEX_SIZE,
-            height: (HEX_SIZE * Math.sqrt(3)) / 2,
-            clipPath,
-            backgroundColor:
-              cell.glow > 0
-                ? `rgba(${GLOW_COLOR}, ${cell.glow * 0.35})`
-                : 'rgba(255,255,255,0.03)',
-            boxShadow:
-              cell.glow > 0
-                ? `0 0 ${12 * cell.glow}px rgba(${GLOW_COLOR}, ${cell.glow * 0.8})`
-                : 'none',
-            transition: 'background-color 0.08s ease',
-            willChange: 'background-color, box-shadow',
-          }}
-        />
-      ))}
+      {/* Hexagon grid */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: grid.rows }).map((_, rowIndex) => {
+          const isOddRow = rowIndex % 2 === 1
+          const marginLeft = isOddRow ? -(scaledHexWidth / 2) + scaledMargin : scaledMargin
+
+          return (
+            <div
+              key={rowIndex}
+              className="flex"
+              style={{
+                marginTop: rowIndex === 0 ? -scaledHexHeight * 0.25 : -scaledRowSpacing * 0.16,
+                marginLeft: marginLeft - scaledHexWidth * 0.1,
+              }}
+            >
+              {Array.from({ length: grid.cols }).map((_, colIndex) => (
+                <div
+                  key={`${rowIndex}-${colIndex}`}
+                  className={cn(
+                    "relative shrink-0 transition-all duration-1000",
+                    "[clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]",
+                    "before:absolute before:inset-0 before:bg-[var(--border-color)]",
+                    "before:transition-all before:duration-1000",
+                    "after:absolute after:inset-[var(--margin)] after:bg-neutral-950",
+                    "after:[clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]",
+                    "after:transition-all after:duration-500",
+                    "hover:before:bg-[var(--glow-color)] hover:before:duration-0",
+                    "hover:after:bg-neutral-900 hover:after:duration-0",
+                    "hover:before:shadow-[0_0_20px_var(--glow-color)]",
+                  )}
+                  style={hexagonStyle as React.CSSProperties}
+                />
+              ))}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Ambient glow overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          background: `radial-gradient(ellipse at 30% 20%, ${glowColor.replace("0.6", "0.15")} 0%, transparent 50%),
+                       radial-gradient(ellipse at 70% 80%, ${glowColor.replace("0.6", "0.1")} 0%, transparent 50%)`,
+        }}
+      />
+
+      {/* Vignette */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(10,10,10,0.8) 100%)",
+        }}
+      />
+
+      {/* Content layer */}
+      {children && <div className="relative z-10 h-full w-full">{children}</div>}
     </div>
-  );
+  )
+}
+
+export default function HexagonBackgroundDemo() {
+  return <HexagonBackground />
 }
