@@ -105,10 +105,10 @@ const projects = [
     company: "via Digital Modus",
     client: "NHS Professionals",
     logo: "/logos/nhsp.svg",
-    title: "UK Government Healthcare",
+    title: "NHSP",
     description:
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
-    tags: ["Marketing Cloud", "Data Cloud", "Apex", "AMPscript"],
+    tags: ["Marketing Cloud", "Mulesoft ", "Apex", "LWC"],
     bg: "#0a0f1e",
     industry: "Government / Healthcare",
   },
@@ -890,107 +890,6 @@ function Navbar() {
   );
 }
 
-// ── About ─────────────────────────────────────────────────────────────────────
-
-function About() {
-  return (
-    <section
-      id="about"
-      style={{
-        padding: "3.5rem clamp(1rem,3vw,2.5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-      }}
-    >
-      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-        <SectionHeader label="ABOUT ME" title="WHO I AM" />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))",
-            gap: "1rem",
-            marginBottom: "1rem",
-          }}
-        >
-          {/* Bio card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65 }}
-            style={{ ...CARD, gridColumn: "span 2" }}
-          >
-            <RevealWords
-              text="SENIOR SALESFORCE ENGINEER INSPIRED BY CUTTING-EDGE TECHNOLOGIES AND ENTERPRISE PRODUCT DEVELOPMENT"
-              style={{
-                fontSize: "clamp(1.1rem,2.2vw,1.5rem)",
-                fontWeight: 500,
-                color: "#fff",
-                lineHeight: 1.45,
-                textTransform: "uppercase",
-                marginBottom: "1.25rem",
-              }}
-            />
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{
-                fontSize: "0.9rem",
-                color: "rgba(255,255,255,0.72)",
-                lineHeight: 1.75,
-              }}
-            >
-              I build scalable, enterprise-grade solutions on the Salesforce
-              platform — from complex Apex back-end logic and LWC interfaces to
-              Marketing Cloud journeys and MuleSoft integrations. Certified
-              across 8 Salesforce disciplines and deployed across 5 countries.
-            </motion.p>
-          </motion.div>
-          {/* Stat cards */}
-          {[
-            { v: 5, s: "+", l: "Years Experience" },
-            { v: 8, s: "", l: "Certifications" },
-            { v: 4, s: "", l: "Industries" },
-            { v: 30, s: "+", l: "Projects Delivered" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.l}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.2 + i * 0.08 }}
-              style={CARD}
-            >
-              <div
-                style={{
-                  fontSize: "clamp(2.5rem,4vw,3.5rem)",
-                  fontWeight: 500,
-                  color: "#fff",
-                  lineHeight: 1,
-                  marginBottom: "0.5rem",
-                }}
-              >
-                <Counter target={stat.v} suffix={stat.s} />
-              </div>
-              <div
-                style={{
-                  fontSize: "0.75rem",
-                  color: "rgba(255,255,255,0.58)",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {stat.l}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ── Projects ──────────────────────────────────────────────────────────────────
 
 function ProjectCard({
@@ -1729,7 +1628,6 @@ export default function Home() {
       <Navbar />
       <main style={{ position: "relative", zIndex: 1 }}>
         <Hero />
-        <About />
         <Experience />
         <Projects />
         <Services />
