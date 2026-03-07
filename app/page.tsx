@@ -378,15 +378,6 @@ function CustomCursor() {
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
-const CLIENT_LOGOS = [
-  "/logos/NHS-01.svg",
-  "/logos/capitec.svg",
-  "/logos/heineken.svg",
-  "/logos/absa.svg",
-  "/logos/pmi.svg",
-  "/logos/cafu.svg",
-];
-
 const SOCIAL_LINKS = [
   {
     href: "https://linkedin.com/in/ziyaad-adams-8b0b001a2",
@@ -446,12 +437,12 @@ const SKILL_CARDS = [
     items: "Apex, LWC, Flows, SOQL, Triggers, OmniStudio, Marketing Cloud, Service Cloud, Experience Cloud, Data Cloud",
   },
   {
-    title: "Front-End Side",
-    items: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS, Framer Motion",
+    title: "Full Stack",
+    items: "HTML, CSS, JavaScript, TypeScript, Node.js, Express, REST APIs, PostgreSQL, MongoDB, AWS, Docker, Heroku",
   },
   {
-    title: "Back-End Side",
-    items: "Node.js, Express, REST APIs, MuleSoft, Heroku, AWS, Docker, PostgreSQL",
+    title: "React Frameworks",
+    items: "React, Next.js, React Native, Tailwind CSS, Framer Motion, shadcn/ui",
   },
   {
     title: "UI & Styling",
@@ -697,89 +688,6 @@ function Hero() {
                 </div>
               </div>
 
-              {/* Testimonial below photo */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.7 }}
-                style={{
-                  marginTop: "0.75rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.35rem",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "0.35rem",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "1.5rem",
-                      color: "rgba(255,255,255,0.15)",
-                      lineHeight: 1,
-                      fontFamily: "Georgia, serif",
-                    }}
-                  >
-                    &ldquo;
-                  </span>
-                  <p
-                    style={{
-                      fontSize: "clamp(0.65rem, 0.78vw, 0.72rem)",
-                      color: "rgba(255,255,255,0.45)",
-                      lineHeight: 1.6,
-                      fontStyle: "italic",
-                    }}
-                  >
-                    I have worked with over
-                    <br />
-                    <span
-                      style={{
-                        color: "#fff",
-                        fontWeight: 600,
-                        fontStyle: "normal",
-                      }}
-                    >
-                      25 business teams.
-                    </span>
-                    &rdquo;
-                  </p>
-                </div>
-                <div style={{ display: "flex", marginLeft: "1rem" }}>
-                  {CLIENT_LOGOS.map((logo, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        borderRadius: "50%",
-                        background: "#1a1a1a",
-                        border: "2px solid #000",
-                        marginLeft: i > 0 ? "-5px" : "0",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <img
-                        src={logo}
-                        alt=""
-                        style={{
-                          width: "14px",
-                          height: "14px",
-                          objectFit: "contain",
-                          filter: "brightness(0) invert(1)",
-                          opacity: 0.6,
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
             </div>
 
             {/* ─── RIGHT COLUMN: Description + Button (below name overlap area) ─── */}
