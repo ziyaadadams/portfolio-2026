@@ -451,12 +451,14 @@ const SKILL_CARDS = [
 ];
 
 function Hero() {
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const aboutInView = useInView(aboutRef, { once: true, margin: "-80px" });
+
   return (
     <section
       id="hero"
       className="hero-section"
       style={{
-        minHeight: "100vh",
         background: "#000",
         position: "relative",
         overflow: "hidden",
@@ -464,30 +466,12 @@ function Hero() {
         flexDirection: "column",
       }}
     >
-      {/* Decorative circle top right */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 1.2 }}
-        className="hero-circle-deco"
-        style={{
-          position: "absolute",
-          top: "-6vw",
-          right: "-4vw",
-          width: "clamp(220px, 32vw, 520px)",
-          height: "clamp(220px, 32vw, 520px)",
-          borderRadius: "50%",
-          border: "1px solid rgba(255,255,255,0.05)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
-      {/* ─── Main hero content ─── */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          TOP HALF — Hero: Photo + Name + Description + Social
+         ═══════════════════════════════════════════════════════════════════════ */}
       <div
         className="hero-main"
         style={{
-          flex: 1,
           display: "grid",
           gridTemplateColumns: "auto 1fr auto",
           position: "relative",
@@ -496,7 +480,7 @@ function Hero() {
           minHeight: "100vh",
         }}
       >
-        {/* ── Far-left vertical label ── */}
+        {/* Far-left: vertical labels */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -507,8 +491,9 @@ function Hero() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "1.5rem",
-            padding: "0 clamp(0.5rem, 1.5vw, 1.5rem)",
+            gap: "2rem",
+            padding: "0 clamp(0.6rem, 1.2vw, 1.25rem)",
+            width: "clamp(40px, 4vw, 60px)",
           }}
         >
           <span
@@ -516,11 +501,11 @@ function Hero() {
               writingMode: "vertical-rl",
               textOrientation: "mixed",
               transform: "rotate(180deg)",
-              fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)",
+              fontSize: "clamp(0.55rem, 0.7vw, 0.65rem)",
               fontWeight: 500,
-              letterSpacing: "0.4em",
+              letterSpacing: "0.35em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "rgba(255,255,255,0.3)",
             }}
           >
             Salesforce
@@ -530,94 +515,64 @@ function Hero() {
               writingMode: "vertical-rl",
               textOrientation: "mixed",
               transform: "rotate(180deg)",
-              fontSize: "clamp(0.9rem, 1.4vw, 1.25rem)",
+              fontSize: "clamp(0.8rem, 1.1vw, 1rem)",
               fontWeight: 700,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.65)",
+              color: "rgba(255,255,255,0.55)",
             }}
           >
             Engineer
           </span>
         </motion.div>
 
-        {/* ── Center: two-column hero layout ── */}
+        {/* CENTER CONTENT */}
         <div
           className="hero-center"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            display: "flex",
             alignItems: "center",
-            gap: "clamp(1.5rem, 3vw, 4rem)",
-            padding: "2rem clamp(0.5rem, 2vw, 2rem)",
+            justifyContent: "center",
+            padding: "2rem clamp(1rem, 3vw, 3rem)",
+            position: "relative",
           }}
         >
-          {/* LEFT COLUMN — Portrait + Name composite */}
           <div
+            className="hero-composition"
             style={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              position: "relative",
+              alignItems: "flex-start",
+              gap: "clamp(2rem, 4vw, 5rem)",
+              maxWidth: "1100px",
+              width: "100%",
             }}
           >
-            {/* Spaced last name */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.3,
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              style={{
-                fontSize: "clamp(0.7rem, 1.1vw, 0.95rem)",
-                fontWeight: 300,
-                letterSpacing: "0.65em",
-                textTransform: "lowercase",
-                color: "rgba(255,255,255,0.5)",
-                marginBottom: "0.25rem",
-                alignSelf: "flex-end",
-                paddingRight: "5%",
-              }}
-            >
-              A d a m s
-            </motion.div>
-
-            {/* Photo + big name wrapper */}
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {/* DEVELOPER vertical text on left of photo */}
+            {/* LEFT: Photo block */}
+            <div style={{ position: "relative", flexShrink: 0 }}>
+              {/* DEVELOPER vertical text */}
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
                 style={{
                   position: "absolute",
-                  left: "-2%",
+                  left: "-24px",
                   top: "50%",
                   transform: "translateY(-50%) rotate(180deg)",
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
-                  fontSize: "clamp(0.9rem, 1.3vw, 1.15rem)",
+                  fontSize: "clamp(0.75rem, 1vw, 0.9rem)",
                   fontWeight: 700,
                   letterSpacing: "0.3em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.12)",
+                  color: "rgba(255,255,255,0.1)",
                   zIndex: 3,
                 }}
               >
                 DEVELOPER
               </motion.span>
 
-              {/* Portrait photo */}
+              {/* Portrait */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -627,32 +582,29 @@ function Hero() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 style={{
-                  position: "relative",
-                  width: "clamp(220px, 24vw, 380px)",
-                  height: "clamp(280px, 32vw, 480px)",
+                  width: "clamp(260px, 26vw, 400px)",
+                  height: "clamp(320px, 34vw, 520px)",
                   overflow: "hidden",
+                  position: "relative",
                   zIndex: 1,
                 }}
               >
-                {/* Gradient overlay for photo placeholder */}
                 <div
                   style={{
                     width: "100%",
                     height: "100%",
                     background:
-                      "linear-gradient(180deg, rgba(40,40,40,0.6) 0%, rgba(60,60,60,0.4) 35%, rgba(20,20,20,0.95) 100%)",
+                      "linear-gradient(180deg, rgba(40,40,40,0.5) 0%, rgba(55,55,55,0.35) 40%, rgba(15,15,15,0.95) 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    borderRadius: "0 0 40% 40% / 0 0 12% 12%",
                   }}
                 >
-                  {/* Silhouette — replace with: <img src="/images/portrait.webp" alt="Ziyaad Adams" style={{width:'100%',height:'100%',objectFit:'cover',filter:'grayscale(100%)'}} /> */}
                   <svg
                     viewBox="0 0 200 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    style={{ width: "65%", height: "65%", opacity: 0.2 }}
+                    style={{ width: "60%", height: "60%", opacity: 0.18 }}
                   >
                     <ellipse cx="100" cy="80" rx="45" ry="52" fill="white" />
                     <path
@@ -663,198 +615,206 @@ function Hero() {
                 </div>
               </motion.div>
 
-              {/* Big name overlapping the photo from the right */}
-              <div
+              {/* Testimonial below photo */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1, duration: 0.7 }}
                 style={{
-                  position: "absolute",
-                  right: "-15%",
-                  bottom: "18%",
-                  zIndex: 2,
-                }}
-              >
-                <h1
-                  style={{
-                    fontSize: "clamp(3rem, 8vw, 7.5rem)",
-                    fontWeight: 700,
-                    lineHeight: 0.85,
-                    letterSpacing: "-0.03em",
-                    color: "#fff",
-                    textShadow: "0 4px 40px rgba(0,0,0,0.8)",
-                  }}
-                >
-                  <div style={{ overflow: "hidden" }}>
-                    <motion.span
-                      style={{ display: "inline-block" }}
-                      initial={{ y: "120%" }}
-                      animate={{ y: "0%" }}
-                      transition={{
-                        duration: 0.85,
-                        ease: [0.16, 1, 0.3, 1],
-                        delay: 0.15,
-                      }}
-                    >
-                      Ziyaad
-                    </motion.span>
-                  </div>
-                </h1>
-              </div>
-            </div>
-
-            {/* Testimonial below photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.7 }}
-              style={{
-                marginTop: "1.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.6rem",
-                alignSelf: "flex-start",
-                paddingLeft: "10%",
-              }}
-            >
-              <div
-                style={{
+                  marginTop: "1.5rem",
                   display: "flex",
-                  alignItems: "flex-start",
-                  gap: "0.4rem",
+                  flexDirection: "column",
+                  gap: "0.5rem",
                 }}
               >
-                <span
+                <div
                   style={{
-                    fontSize: "1.5rem",
-                    color: "rgba(255,255,255,0.18)",
-                    lineHeight: 1,
-                    fontFamily: "Georgia, serif",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "0.35rem",
                   }}
                 >
-                  &ldquo;
-                </span>
-                <p
-                  style={{
-                    fontSize: "clamp(0.65rem, 0.8vw, 0.75rem)",
-                    color: "rgba(255,255,255,0.5)",
-                    lineHeight: 1.6,
-                    fontStyle: "italic",
-                  }}
-                >
-                  I have worked with over
-                  <br />
                   <span
                     style={{
-                      color: "#fff",
-                      fontWeight: 600,
-                      fontStyle: "normal",
+                      fontSize: "1.5rem",
+                      color: "rgba(255,255,255,0.15)",
+                      lineHeight: 1,
+                      fontFamily: "Georgia, serif",
                     }}
                   >
-                    25 business teams.
+                    &ldquo;
                   </span>
-                  &rdquo;
-                </p>
-              </div>
-              {/* Client avatar row */}
-              <div style={{ display: "flex", marginLeft: "1rem" }}>
-                {CLIENT_LOGOS.map((logo, i) => (
-                  <div
-                    key={i}
+                  <p
                     style={{
-                      width: "26px",
-                      height: "26px",
-                      borderRadius: "50%",
-                      background: "#1a1a1a",
-                      border: "2px solid #000",
-                      marginLeft: i > 0 ? "-5px" : "0",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      overflow: "hidden",
+                      fontSize: "clamp(0.65rem, 0.78vw, 0.72rem)",
+                      color: "rgba(255,255,255,0.45)",
+                      lineHeight: 1.6,
+                      fontStyle: "italic",
                     }}
                   >
-                    <img
-                      src={logo}
-                      alt=""
+                    I have worked with over
+                    <br />
+                    <span
                       style={{
-                        width: "14px",
-                        height: "14px",
-                        objectFit: "contain",
-                        filter: "brightness(0) invert(1)",
-                        opacity: 0.65,
+                        color: "#fff",
+                        fontWeight: 600,
+                        fontStyle: "normal",
                       }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+                    >
+                      25 business teams.
+                    </span>
+                    &rdquo;
+                  </p>
+                </div>
+                <div style={{ display: "flex", marginLeft: "1rem" }}>
+                  {CLIENT_LOGOS.map((logo, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        width: "26px",
+                        height: "26px",
+                        borderRadius: "50%",
+                        background: "#1a1a1a",
+                        border: "2px solid #000",
+                        marginLeft: i > 0 ? "-5px" : "0",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <img
+                        src={logo}
+                        alt=""
+                        style={{
+                          width: "14px",
+                          height: "14px",
+                          objectFit: "contain",
+                          filter: "brightness(0) invert(1)",
+                          opacity: 0.6,
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
 
-          {/* RIGHT COLUMN — Description + CTA */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              gap: "1.75rem",
-              paddingTop: "4rem",
-            }}
-          >
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.7,
-                duration: 0.65,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+            {/* RIGHT: Name + Description + Button */}
+            <div
               style={{
-                fontSize: "clamp(0.72rem, 0.95vw, 0.85rem)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.85,
-                maxWidth: "24rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                paddingTop: "clamp(2rem, 6vw, 5rem)",
+                flex: 1,
+                minWidth: 0,
               }}
             >
-              My goal is to write clean, maintainable code that enhances the
-              development process and makes coding enjoyable through structured
-              and thoughtful practices.
-            </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.3,
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                style={{
+                  fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
+                  fontWeight: 300,
+                  letterSpacing: "0.6em",
+                  textTransform: "lowercase",
+                  color: "rgba(255,255,255,0.45)",
+                  marginBottom: "0.25rem",
+                }}
+              >
+                A d a m s
+              </motion.div>
 
-            <motion.a
-              href="#work"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.55 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                alignSelf: "flex-start",
-                gap: "0.5rem",
-                padding: "0.7rem 2rem",
-                background: "transparent",
-                color: "#fff",
-                borderRadius: "4px",
-                border: "1px solid rgba(255,255,255,0.25)",
-                fontSize: "0.75rem",
-                fontWeight: 500,
-                textDecoration: "none",
-                letterSpacing: "0.12em",
-                textTransform: "capitalize",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-              }}
-            >
-              Portfolio
-            </motion.a>
+              <h1
+                style={{
+                  fontSize: "clamp(3.5rem, 7.5vw, 8rem)",
+                  fontWeight: 700,
+                  lineHeight: 0.85,
+                  letterSpacing: "-0.03em",
+                  color: "#fff",
+                  marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
+                }}
+              >
+                <div style={{ overflow: "hidden" }}>
+                  <motion.span
+                    style={{ display: "inline-block" }}
+                    initial={{ y: "120%" }}
+                    animate={{ y: "0%" }}
+                    transition={{
+                      duration: 0.85,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: 0.15,
+                    }}
+                  >
+                    Ziyaad
+                  </motion.span>
+                </div>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.7,
+                  duration: 0.65,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                style={{
+                  fontSize: "clamp(0.72rem, 0.88vw, 0.82rem)",
+                  color: "rgba(255,255,255,0.48)",
+                  lineHeight: 1.85,
+                  maxWidth: "22rem",
+                  marginBottom: "clamp(1.25rem, 2vw, 2rem)",
+                }}
+              >
+                My goal is to write clean, maintainable code that enhances the
+                development process and makes coding enjoyable through structured
+                and thoughtful practices.
+              </motion.p>
+
+              <motion.a
+                href="#work"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.55 }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  alignSelf: "flex-start",
+                  gap: "0.5rem",
+                  padding: "0.65rem 2rem",
+                  background: "transparent",
+                  color: "#fff",
+                  borderRadius: "4px",
+                  border: "1px solid rgba(255,255,255,0.25)",
+                  fontSize: "0.72rem",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  letterSpacing: "0.12em",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                }}
+              >
+                Portfolio
+              </motion.a>
+            </div>
           </div>
         </div>
 
-        {/* ── Far-right social icons ── */}
+        {/* Far-right: Social icons */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -865,8 +825,9 @@ function Hero() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "1.25rem",
-            padding: "0 clamp(0.5rem, 1.5vw, 1.5rem)",
+            gap: "1rem",
+            padding: "0 clamp(0.6rem, 1.2vw, 1.25rem)",
+            width: "clamp(50px, 5vw, 70px)",
           }}
         >
           {SOCIAL_LINKS.map((s) => (
@@ -877,15 +838,15 @@ function Hero() {
               rel="noopener noreferrer"
               aria-label={s.label}
               style={{
-                width: "36px",
-                height: "36px",
+                width: "38px",
+                height: "38px",
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.05)",
                 border: "1px solid rgba(255,255,255,0.1)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "rgba(255,255,255,0.6)",
+                color: "rgba(255,255,255,0.55)",
                 textDecoration: "none",
                 transition: "all 0.25s ease",
               }}
@@ -894,8 +855,8 @@ function Hero() {
                 e.currentTarget.style.color = "#fff";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.55)";
               }}
             >
               {s.icon}
@@ -904,7 +865,168 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* ─── Bottom wave/mountain decoration ─── */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          BOTTOM HALF — About: Bio + Info + Skill Cards (inside hero section)
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <div
+        id="about"
+        ref={aboutRef}
+        style={{
+          position: "relative",
+          zIndex: 1,
+          padding: "4rem clamp(1.5rem, 4vw, 4rem) 5rem",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        {/* Decorative circle */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-3rem",
+            left: "-2rem",
+            width: "120px",
+            height: "120px",
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.06)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          {/* About heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={aboutInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3.5rem)",
+              fontWeight: 700,
+              color: "#fff",
+              marginBottom: "2.5rem",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            About
+          </motion.h2>
+
+          <div
+            className="about-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "clamp(2rem, 4vw, 4rem)",
+              alignItems: "start",
+            }}
+          >
+            {/* LEFT — Bio + personal info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={aboutInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.15, duration: 0.7 }}
+            >
+              <p
+                style={{
+                  fontSize: "clamp(0.78rem, 0.95vw, 0.88rem)",
+                  color: "rgba(255,255,255,0.6)",
+                  lineHeight: 1.85,
+                  marginBottom: "2rem",
+                }}
+              >
+                Hello! I&apos;m Ziyaad Adams, a full-stack Salesforce developer
+                with over 5 years of experience. I&apos;ve built scalable
+                solutions for enterprise clients across banking, healthcare,
+                FMCG, and government. I specialise in Apex, LWC, Marketing
+                Cloud, and MuleSoft integrations. Committed to continuous
+                learning, I prioritise company success and customer satisfaction.
+                Explore my portfolio for innovative solutions. Let&apos;s create
+                something amazing!
+              </p>
+
+              {/* Info rows */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                }}
+              >
+                {ABOUT_INFO.map((item) => (
+                  <div
+                    key={item.label}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                      fontSize: "clamp(0.72rem, 0.88vw, 0.82rem)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "rgba(255,255,255,0.4)",
+                        minWidth: "100px",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span style={{ color: "rgba(255,255,255,0.25)" }}>:</span>
+                    <span style={{ color: "rgba(255,255,255,0.75)" }}>
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* RIGHT — Skill cards grid (2×3) */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "1rem",
+              }}
+            >
+              {SKILL_CARDS.map((card, i) => (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={aboutInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.08, duration: 0.55 }}
+                  style={{
+                    padding: "1.15rem",
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "clamp(0.7rem, 0.82vw, 0.76rem)",
+                      fontWeight: 600,
+                      color: "#fff",
+                      marginBottom: "0.5rem",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {card.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "clamp(0.58rem, 0.68vw, 0.64rem)",
+                      color: "rgba(255,255,255,0.45)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {card.items}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom wave decoration */}
       <div
         style={{
           position: "absolute",
@@ -942,180 +1064,7 @@ function Hero() {
   );
 }
 
-// ── About Section ─────────────────────────────────────────────────────────────
-
-function About() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section
-      ref={ref}
-      id="about"
-      style={{
-        padding: "5rem clamp(1rem, 3vw, 2.5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        position: "relative",
-      }}
-    >
-      {/* Decorative circle */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-3rem",
-          left: "-2rem",
-          width: "120px",
-          height: "120px",
-          borderRadius: "50%",
-          border: "1px solid rgba(255,255,255,0.06)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-        {/* About heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3.5rem)",
-            fontWeight: 700,
-            color: "#fff",
-            marginBottom: "3rem",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          About
-        </motion.h2>
-
-        <div
-          className="about-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "clamp(2rem, 4vw, 5rem)",
-            alignItems: "start",
-          }}
-        >
-          {/* LEFT — Bio + personal info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.15, duration: 0.7 }}
-          >
-            <p
-              style={{
-                fontSize: "clamp(0.8rem, 1vw, 0.9rem)",
-                color: "rgba(255,255,255,0.6)",
-                lineHeight: 1.85,
-                marginBottom: "2.5rem",
-              }}
-            >
-              Hello! I&apos;m Ziyaad Adams, a full-stack Salesforce developer with
-              over 5 years of experience. I&apos;ve built scalable solutions for
-              enterprise clients across banking, healthcare, FMCG, and
-              government. I specialise in Apex, LWC, Marketing Cloud, and
-              MuleSoft integrations. Committed to continuous learning, I
-              prioritise company success and customer satisfaction. Explore my
-              portfolio for innovative solutions. Let&apos;s create something
-              amazing!
-            </p>
-
-            {/* Info rows */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.85rem",
-              }}
-            >
-              {ABOUT_INFO.map((item) => (
-                <div
-                  key={item.label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                    fontSize: "clamp(0.72rem, 0.9vw, 0.82rem)",
-                  }}
-                >
-                  <span
-                    style={{
-                      color: "rgba(255,255,255,0.4)",
-                      minWidth: "100px",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {item.label}
-                  </span>
-                  <span
-                    style={{
-                      color: "rgba(255,255,255,0.25)",
-                    }}
-                  >
-                    :
-                  </span>
-                  <span style={{ color: "rgba(255,255,255,0.75)" }}>
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* RIGHT — Skill cards grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
-            }}
-          >
-            {SKILL_CARDS.map((card, i) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  delay: 0.2 + i * 0.08,
-                  duration: 0.55,
-                }}
-                style={{
-                  padding: "1.25rem",
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: "8px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "clamp(0.7rem, 0.85vw, 0.78rem)",
-                    fontWeight: 600,
-                    color: "#fff",
-                    marginBottom: "0.6rem",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {card.title}
-                </div>
-                <div
-                  style={{
-                    fontSize: "clamp(0.6rem, 0.72vw, 0.67rem)",
-                    color: "rgba(255,255,255,0.45)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {card.items}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+// ── RevealWords ───────────────────────────────────────────────────────────────
 
 function RevealWords({
   text,
@@ -1189,6 +1138,15 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 function Navbar() {
   const [active, setActive] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
+
+  // Force scroll to top on mount & clear hash so browser doesn't jump
+  useEffect(() => {
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname);
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -1973,7 +1931,6 @@ export default function Home() {
       <Navbar />
       <main style={{ position: "relative", zIndex: 1 }}>
         <Hero />
-        <About />
         <Experience />
         <Projects />
         <Services />

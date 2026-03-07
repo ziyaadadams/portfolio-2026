@@ -133,8 +133,9 @@ main, section, footer, nav {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
@@ -145,6 +146,8 @@ main, section, footer, nav {
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   z-index: 9999;
   transition: all 0.3s ease;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
 }
 
 .nav-island--scrolled {
@@ -302,18 +305,14 @@ main, section, footer, nav {
 
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .hero-center {
-    grid-template-columns: 1fr !important;
+  .hero-composition {
+    flex-direction: column !important;
+    align-items: center !important;
     text-align: center;
   }
 
-  .hero-center > div:first-child {
+  .hero-composition > div:last-child {
     align-items: center !important;
-  }
-
-  .hero-center > div:last-child {
-    align-items: center !important;
-    text-align: center;
   }
 
   .about-grid {
@@ -336,10 +335,6 @@ main, section, footer, nav {
   }
 
   .hero-main {
-    grid-template-columns: 1fr !important;
-  }
-
-  .hero-center {
     grid-template-columns: 1fr !important;
   }
 
