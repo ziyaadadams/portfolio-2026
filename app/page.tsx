@@ -1344,8 +1344,9 @@ function ProjectModal({
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.75)",
-        backdropFilter: "blur(8px)",
+        background: "rgba(0,0,0,0.72)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
         zIndex: 10000,
         display: "flex",
         alignItems: "center",
@@ -1561,10 +1562,17 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.6, delay: i * 0.05 }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      whileHover={{
+        y: -4,
+        backgroundColor: "rgba(255,255,255,0.055)",
+        borderColor: "rgba(255,255,255,0.16)",
+        transition: { duration: 0.2 },
+      }}
       onClick={onOpen}
       style={{
-        ...CARD,
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "8px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -1573,6 +1581,7 @@ function ProjectCard({
         cursor: "pointer",
         padding: "1.5rem 1.25rem 1.25rem",
         minHeight: "160px",
+        transition: "border-color 0.2s, background 0.2s",
       }}
     >
       {/* Logo */}
