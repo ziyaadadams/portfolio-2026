@@ -105,7 +105,7 @@ const projects = [
     company: "via Digital Modus",
     client: "NHS Professionals",
     logo: "/logos/NHS-01.svg",
-    title: "NHSP",
+    title: "NHS Professionals",
     description:
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
     tags: ["Marketing Cloud", "Mulesoft ", "Apex", "LWC"],
