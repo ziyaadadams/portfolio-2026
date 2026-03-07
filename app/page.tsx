@@ -965,38 +965,48 @@ function Hero() {
                 something amazing!
               </p>
 
-              {/* Info rows */}
+              {/* Info cards grid */}
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.75rem",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "0.65rem",
                 }}
               >
-                {ABOUT_INFO.map((item) => (
-                  <div
+                {ABOUT_INFO.map((item, i) => (
+                  <motion.div
                     key={item.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={aboutInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.2 + i * 0.06, duration: 0.5 }}
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "1rem",
-                      fontSize: "clamp(0.72rem, 0.88vw, 0.82rem)",
+                      padding: "0.7rem 0.85rem",
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: "8px",
                     }}
                   >
-                    <span
+                    <div
                       style={{
-                        color: "rgba(255,255,255,0.4)",
-                        minWidth: "100px",
+                        fontSize: "clamp(0.58rem, 0.7vw, 0.65rem)",
+                        color: "rgba(255,255,255,0.35)",
                         textTransform: "capitalize",
+                        marginBottom: "0.2rem",
+                        letterSpacing: "0.04em",
                       }}
                     >
                       {item.label}
-                    </span>
-                    <span style={{ color: "rgba(255,255,255,0.25)" }}>:</span>
-                    <span style={{ color: "rgba(255,255,255,0.75)" }}>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "clamp(0.7rem, 0.85vw, 0.78rem)",
+                        color: "rgba(255,255,255,0.8)",
+                        fontWeight: 500,
+                      }}
+                    >
                       {item.value}
-                    </span>
-                  </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
