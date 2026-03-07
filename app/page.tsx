@@ -109,7 +109,6 @@ const projects = [
       "Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.",
     tags: ["Marketing Cloud", "Mulesoft ", "Apex", "LWC"],
     bg: "#0a0f1e",
-    industry: "Government / Healthcare",
   },
   {
     company: "via BlueSky",
@@ -119,7 +118,6 @@ const projects = [
       "Engineered and enhanced the Salesforce platform for the Fraud Department, leveraging OmniStudio, Flows, and Lightning Web Components (LWC) to build dynamic fraud-focused features and case automation tools. Delivered solutions that streamlined internal processes and improved efficiency for agents investigating and managing fraud cases — tools currently active in production.",
     tags: ["OmniStudio", "LWC", "Flows", "Service Cloud"],
     bg: "#001a0d",
-    industry: "Financial Services",
   },
   {
     company: "via BlueSky",
@@ -129,7 +127,6 @@ const projects = [
       "Led the development of new CIB Complaints and Credit Application forms as the sole developer, accelerating ABSA Bank's migration of key business processes to Salesforce. Implemented a customer feature for bulk case transfers and ensured UI compliance with external Adobe XD design templates. Successfully enabled the client to manage all complaints and new credit applications within a centralised CRM environment.",
     tags: ["Service Cloud", "Flows", "Apex", "LWC"],
     bg: "#1a0306",
-    industry: "Financial Services",
   },
   {
     company: "via Cloudmuscle B.V.",
@@ -139,7 +136,6 @@ const projects = [
       "Served as Senior Salesforce Developer, developing new B2B sales features for a nationwide and international liquor distribution platform. Managed complex third-party integrations with SAP, Apigee, and WhatsApp, in addition to developing solutions for Experience Cloud chatbots and ordering processes.",
     tags: ["B2B Commerce", "Experience Cloud", "MuleSoft", "SAP"],
     bg: "#0a1408",
-    industry: "FMCG / Distribution",
   },
   {
     company: "via Cloudsmiths",
@@ -149,7 +145,6 @@ const projects = [
       "Managed end-to-end development of migrating an international NPO's global donation platform to Salesforce. Created a single, dynamic donation page capable of routing donors to multiple campaigns based on internal logic. Implemented essential financial and marketing integrations, including Pay Gate, Facebook Pixel, and custom subscription/unsubscribe forms.",
     tags: ["NPSP", "Data Migration", "Apex Triggers", "Pay Gate"],
     bg: "#1a0d0a",
-    industry: "Non-Profit",
   },
   {
     company: "via Cloudsmiths",
@@ -159,7 +154,6 @@ const projects = [
       "Automated core customer opportunity processes across Africa by developing efficient Workflow Rules and optimized Apex Triggers, ensuring high performance and compliance with Salesforce CPU limits. Created a custom Home Page component displaying the top 10 opportunities with an export feature for ad-hoc analysis (CSV output).",
     tags: ["Apex", "Workflow Rules", "Custom Components", "LWC"],
     bg: "#030a1a",
-    industry: "Telecommunications",
   },
   {
     company: "via BlueSky",
@@ -169,7 +163,6 @@ const projects = [
       "Developed the IQOS Customer Portal, focusing on building the user account, rewards, and inventory/sales tracking systems. Managed a critical MuleSoft integration that required decrypting and synchronising encrypted data across servers. Built various custom components and forms (LWC, Aura, Visualforce) and ensured proper Google Tag processing for analytics.",
     tags: ["Experience Cloud", "MuleSoft", "LWC", "REST API"],
     bg: "#0a0d1a",
-    industry: "FMCG / Consumer",
   },
   {
     company: "via BlueSky",
@@ -179,7 +172,6 @@ const projects = [
       "Automated and optimised mechanic dispatching within Salesforce Field Service Lightning (FSL) for a major UAE service provider. Developed a custom AWS integration for storing job completion images and implemented sophisticated geolocation-based polygon map logic to automatically assign drivers.",
     tags: ["Field Service Lightning", "AWS", "Apex", "Geolocation"],
     bg: "#1a1400",
-    industry: "Field Services / UAE",
   },
   {
     company: "via BlueSky",
@@ -189,7 +181,6 @@ const projects = [
       "Developed custom features to enhance lead generation and customer service, including automating lead processes based on site entry and Google Ad click data. Implemented a complex automation trigger to notify agents, with dynamic retrieval and display of relevant agent information by securely passing data via URL parameters.",
     tags: ["Sales Cloud", "Apex", "Automation", "Google Ads API"],
     bg: "#06061a",
-    industry: "Financial Services",
   },
   {
     company: "via BlueSky",
@@ -199,7 +190,6 @@ const projects = [
       "Designed and built a live Client Satisfaction Form within the Lightning Experience Builder using Lightning frameworks. The solution dynamically retrieved and displayed relevant agent information by securely passing data via URL parameters.",
     tags: ["Lightning Experience", "LWC", "Aura", "Flows"],
     bg: "#0d0f12",
-    industry: "Business Consulting",
   },
 ];
 
@@ -211,7 +201,6 @@ const freelanceProjects = [
       "This portfolio — built with Next.js 14, TypeScript, Framer Motion, Three.js, shadcn/ui, and a custom hexagon background. Designed to showcase enterprise Salesforce engineering work with a premium, animation-driven aesthetic.",
     tags: ["Next.js", "TypeScript", "Three.js", "Framer Motion", "shadcn/ui"],
     link: null,
-    industry: "Web Development",
   },
   {
     client: "Veloracer",
@@ -220,7 +209,6 @@ const freelanceProjects = [
       "End-to-end WordPress WooCommerce store for a custom cycling apparel brand. Includes product configurator, custom order forms, and payment gateway integration.",
     tags: ["WordPress", "WooCommerce", "PHP", "E-Commerce"],
     link: null,
-    industry: "E-Commerce / Sports",
   },
   {
     client: "Side Project",
@@ -229,7 +217,6 @@ const freelanceProjects = [
       "Full-stack invoice generation and management web application. Create, send, and track professional invoices with PDF export, client management, and payment status tracking.",
     tags: ["React", "Next.js", "TypeScript", "Vercel"],
     link: "https://invoice-web-app-six.vercel.app",
-    industry: "SaaS / Productivity",
   },
 ];
 
@@ -861,52 +848,47 @@ function ProjectCard({
         cursor: link ? "pointer" : "default",
       }}
     >
-      {/* Logo + meta row */}
+      {/* Logo */}
       <div
         style={{
           display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          gap: "1rem",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "1.5rem 0",
         }}
       >
         <img
           src={p.logo}
           alt={(p as any).client ?? p.company}
           style={{
-            height: "36px",
+            height: "52px",
             width: "auto",
-            maxWidth: "100px",
+            maxWidth: "150px",
             objectFit: "contain",
             borderRadius: "4px",
-            opacity: 0.9,
+            opacity: 0.95,
           }}
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
-        <span
-          style={{
-            fontSize: "0.625rem",
-            color: "rgba(255,255,255,0.55)",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-            paddingTop: "2px",
-          }}
-        >
-          {(p as any).industry ?? ""}
-        </span>
       </div>
-      {/* Title + via */}
-      <div>
+      {/* Meta row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.5rem",
+          marginBottom: "0.5rem",
+        }}
+      >
         <div
           style={{
             fontSize: "0.6875rem",
             color: "rgba(255,255,255,0.55)",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            marginBottom: "0.3rem",
           }}
         >
           {p.company}
