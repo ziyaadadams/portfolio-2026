@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
-import { HexagonBackground } from '@/components/ui/hexagon-background';
+import { ParticleBackground } from '@/components/ui/particle-background';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -814,7 +814,7 @@ export default function Home() {
   return (
     <>
       {/* Hexagon background */}
-      <HexagonBackground className="z-0" aria-hidden="true" />
+      <ParticleBackground className="z-0" aria-hidden="true" />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />

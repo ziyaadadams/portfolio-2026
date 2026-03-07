@@ -73,7 +73,7 @@ function makeParticle(W: number, H: number): Particle {
   };
 }
 
-export function ParticleBackground() {
+export function ParticleBackground({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -169,6 +169,7 @@ export function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
+      className={className}
       style={{
         position: 'fixed',
         inset: 0,
