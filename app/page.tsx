@@ -23,7 +23,9 @@ const workHistory = [
     date: "2025 — Present",
     location: "Cape Town, South Africa",
     description:
-      "Outsourced Salesforce Developer and Consultant for high-profile enterprise accounts including NHS Professionals (UK Government).",
+      "Architecting and deploying scalable Salesforce solutions for high-consequence enterprise environments within the public sector." +
+      "Acting as a strategic technical consultant, bridging the gap between complex business requirements and robust platform delivery for the NHS." +
+      "Managing end-to-end integration and automation workflows to streamline large-scale workforce management.",
     clients: ["NHS / UK Government"],
   },
   {
@@ -32,7 +34,9 @@ const workHistory = [
     date: "2022 — 2025",
     location: "Cape Town, South Africa",
     description:
-      "Delivered full-cycle Salesforce projects across banking, FMCG, and global consumer industries.",
+      "Spearheaded full-cycle Salesforce implementations for industry leaders in Banking, FMCG, and Global Consumer Goods." +
+      "Engineered bespoke Apex and Lightning Web Components (LWC) to enhance digital banking experiences and global supply chain visibility." +
+      "Collaborated with cross-functional stakeholders to translate legacy business processes into high-performing cloud solutions.",
     clients: ["Capitec Bank", "Distell", "Heineken"],
   },
   {
@@ -50,7 +54,8 @@ const workHistory = [
     date: "2020 — 2022",
     location: "Cape Town, South Africa",
     description:
-      "Developed and maintained full-stack applications on the Salesforce Platform.",
+      "Provided high-velocity development and technical consulting as an agile project resource for international clients." +
+      "Optimized existing Salesforce orgs through refactoring legacy code and implementing best-practice declarative and programmatic solutions.",
     clients: [
       "CAFU",
       "Main One",
