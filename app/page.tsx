@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
-import { HexagonBackground } from '@/components/ui/hexagon-background';
+import { FluidGradientBackground } from '@/components/ui/fluid-gradient-background';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -31,12 +31,136 @@ const services = [
 ];
 
 const projects = [
-  { company: 'via Digital Modus',  title: 'UK Government Healthcare',    description: 'Patient engagement journeys for NHS Professionals, handling millions of healthcare communications across the UK public health network.', tags: ['Marketing Cloud', 'Data Cloud', 'Apex'],    bg: '#0a0f1e' },
-  { company: 'via BlueSky',        title: 'Capitec Bank Fraud System',   description: "Enterprise fraud detection and case management processing thousands of daily alerts for South Africa's largest retail bank.",                tags: ['OmniStudio', 'LWC', 'Flows'],             bg: '#0d0d0d' },
-  { company: 'via BlueSky',        title: 'ABSA Complaints Platform',    description: 'Enterprise complaints management integrating Service Cloud with legacy banking systems across multiple African markets.',                  tags: ['Service Cloud', 'Flows', 'Apex'],          bg: '#110a1a' },
-  { company: 'via Cloudmuscle',    title: 'Heineken B2B Commerce',       description: 'B2B commerce platform with CPQ and MuleSoft integrations for distributor ordering and account management across Africa.',                 tags: ['CPQ', 'MuleSoft', 'B2B Commerce'],         bg: '#0a1408' },
-  { company: 'via Cloudsmiths',    title: 'Four Paws NPSP Migration',    description: 'Global donor data migration to NPSP and automated fundraising workflows deployed across 15 countries.',                                   tags: ['NPSP', 'Data Migration', 'Flows'],         bg: '#1a0d0a' },
-  { company: 'via BlueSky',        title: 'PMI Experience Cloud',        description: 'Customer portal for product registration and support integrating with global ERP systems for Philip Morris International.',                  tags: ['Experience Cloud', 'Apex', 'REST API'],   bg: '#0a0d1a' },
+  {
+    company: 'via Digital Modus',
+    client:  'NHS Professionals',
+    logo:    '/logos/nhsp.svg',
+    title:   'UK Government Healthcare',
+    description: 'Designed and deployed complex, data-driven, multi-channel user journeys and automation flows to support large-scale public engagement and service delivery. Managed end-to-end configuration of Marketing Cloud, focusing on robust data architecture, advanced segmentation logic, and adherence to strict government data and security compliance standards.',
+    tags: ['Marketing Cloud', 'Data Cloud', 'Apex', 'AMPscript'],
+    bg: '#0a0f1e',
+    industry: 'Government / Healthcare',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'Capitec Bank',
+    logo:    '/logos/capitec.svg',
+    title:   'Fraud Detection System',
+    description: 'Engineered and enhanced the Salesforce platform for the Fraud Department, leveraging OmniStudio, Flows, and Lightning Web Components (LWC) to build dynamic fraud-focused features and case automation tools. Delivered solutions that streamlined internal processes and improved efficiency for agents investigating and managing fraud cases — tools currently active in production.',
+    tags: ['OmniStudio', 'LWC', 'Flows', 'Service Cloud'],
+    bg: '#001a0d',
+    industry: 'Financial Services',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'ABSA Bank',
+    logo:    '/logos/absa.svg',
+    title:   'Credit & Complaints Platform',
+    description: 'Led the development of new CIB Complaints and Credit Application forms as the sole developer, accelerating ABSA Bank\'s migration of key business processes to Salesforce. Implemented a customer feature for bulk case transfers and ensured UI compliance with external Adobe XD design templates. Successfully enabled the client to manage all complaints and new credit applications within a centralised CRM environment.',
+    tags: ['Service Cloud', 'Flows', 'Apex', 'LWC'],
+    bg: '#1a0306',
+    industry: 'Financial Services',
+  },
+  {
+    company: 'via Cloudmuscle B.V.',
+    client:  'Heineken / Distell',
+    logo:    '/logos/heineken.svg',
+    title:   'B2B Distribution Platform',
+    description: 'Served as Senior Salesforce Developer, developing new B2B sales features for a nationwide and international liquor distribution platform. Managed complex third-party integrations with SAP, Apigee, and WhatsApp, in addition to developing solutions for Experience Cloud chatbots and ordering processes.',
+    tags: ['B2B Commerce', 'Experience Cloud', 'MuleSoft', 'SAP'],
+    bg: '#0a1408',
+    industry: 'FMCG / Distribution',
+  },
+  {
+    company: 'via Cloudsmiths',
+    client:  'Four Paws International',
+    logo:    '/logos/fourpaws.svg',
+    title:   'Global NPO Donation Platform',
+    description: 'Managed end-to-end development of migrating an international NPO\'s global donation platform to Salesforce. Created a single, dynamic donation page capable of routing donors to multiple campaigns based on internal logic. Implemented essential financial and marketing integrations, including Pay Gate, Facebook Pixel, and custom subscription/unsubscribe forms.',
+    tags: ['NPSP', 'Data Migration', 'Apex Triggers', 'Pay Gate'],
+    bg: '#1a0d0a',
+    industry: 'Non-Profit',
+  },
+  {
+    company: 'via Cloudsmiths',
+    client:  'Main One',
+    logo:    '/logos/mainone.svg',
+    title:   'ISP Opportunity Automation',
+    description: 'Automated core customer opportunity processes across Africa by developing efficient Workflow Rules and optimized Apex Triggers, ensuring high performance and compliance with Salesforce CPU limits. Created a custom Home Page component displaying the top 10 opportunities with an export feature for ad-hoc analysis (CSV output).',
+    tags: ['Apex', 'Workflow Rules', 'Custom Components', 'LWC'],
+    bg: '#030a1a',
+    industry: 'Telecommunications',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'Philip Morris / IQOS',
+    logo:    '/logos/pmi.svg',
+    title:   'IQOS Customer Portal',
+    description: 'Developed the IQOS Customer Portal, focusing on building the user account, rewards, and inventory/sales tracking systems. Managed a critical MuleSoft integration that required decrypting and synchronising encrypted data across servers. Built various custom components and forms (LWC, Aura, Visualforce) and ensured proper Google Tag processing for analytics.',
+    tags: ['Experience Cloud', 'MuleSoft', 'LWC', 'REST API'],
+    bg: '#0a0d1a',
+    industry: 'FMCG / Consumer',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'CAFU',
+    logo:    '/logos/cafu.svg',
+    title:   'Field Service Dispatching',
+    description: 'Automated and optimised mechanic dispatching within Salesforce Field Service Lightning (FSL) for a major UAE service provider. Developed a custom AWS integration for storing job completion images and implemented sophisticated geolocation-based polygon map logic to automatically assign drivers.',
+    tags: ['Field Service Lightning', 'AWS', 'Apex', 'Geolocation'],
+    bg: '#1a1400',
+    industry: 'Field Services / UAE',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'Sygnia',
+    logo:    '/logos/sygnia.svg',
+    title:   'Investment Lead Generation',
+    description: 'Developed custom features to enhance lead generation and customer service, including automating lead processes based on site entry and Google Ad click data. Implemented a complex automation trigger to notify agents, with dynamic retrieval and display of relevant agent information by securely passing data via URL parameters.',
+    tags: ['Sales Cloud', 'Apex', 'Automation', 'Google Ads API'],
+    bg: '#06061a',
+    industry: 'Financial Services',
+  },
+  {
+    company: 'via BlueSky',
+    client:  'Urban MGT',
+    logo:    '/logos/urbanmgt.svg',
+    title:   'Client Satisfaction Portal',
+    description: 'Designed and built a live Client Satisfaction Form within the Lightning Experience Builder using Lightning frameworks. The solution dynamically retrieved and displayed relevant agent information by securely passing data via URL parameters.',
+    tags: ['Lightning Experience', 'LWC', 'Aura', 'Flows'],
+    bg: '#0d0f12',
+    industry: 'Business Consulting',
+  },
+];
+
+const freelanceProjects = [
+  {
+    client:      'Personal',
+    logo:        '/logos/portfolio.svg',
+    title:       'Portfolio 2026',
+    description: 'This portfolio — built with Next.js 14, TypeScript, Framer Motion, Three.js, shadcn/ui, and a custom hexagon background. Designed to showcase enterprise Salesforce engineering work with a premium, animation-driven aesthetic.',
+    tags:        ['Next.js', 'TypeScript', 'Three.js', 'Framer Motion', 'shadcn/ui'],
+    link:        null,
+    industry:    'Web Development',
+  },
+  {
+    client:      'Veloracer',
+    logo:        '/logos/veloracer.svg',
+    title:       'Custom Cycle Wear E-Commerce',
+    description: 'End-to-end WordPress WooCommerce store for a custom cycling apparel brand. Includes product configurator, custom order forms, and payment gateway integration.',
+    tags:        ['WordPress', 'WooCommerce', 'PHP', 'E-Commerce'],
+    link:        null,
+    industry:    'E-Commerce / Sports',
+  },
+  {
+    client:      'Side Project',
+    logo:        '/logos/invoiceapp.svg',
+    title:       'Invoice Platform',
+    description: 'Full-stack invoice generation and management web application. Create, send, and track professional invoices with PDF export, client management, and payment status tracking.',
+    tags:        ['React', 'Next.js', 'TypeScript', 'Vercel'],
+    link:        'https://invoice-web-app-six.vercel.app',
+    industry:    'SaaS / Productivity',
+  },
 ];
 
 // ── Multi-dot snake cursor (clouddevs.pro style) ───────────────────────────
@@ -135,30 +259,114 @@ function CustomCursor() {
   );
 }
 
-// ── Iridescent Orb ────────────────────────────────────────────────────────────
+// ── Floating Tech Card (hero right) ──────────────────────────────────────────
 
-function IridescentOrb() {
+const CERTS = [
+  { label: 'Salesforce Administrator',       abbr: 'ADM',  color: '#00A1E0' },
+  { label: 'Platform Developer I',           abbr: 'PD1',  color: '#00A1E0' },
+  { label: 'Platform Developer II',          abbr: 'PD2',  color: '#032D60' },
+  { label: 'Marketing Cloud Developer',      abbr: 'MCD',  color: '#F97316' },
+  { label: 'Marketing Cloud Email Spec.',    abbr: 'MCE',  color: '#F97316' },
+  { label: 'OmniStudio Developer',           abbr: 'OSD',  color: '#8B5CF6' },
+  { label: 'Data Cloud Consultant',          abbr: 'DCC',  color: '#10B981' },
+  { label: 'AI Associate',                   abbr: 'AIA',  color: '#06B6D4' },
+];
+
+const TECH_BADGES = ['Apex', 'LWC', 'SOQL', 'MuleSoft', 'REST', 'AWS', 'React', 'Next.js'];
+
+function FloatingTechCard() {
   return (
-    <div style={{ position: 'relative', width: 'clamp(180px, 28vw, 440px)', height: 'clamp(200px, 31vw, 491px)', flexShrink: 0, animation: 'orb-float 7s ease-in-out infinite' }}>
-      {/* Outer glow */}
-      <div style={{ position: 'absolute', inset: '-20%', borderRadius: '40% 60% 55% 45% / 50% 45% 55% 50%', background: 'radial-gradient(ellipse, rgba(130,0,255,0.5) 0%, rgba(255,0,120,0.3) 40%, rgba(0,100,255,0.2) 70%, transparent 85%)', filter: 'blur(35px)' }} />
-      {/* Main orb blob */}
-      <div style={{
-        position: 'relative', width: '100%', height: '100%',
-        borderRadius: '40% 60% 55% 45% / 50% 45% 55% 50%',
-        background: `conic-gradient(from 0deg at 40% 40%, #ff006680 0deg, #8800ff 60deg, #00ccff 120deg, #00ff88 180deg, #ffcc00 240deg, #ff5500 300deg, #ff006680 360deg)`,
-        boxShadow: 'inset -25px -25px 70px rgba(0,0,180,0.6), inset 15px 15px 50px rgba(200,0,200,0.4), inset 0 0 100px rgba(0,150,255,0.2), 0 0 80px rgba(120,0,255,0.5), 0 0 150px rgba(0,80,200,0.25)',
-        animation: 'orb-hue 8s ease-in-out infinite',
-        overflow: 'hidden',
-      }}>
-        {/* Specular highlight */}
-        <div style={{ position: 'absolute', top: '8%', left: '12%', width: '32%', height: '26%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.95) 0%, transparent 70%)', filter: 'blur(4px)' }} />
-        {/* Inner depth */}
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 'inherit', background: 'radial-gradient(circle at 70% 70%, rgba(0,0,30,0.85) 0%, transparent 60%)', mixBlendMode: 'multiply' }} />
-        {/* Rainbow sheen */}
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 'inherit', background: 'linear-gradient(135deg, rgba(255,80,200,0.3) 0%, transparent 40%, rgba(0,200,255,0.25) 70%, transparent 100%)', mixBlendMode: 'screen' }} />
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+      style={{
+        position: 'relative',
+        width: 'clamp(260px, 26vw, 400px)',
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+      }}
+    >
+      {/* Certifications card */}
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 6, ease: 'easeInOut', repeat: Infinity }}
+        style={{
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: '16px',
+          padding: '1.25rem 1.375rem',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+        }}
+      >
+        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          Salesforce Certifications
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {CERTS.map((c, i) => (
+            <motion.div
+              key={c.abbr}
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 + i * 0.07, duration: 0.45 }}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}
+            >
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: '30px', height: '20px', borderRadius: '4px',
+                background: c.color + '22', border: `1px solid ${c.color}44`,
+                fontSize: '0.55rem', fontWeight: 700, color: c.color,
+                letterSpacing: '0.04em', flexShrink: 0,
+              }}>
+                {c.abbr}
+              </span>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.02em' }}>{c.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Tech badges card */}
+      <motion.div
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 5, ease: 'easeInOut', repeat: Infinity, delay: 1 }}
+        style={{
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '12px',
+          padding: '1rem 1.125rem',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+        }}
+      >
+        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+          Core Stack
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+          {TECH_BADGES.map((t, i) => (
+            <motion.span
+              key={t}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1 + i * 0.06 }}
+              style={{
+                padding: '0.25rem 0.65rem',
+                borderRadius: '20px',
+                border: '1px solid rgba(255,255,255,0.12)',
+                fontSize: '0.65rem', fontWeight: 500,
+                color: 'rgba(255,255,255,0.6)',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {t}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -312,10 +520,8 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* Right: Orb */}
-        <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease: [0.16,1,0.3,1], delay: 0.2 }} style={{ flexShrink: 0 }}>
-          <IridescentOrb />
-        </motion.div>
+        {/* Right: floating cert/tech card */}
+        <FloatingTechCard />
       </div>
 
       {/* Bottom stats band */}
@@ -374,29 +580,105 @@ function About() {
 
 // ── Projects ──────────────────────────────────────────────────────────────────
 
+function ProjectCard({ p, i, link }: { p: typeof projects[0] & { link?: string | null }; i: number; link?: string | null }) {
+  const card = (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.6, delay: i * 0.05 }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      style={{ ...CARD, display: 'flex', flexDirection: 'column', gap: '1.125rem', cursor: link ? 'pointer' : 'default' }}
+    >
+      {/* Logo + meta row */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem' }}>
+        <img
+          src={p.logo}
+          alt={(p as any).client ?? p.company}
+          style={{ height: '36px', width: 'auto', maxWidth: '100px', objectFit: 'contain', borderRadius: '4px', opacity: 0.9 }}
+          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+        />
+        <span style={{ fontSize: '0.625rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.14em', textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: '2px' }}>
+          {(p as any).industry ?? ''}
+        </span>
+      </div>
+      {/* Title + via */}
+      <div>
+        <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
+          {p.company}
+        </div>
+        <h3 style={{ fontSize: '1.075rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>{p.title}</h3>
+      </div>
+      <p style={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.8125rem', lineHeight: 1.7, flex: 1 }}>{p.description}</p>
+      {/* Tags */}
+      <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+        {p.tags.map(tag => (
+          <span key={tag} style={{ padding: '0.18rem 0.7rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.48)', fontSize: '0.625rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{tag}</span>
+        ))}
+      </div>
+      {link && (
+        <div style={{ fontSize: '0.75rem', color: 'rgba(0,200,180,0.7)', letterSpacing: '0.04em' }}>
+          View Project →
+        </div>
+      )}
+    </motion.div>
+  );
+
+  if (link) {
+    return <a href={link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>{card}</a>;
+  }
+  return card;
+}
+
 function Projects() {
+  const [tab, setTab] = useState<'enterprise' | 'personal'>('enterprise');
+
   return (
     <section id="work" style={{ padding: '5rem clamp(1rem,3vw,2.5rem)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <SectionHeader label="SELECTED WORK" title="PROJECTS" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(340px,1fr))', gap: '1rem' }}>
-          {projects.map((p, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.6, delay: i * 0.06 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              style={{ ...CARD, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div>
-                <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '0.375rem' }}>{p.company}</div>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>{p.title}</h3>
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.875rem', lineHeight: 1.65, flex: 1 }}>{p.description}</p>
-              <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                {p.tags.map(tag => (
-                  <span key={tag} style={{ padding: '0.2rem 0.75rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)', fontSize: '0.6875rem', letterSpacing: '0.04em' }}>{tag}</span>
-                ))}
-              </div>
-            </motion.div>
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '2.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0' }}>
+          {(['enterprise', 'personal'] as const).map(t => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              style={{
+                padding: '0.6rem 1.25rem',
+                background: 'none',
+                border: 'none',
+                borderBottom: tab === t ? '2px solid #fff' : '2px solid transparent',
+                color: tab === t ? '#fff' : 'rgba(255,255,255,0.35)',
+                fontSize: '0.6875rem',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'color 0.2s, border-color 0.2s',
+                marginBottom: '-1px',
+              }}
+            >
+              {t === 'enterprise' ? `Enterprise (${projects.length})` : `Personal (${freelanceProjects.length})`}
+            </button>
           ))}
         </div>
+
+        {tab === 'enterprise' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(340px,1fr))', gap: '1rem' }}>
+            {projects.map((p, i) => (
+              <ProjectCard key={i} p={p} i={i} />
+            ))}
+          </div>
+        )}
+
+        {tab === 'personal' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(340px,1fr))', gap: '1rem' }}>
+            {freelanceProjects.map((p, i) => (
+              <ProjectCard key={i} p={p as any} i={i} link={(p as any).link} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -536,10 +818,8 @@ function Footer() {
 export default function Home() {
   return (
     <>
-      {/* Fixed hexagon grid background */}
-      <div className="fixed inset-0 z-0" aria-hidden="true">
-        <HexagonBackground />
-      </div>
+      {/* Fixed fluid gradient background */}
+      <FluidGradientBackground />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />

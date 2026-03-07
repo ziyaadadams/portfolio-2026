@@ -1,5 +1,11 @@
-<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="160" height="80" rx="8" fill="#0A0A0A" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-  <text x="80" y="34" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.4)" text-anchor="middle" letter-spacing="3">ZIYAAD ADAMS</text>
-  <text x="80" y="54" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="1">PORTFOLIO 2026</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <defs>
+    <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="60" rx="6" fill="url(#pg)"/>
+  <text x="60" y="25" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="11" font-weight="800" letter-spacing="1">PORTFOLIO</text>
+  <text x="60" y="44" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Arial,sans-serif" font-size="9" font-weight="600" letter-spacing="1">2026</text>
 </svg>

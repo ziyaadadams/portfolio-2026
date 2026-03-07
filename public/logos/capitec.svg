@@ -1,7 +1,5 @@
-<svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="160" height="80" rx="8" fill="#002E5F"/>
-  <circle cx="40" cy="40" r="18" fill="none" stroke="#00C3F0" stroke-width="2.5"/>
-  <text x="40" y="46" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#00C3F0" text-anchor="middle">C</text>
-  <text x="95" y="36" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">CAPITEC</text>
-  <text x="95" y="52" font-family="Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="1">BANK</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <rect width="120" height="60" rx="6" fill="#00843D"/>
+  <text x="60" y="27" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="16" font-weight="800" letter-spacing="1">CAPITEC</text>
+  <text x="60" y="44" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Arial,sans-serif" font-size="8" font-weight="500" letter-spacing="2">BANK</text>
 </svg>

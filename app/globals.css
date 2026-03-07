@@ -106,18 +106,6 @@ h1, h2, h3, h4, h5, h6, p, span, a, div { font-family: inherit; }
 }
 .marquee-track { animation: marquee 25s linear infinite; }
 
-/* ── Orb rotation animation ──────────────────────────────────────────────── */
-@keyframes orb-hue {
-  0%   { filter: hue-rotate(0deg)   saturate(1.1) brightness(1.05); }
-  50%  { filter: hue-rotate(45deg)  saturate(1.3) brightness(1.1);  }
-  100% { filter: hue-rotate(0deg)   saturate(1.1) brightness(1.05); }
-}
-@keyframes orb-float {
-  0%,  100% { transform: rotate(255deg) translateY(0px);   }
-  33%        { transform: rotate(260deg) translateY(-12px); }
-  66%        { transform: rotate(250deg) translateY(8px);   }
-}
-
 /* ── Scrollbar ───────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: #111; }
