@@ -487,12 +487,13 @@ function Hero() {
       id="hero"
       className="hero-section"
       style={{
-        background: "#000",
+        background: "var(--hero-bg)",
         position: "relative",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        transition: "background 0.3s ease",
       }}
     >
       {/* ═══════════════════════════════════════════════════════════════════════
@@ -534,7 +535,7 @@ function Hero() {
               fontWeight: 500,
               letterSpacing: "0.35em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.3)",
+              color: "var(--text-4)",
             }}
           >
             Salesforce
@@ -548,7 +549,7 @@ function Hero() {
               fontWeight: 700,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.55)",
+              color: "var(--text-3)",
             }}
           >
             Engineer
@@ -595,7 +596,7 @@ function Hero() {
                   fontWeight: 700,
                   letterSpacing: "0.3em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.1)",
+                  color: "var(--text-4)",
                   zIndex: 3,
                 }}
               >
@@ -620,7 +621,7 @@ function Hero() {
                     position: "relative",
                     zIndex: 1,
                     borderRadius: "clamp(24px, 3vw, 48px)",
-                    boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
+                    boxShadow: "0 8px 40px rgba(0,0,0,0.15)",
                   }}
                 >
                   <img
@@ -660,9 +661,8 @@ function Hero() {
                       fontWeight: 300,
                       letterSpacing: "0.55em",
                       textTransform: "lowercase",
-                      color: "rgba(255,255,255,0.45)",
+                      color: "var(--text-3)",
                       marginBottom: "0.15rem",
-                      textShadow: "0 2px 20px rgba(0,0,0,0.8)",
                     }}
                   >
                     A d a m s
@@ -675,8 +675,7 @@ function Hero() {
                       fontWeight: 700,
                       lineHeight: 0.85,
                       letterSpacing: "-0.03em",
-                      color: "#fff",
-                      textShadow: "0 4px 40px rgba(0,0,0,0.9)",
+                      color: "var(--hero-text)",
                     }}
                   >
                     <div style={{ overflow: "hidden" }}>
@@ -743,9 +742,9 @@ function Hero() {
                     gap: "0.5rem",
                     padding: "0.6rem 1.75rem",
                     background: "transparent",
-                    color: "#fff",
+                    color: "var(--hero-text)",
                     borderRadius: "4px",
-                    border: "1px solid rgba(255,255,255,0.25)",
+                    border: "1px solid var(--text-3)",
                     fontSize: "0.72rem",
                     fontWeight: 500,
                     textDecoration: "none",
@@ -753,12 +752,12 @@ function Hero() {
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+                    e.currentTarget.style.background = "var(--card-bg)";
+                    e.currentTarget.style.borderColor = "var(--text-2)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                    e.currentTarget.style.borderColor = "var(--text-3)";
                   }}
                 >
                   Portfolio
@@ -776,9 +775,9 @@ function Hero() {
                     gap: "0.5rem",
                     padding: "0.6rem 1.75rem",
                     background: "transparent",
-                    color: "rgba(255,255,255,0.6)",
+                    color: "var(--text-3)",
                     borderRadius: "4px",
-                    border: "1px solid rgba(255,255,255,0.12)",
+                    border: "1px solid var(--card-border)",
                     fontSize: "0.72rem",
                     fontWeight: 500,
                     textDecoration: "none",
@@ -786,14 +785,14 @@ function Hero() {
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
-                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.background = "var(--card-bg)";
+                    e.currentTarget.style.borderColor = "var(--text-3)";
+                    e.currentTarget.style.color = "var(--hero-text)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                    e.currentTarget.style.borderColor = "var(--card-border)";
+                    e.currentTarget.style.color = "var(--text-3)";
                   }}
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -835,22 +834,22 @@ function Hero() {
                 width: "38px",
                 height: "38px",
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "rgba(255,255,255,0.55)",
+                color: "var(--text-3)",
                 textDecoration: "none",
                 transition: "all 0.25s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-                e.currentTarget.style.color = "#fff";
+                e.currentTarget.style.background = "var(--card-hover)";
+                e.currentTarget.style.color = "var(--hero-text)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+                e.currentTarget.style.background = "var(--card-bg)";
+                e.currentTarget.style.color = "var(--text-3)";
               }}
             >
               {s.icon}
@@ -869,7 +868,7 @@ function Hero() {
           position: "relative",
           zIndex: 1,
           padding: "2rem clamp(1.5rem, 4vw, 4rem) 3rem",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
+          borderTop: "1px solid var(--card-border)",
           flex: "1 1 45%",
           display: "flex",
           flexDirection: "column",
@@ -885,7 +884,7 @@ function Hero() {
             width: "120px",
             height: "120px",
             borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid var(--card-border)",
             pointerEvents: "none",
           }}
         />
@@ -899,7 +898,7 @@ function Hero() {
             style={{
               fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
               fontWeight: 700,
-              color: "#fff",
+              color: "var(--hero-text)",
               marginBottom: "1.5rem",
               letterSpacing: "-0.02em",
             }}
@@ -925,7 +924,7 @@ function Hero() {
               <p
                 style={{
                   fontSize: "clamp(0.78rem, 0.95vw, 0.88rem)",
-                  color: "rgba(255,255,255,0.6)",
+                  color: "var(--hero-text-secondary)",
                   lineHeight: 1.75,
                   marginBottom: "1.25rem",
                 }}
@@ -956,15 +955,15 @@ function Hero() {
                     transition={{ delay: 0.2 + i * 0.06, duration: 0.5 }}
                     style={{
                       padding: "0.7rem 0.85rem",
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "var(--card-bg)",
+                      border: "1px solid var(--card-border)",
                       borderRadius: "8px",
                     }}
                   >
                     <div
                       style={{
                         fontSize: "clamp(0.58rem, 0.7vw, 0.65rem)",
-                        color: "rgba(255,255,255,0.35)",
+                        color: "var(--text-4)",
                         textTransform: "capitalize",
                         marginBottom: "0.2rem",
                         letterSpacing: "0.04em",
@@ -975,7 +974,7 @@ function Hero() {
                     <div
                       style={{
                         fontSize: "clamp(0.7rem, 0.85vw, 0.78rem)",
-                        color: "rgba(255,255,255,0.8)",
+                        color: "var(--text-2)",
                         fontWeight: 500,
                       }}
                     >
@@ -1002,8 +1001,8 @@ function Hero() {
                   transition={{ delay: 0.2 + i * 0.08, duration: 0.55 }}
                   style={{
                     padding: "0.85rem",
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "var(--card-bg)",
+                    border: "1px solid var(--card-border)",
                     borderRadius: "8px",
                   }}
                 >
@@ -1011,7 +1010,7 @@ function Hero() {
                     style={{
                       fontSize: "clamp(0.7rem, 0.82vw, 0.76rem)",
                       fontWeight: 600,
-                      color: "#fff",
+                      color: "var(--hero-text)",
                       marginBottom: "0.5rem",
                       letterSpacing: "0.02em",
                     }}
@@ -1021,7 +1020,7 @@ function Hero() {
                   <div
                     style={{
                       fontSize: "clamp(0.58rem, 0.68vw, 0.64rem)",
-                      color: "rgba(255,255,255,0.45)",
+                      color: "var(--text-3)",
                       lineHeight: 1.7,
                     }}
                   >
@@ -1056,15 +1055,15 @@ function Hero() {
         >
           <path
             d="M0 140 Q180 35 360 90 T720 55 T1080 80 T1440 45 L1440 140 Z"
-            fill="rgba(255,255,255,0.02)"
+            fill="var(--card-bg)"
           />
           <path
             d="M0 140 Q240 55 480 100 T960 60 T1440 78 L1440 140 Z"
-            fill="rgba(255,255,255,0.015)"
+            fill="var(--card-bg)"
           />
           <path
             d="M0 140 Q200 80 400 105 T800 70 T1200 92 T1440 65 L1440 140 Z"
-            fill="rgba(255,255,255,0.01)"
+            fill="var(--card-bg)"
           />
         </svg>
       </div>
@@ -1366,7 +1365,7 @@ function ProjectModal({
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.72)",
+        background: "rgba(0,0,0,0.6)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         zIndex: 10000,
@@ -1383,8 +1382,8 @@ function ProjectModal({
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "#0d0d0d",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--surface-2)",
+          border: "1px solid var(--card-border)",
           borderRadius: "16px",
           width: "100%",
           maxWidth: "580px",
@@ -1404,9 +1403,9 @@ function ProjectModal({
             width: "32px",
             height: "32px",
             borderRadius: "50%",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            color: "rgba(255,255,255,0.6)",
+            background: "var(--card-bg)",
+            border: "1px solid var(--card-border)",
+            color: "var(--text-3)",
             fontSize: "1rem",
             cursor: "pointer",
             display: "flex",
@@ -1448,7 +1447,7 @@ function ProjectModal({
             style={{
               fontSize: "1.25rem",
               fontWeight: 700,
-              color: "#fff",
+              color: "var(--text-1)",
               marginBottom: "0.3rem",
             }}
           >
@@ -1458,7 +1457,7 @@ function ProjectModal({
             <div
               style={{
                 fontSize: "0.72rem",
-                color: "rgba(255,255,255,0.4)",
+                color: "var(--text-4)",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
               }}
@@ -1473,8 +1472,8 @@ function ProjectModal({
                 marginTop: "0.5rem",
                 padding: "0.2rem 0.75rem",
                 borderRadius: "20px",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "rgba(255,255,255,0.6)",
+                border: "1px solid var(--card-border)",
+                color: "var(--text-3)",
                 fontSize: "0.625rem",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
@@ -1488,7 +1487,7 @@ function ProjectModal({
         {/* Divider */}
         <div
           style={{
-            borderTop: "1px solid rgba(255,255,255,0.07)",
+            borderTop: "1px solid var(--card-border)",
             marginBottom: "1.25rem",
           }}
         />
@@ -1497,7 +1496,7 @@ function ProjectModal({
         <p
           style={{
             fontSize: "0.82rem",
-            color: "rgba(255,255,255,0.65)",
+            color: "var(--text-2)",
             lineHeight: 1.85,
             marginBottom: "1.75rem",
           }}
@@ -1511,7 +1510,7 @@ function ProjectModal({
             fontSize: "0.6rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.3)",
+            color: "var(--text-4)",
             marginBottom: "0.75rem",
           }}
         >
@@ -1586,14 +1585,14 @@ function ProjectCard({
       transition={{ duration: 0.6, delay: i * 0.05 }}
       whileHover={{
         y: -4,
-        backgroundColor: "rgba(255,255,255,0.055)",
-        borderColor: "rgba(255,255,255,0.16)",
+        backgroundColor: "var(--card-hover)",
+        borderColor: "var(--text-3)",
         transition: { duration: 0.2 },
       }}
       onClick={onOpen}
       style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--card-bg)",
+        border: "1px solid var(--card-border)",
         borderRadius: "8px",
         display: "flex",
         flexDirection: "column",
@@ -1640,7 +1639,7 @@ function ProjectCard({
         <div
           style={{
             fontSize: "0.65rem",
-            color: "rgba(255,255,255,0.45)",
+            color: "var(--text-3)",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
             marginBottom: "0.35rem",
@@ -1654,8 +1653,8 @@ function ProjectCard({
               display: "inline-block",
               padding: "0.15rem 0.6rem",
               borderRadius: "20px",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.4)",
+              border: "1px solid var(--card-border)",
+              color: "var(--text-4)",
               fontSize: "0.575rem",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
@@ -1678,7 +1677,8 @@ function Projects() {
       id="work"
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: "1px solid var(--card-border)",
+        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -1690,7 +1690,7 @@ function Projects() {
             display: "flex",
             gap: "0.25rem",
             marginBottom: "2.5rem",
-            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            borderBottom: "1px solid var(--card-border)",
             paddingBottom: "0",
           }}
         >
@@ -1703,8 +1703,8 @@ function Projects() {
                 background: "none",
                 border: "none",
                 borderBottom:
-                  tab === t ? "2px solid #fff" : "2px solid transparent",
-                color: tab === t ? "#fff" : "rgba(255,255,255,0.58)",
+                  tab === t ? "2px solid var(--text-1)" : "2px solid transparent",
+                color: tab === t ? "var(--text-1)" : "var(--text-3)",
                 fontSize: "0.6875rem",
                 fontWeight: 600,
                 letterSpacing: "0.14em",
@@ -1775,8 +1775,8 @@ function Projects() {
 
 // ── Shared card style ─────────────────────────────────────────────────────────
 const CARD: React.CSSProperties = {
-  background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(255,255,255,0.1)",
+  background: "var(--card-bg)",
+  border: "1px solid var(--card-border)",
   borderRadius: "10px",
   padding: "1.75rem 2rem",
   backdropFilter: "blur(32px)",
@@ -1794,7 +1794,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         style={{
           display: "block",
           fontSize: "0.6875rem",
-          color: "rgba(255,255,255,0.55)",
+          color: "var(--text-3)",
           letterSpacing: "0.2em",
           textTransform: "uppercase",
           marginBottom: "0.75rem",
@@ -1807,7 +1807,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         style={{
           fontSize: "clamp(1.5rem,3vw,2.25rem)",
           fontWeight: 700,
-          color: "#fff",
+          color: "var(--text-1)",
           letterSpacing: "-0.02em",
           textTransform: "uppercase",
         }}
@@ -1824,7 +1824,8 @@ function Services() {
       id="skills"
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: "1px solid var(--card-border)",
+        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -1847,9 +1848,9 @@ function Services() {
                 transition={{ duration: 0.45, delay: i * 0.05 }}
                 style={{
                   padding: "1.25rem 1.5rem",
-                  borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  borderBottom: "1px solid var(--card-border)",
                   borderRight:
-                    i % 2 === 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                    i % 2 === 0 ? "1px solid var(--card-border)" : "none",
                   display: "flex",
                   gap: "1rem",
                   alignItems: "flex-start",
@@ -1859,7 +1860,7 @@ function Services() {
                   style={{
                     flexShrink: 0,
                     marginTop: "0.05rem",
-                    color: "rgba(255,255,255,0.7)",
+                    color: "var(--text-2)",
                   }}
                 >
                   <Icon set="bulk" size={22} />
@@ -1869,7 +1870,7 @@ function Services() {
                     style={{
                       fontSize: "0.9375rem",
                       fontWeight: 600,
-                      color: "#fff",
+                      color: "var(--text-1)",
                       marginBottom: "0.35rem",
                     }}
                   >
@@ -1878,7 +1879,7 @@ function Services() {
                   <div
                     style={{
                       fontSize: "0.8125rem",
-                      color: "rgba(255,255,255,0.68)",
+                      color: "var(--text-3)",
                       lineHeight: 1.65,
                     }}
                   >
@@ -1902,7 +1903,8 @@ function Experience() {
       id="experience"
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: "1px solid var(--card-border)",
+        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -1916,7 +1918,7 @@ function Experience() {
               top: "6px",
               bottom: "6px",
               width: "1px",
-              background: "rgba(255,255,255,0.1)",
+              background: "var(--card-border)",
             }}
           />
           <div
@@ -1940,8 +1942,8 @@ function Experience() {
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
-                    background: "#fff",
-                    boxShadow: "0 0 8px rgba(255,255,255,0.4)",
+                    background: "var(--text-2)",
+                    boxShadow: "0 0 8px var(--text-4)",
                     flexShrink: 0,
                   }}
                 />
@@ -1968,7 +1970,7 @@ function Experience() {
                       style={{
                         fontSize: "1rem",
                         fontWeight: 600,
-                        color: "#fff",
+                        color: "var(--text-1)",
                         letterSpacing: "-0.01em",
                       }}
                     >
@@ -1977,7 +1979,7 @@ function Experience() {
                     <span
                       style={{
                         fontSize: "0.8125rem",
-                        color: "rgba(255,255,255,0.58)",
+                        color: "var(--text-3)",
                         fontWeight: 400,
                       }}
                     >
@@ -1988,7 +1990,7 @@ function Experience() {
                     <div
                       style={{
                         fontSize: "0.8125rem",
-                        color: "rgba(255,255,255,0.62)",
+                        color: "var(--text-2)",
                         whiteSpace: "nowrap",
                       }}
                     >
@@ -1997,7 +1999,7 @@ function Experience() {
                     <div
                       style={{
                         fontSize: "0.75rem",
-                        color: "rgba(255,255,255,0.45)",
+                        color: "var(--text-4)",
                         marginTop: "0.2rem",
                         whiteSpace: "nowrap",
                       }}
@@ -2008,7 +2010,7 @@ function Experience() {
                 </div>
                 <p
                   style={{
-                    color: "rgba(255,255,255,0.68)",
+                    color: "var(--text-2)",
                     fontSize: "0.875rem",
                     lineHeight: 1.65,
                     marginBottom: "0.625rem",
@@ -2026,8 +2028,8 @@ function Experience() {
                       style={{
                         padding: "0.15rem 0.65rem",
                         borderRadius: "20px",
-                        border: "1px solid rgba(255,255,255,0.15)",
-                        color: "rgba(255,255,255,0.68)",
+                        border: "1px solid var(--card-border)",
+                        color: "var(--text-3)",
                         fontSize: "0.6875rem",
                         letterSpacing: "0.04em",
                       }}
@@ -2053,7 +2055,8 @@ function Contact() {
       id="contact"
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem) 3rem",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: "1px solid var(--card-border)",
+        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -2072,7 +2075,7 @@ function Contact() {
               viewport={{ once: true }}
               style={{
                 fontSize: "0.6875rem",
-                color: "rgba(255,255,255,0.55)",
+                color: "var(--text-3)",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 marginBottom: "0.75rem",
@@ -2085,7 +2088,7 @@ function Contact() {
               style={{
                 fontSize: "clamp(1.75rem,4vw,3rem)",
                 fontWeight: 700,
-                color: "#fff",
+                color: "var(--text-1)",
                 letterSpacing: "-0.03em",
                 textTransform: "uppercase",
               }}
@@ -2110,8 +2113,8 @@ function Contact() {
                 alignItems: "center",
                 gap: "0.5rem",
                 padding: "0.75rem 1.625rem",
-                background: "#fff",
-                color: "#000",
+                background: "var(--text-1)",
+                color: "var(--surface-1)",
                 borderRadius: "100px",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
@@ -2133,9 +2136,9 @@ function Contact() {
                 gap: "0.5rem",
                 padding: "0.75rem 1.625rem",
                 background: "transparent",
-                color: "#fff",
+                color: "var(--text-1)",
                 borderRadius: "100px",
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid var(--card-border)",
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 textDecoration: "none",
@@ -2156,9 +2159,9 @@ function Contact() {
                 gap: "0.5rem",
                 padding: "0.75rem 1.625rem",
                 background: "transparent",
-                color: "#fff",
+                color: "var(--text-1)",
                 borderRadius: "100px",
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid var(--card-border)",
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 textDecoration: "none",
@@ -2171,7 +2174,10 @@ function Contact() {
                 alt="Trailhead"
                 width={16}
                 height={16}
-                style={{ filter: "invert(1)", display: "block" }}
+                style={{ 
+                  filter: "var(--icon-filter, none)", 
+                  display: "block" 
+                }}
               />
               Trailhead
             </a>
@@ -2185,9 +2191,9 @@ function Contact() {
                 gap: "0.5rem",
                 padding: "0.75rem 1.625rem",
                 background: "transparent",
-                color: "#fff",
+                color: "var(--text-1)",
                 borderRadius: "100px",
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid var(--card-border)",
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 textDecoration: "none",
@@ -2206,7 +2212,7 @@ function Contact() {
             transition={{ delay: 0.4 }}
             style={{
               fontSize: "0.875rem",
-              color: "rgba(255,255,255,0.58)",
+              color: "var(--text-3)",
               letterSpacing: "0.02em",
             }}
           >
@@ -2225,8 +2231,9 @@ function Footer() {
   return (
     <footer
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: "1px solid var(--card-border)",
         padding: "1.5rem clamp(1rem,3vw,2.5rem)",
+        background: "var(--color-background)",
       }}
     >
       <div
@@ -2243,7 +2250,7 @@ function Footer() {
         <div
           style={{
             fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.50)",
+            color: "var(--text-4)",
             letterSpacing: "0.06em",
           }}
         >
@@ -2253,7 +2260,7 @@ function Footer() {
           href="mailto:ziyaada22@gmail.com"
           style={{
             fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.50)",
+            color: "var(--text-4)",
             textDecoration: "none",
             letterSpacing: "0.06em",
           }}
@@ -2263,7 +2270,7 @@ function Footer() {
         <div
           style={{
             fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.50)",
+            color: "var(--text-4)",
             letterSpacing: "0.08em",
             textTransform: "uppercase",
           }}
