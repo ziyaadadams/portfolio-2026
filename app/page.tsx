@@ -8,6 +8,7 @@ import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
 import { Mail, Linkedin, Github, Globe, ArrowUp } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Preloader } from "@/components/Preloader";
+import { useReducedMotion } from "framer-motion";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -239,9 +240,15 @@ const freelanceProjects = [
 
 function CustomCursor() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  
   useEffect(() => {
     const container = containerRef.current;
     if (!container || typeof window === "undefined") return;
+    
+    // Check if touch device or reduced motion preferred
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice || shouldReduceMotion) return;
 
     const AMOUNT = 20;
     const SINE_DOTS = Math.floor(AMOUNT * 0.3);
@@ -341,7 +348,7 @@ function CustomCursor() {
       cancelAnimationFrame(rafId);
       clearTimeout(timeoutID);
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <>
