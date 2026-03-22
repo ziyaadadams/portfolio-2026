@@ -487,13 +487,11 @@ function Hero() {
       id="hero"
       className="hero-section"
       style={{
-        background: "var(--hero-bg)",
         position: "relative",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        transition: "background 0.3s ease",
       }}
     >
       {/* ═══════════════════════════════════════════════════════════════════════
@@ -1678,7 +1676,6 @@ function Projects() {
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
         borderTop: "1px solid var(--card-border)",
-        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -1825,7 +1822,6 @@ function Services() {
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
         borderTop: "1px solid var(--card-border)",
-        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -1904,7 +1900,6 @@ function Experience() {
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem)",
         borderTop: "1px solid var(--card-border)",
-        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -2056,7 +2051,6 @@ function Contact() {
       style={{
         padding: "3.5rem clamp(1rem,3vw,2.5rem) 3rem",
         borderTop: "1px solid var(--card-border)",
-        background: "var(--color-background)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -2233,7 +2227,6 @@ function Footer() {
       style={{
         borderTop: "1px solid var(--card-border)",
         padding: "1.5rem clamp(1rem,3vw,2.5rem)",
-        background: "var(--color-background)",
       }}
     >
       <div
