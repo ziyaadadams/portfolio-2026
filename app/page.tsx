@@ -10,7 +10,6 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { Preloader } from "@/components/Preloader";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -2285,22 +2284,6 @@ function Footer() {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-function ThemedParticleBackground() {
-  const { theme, systemTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  // Default to dark during SSR to match your preference
-  const isDark = mounted 
-    ? (theme === 'dark' || (theme === 'system' && systemTheme === 'dark'))
-    : true;
-    
-  return <ParticleBackground className="z-0" isDark={isDark} aria-hidden="true" />;
-}
-
 export default function Home() {
   return (
     <>
@@ -2315,7 +2298,7 @@ export default function Home() {
       </a>
       
       {/* Animated dots background */}
-      <ThemedParticleBackground />
+      <ParticleBackground aria-hidden="true" />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />

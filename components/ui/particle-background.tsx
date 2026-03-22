@@ -25,8 +25,8 @@ interface Particle {
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 
-// Blue-teal-white particles for dark backgrounds (original style)
-function particleColorDark(phase: number, opacity: number): string {
+// Blue-teal-white particles (original style)
+function particleColor(phase: number, opacity: number): string {
   const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
   let r: number, g: number, b: number;
   if (t < 0.5) {
@@ -43,15 +43,6 @@ function particleColorDark(phase: number, opacity: number): string {
     b = Math.round(lerp(220, 255, s));
   }
   return `rgba(${r},${g},${b},${opacity.toFixed(3)})`;
-}
-
-// Gray-blue particles for light backgrounds
-function particleColorLight(phase: number, opacity: number): string {
-  const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
-  // Gray to blue-gray range
-  const gray = Math.round(lerp(100, 160, t));
-  const blueTint = Math.round(lerp(120, 180, t));
-  return `rgba(${gray}, ${blueTint}, ${blueTint + 20}, ${opacity.toFixed(3)})`;
 }
 
 function makeParticle(W: number, H: number): Particle {
@@ -78,17 +69,10 @@ function makeParticle(W: number, H: number): Particle {
   };
 }
 
-export function ParticleBackground({ className, isDark = true }: { className?: string; isDark?: boolean }) {
+export function ParticleBackground({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -117,8 +101,8 @@ export function ParticleBackground({ className, isDark = true }: { className?: s
       const dt = Math.min(now - last, 50);
       last = now;
 
-      // Clear canvas - fill with background color
-      ctx.fillStyle = isDark ? '#0a0a0a' : '#fafafa';
+      // Fill with dark background
+      ctx.fillStyle = '#0a0a0a';
       ctx.fillRect(0, 0, W, H);
 
       for (const p of particles) {
@@ -146,16 +130,14 @@ export function ParticleBackground({ className, isDark = true }: { className?: s
         // Skip if outside canvas
         if (x < -10 || x > W + 10 || y < -10 || y > H + 10) continue;
 
-        const color = isDark 
-          ? particleColorDark(p.colorOffset, Math.max(0, Math.min(1, p.opacity)))
-          : particleColorLight(p.colorOffset, Math.max(0, Math.min(1, p.opacity)));
+        const color = particleColor(p.colorOffset, Math.max(0, Math.min(1, p.opacity)));
 
         // Soft glow
         const glowR = p.size * 3.5;
         const grd = ctx.createRadialGradient(x, y, 0, x, y, glowR);
         const baseAlpha = Math.max(0, Math.min(1, p.opacity)) * 0.25;
         grd.addColorStop(0, color.replace(/[\d.]+\)$/, `${baseAlpha})`));
-        grd.addColorStop(1, isDark ? 'rgba(0,0,0,0)' : 'rgba(250,250,250,0)');
+        grd.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.beginPath();
         ctx.arc(x, y, glowR, 0, TWO_PI);
         ctx.fillStyle = grd;
@@ -177,10 +159,7 @@ export function ParticleBackground({ className, isDark = true }: { className?: s
       running = false;
       window.removeEventListener('resize', resize);
     };
-  }, [mounted, isDark]);
-
-  // Don't render canvas until mounted to avoid hydration mismatch
-  if (!mounted) return null;
+  }, []);
 
   return (
     <canvas
@@ -191,7 +170,7 @@ export function ParticleBackground({ className, isDark = true }: { className?: s
         inset: 0,
         width: '100%',
         height: '100%',
-        zIndex: 0,
+        zIndex: -1,
         pointerEvents: 'none',
       }}
     />
