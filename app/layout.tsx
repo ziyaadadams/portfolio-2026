@@ -113,7 +113,8 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="google-site-verification" content="your-verification-code" />
+        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -124,7 +125,7 @@ export default function RootLayout({
               jobTitle: 'Senior Salesforce Engineer',
               description: 'Enterprise Salesforce architect specializing in system integrations, Apex, LWC, Marketing Cloud, and full-stack development.',
               url: 'https://ziyaad.dev',
-              email: 'mailto:ziyaada22@gmail.com',
+              email: 'mailto:' + ['ziyaada22', 'gmail.com'].join('@'),
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Cape Town',

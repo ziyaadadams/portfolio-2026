@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ParticleBackground } from "@/components/ui/particle-background";
 import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
-import { Mail, Linkedin, Github, Globe, ArrowUp } from "lucide-react";
+import { Mail, Linkedin, Github, ArrowUp } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Preloader } from "@/components/Preloader";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useReducedMotion } from "framer-motion";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { ANIMATION, getObfuscatedEmail } from "@/lib/animation";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -259,7 +260,11 @@ function CustomCursor() {
     
     // Check if touch device or reduced motion preferred
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchDevice || shouldReduceMotion) return;
+    if (isTouchDevice || shouldReduceMotion) {
+      // Hide default cursor when reduced motion is preferred
+      document.body.style.cursor = 'auto';
+      return;
+    }
 
     const AMOUNT = 20;
     const SINE_DOTS = Math.floor(AMOUNT * 0.3);
@@ -431,7 +436,7 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    href: "mailto:ziyaada22@gmail.com",
+    href: "#email",
     label: "Email",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -481,6 +486,7 @@ const SKILL_CARDS = [
 function Hero() {
   const aboutRef = useRef<HTMLDivElement>(null);
   const aboutInView = useInView(aboutRef, { once: true, margin: "-80px" });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
@@ -510,9 +516,9 @@ function Hero() {
       >
         {/* Far-left: vertical labels */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.8, duration: 0.7, ease: ANIMATION.easing.smooth }}
           className="hero-vertical-left"
           style={{
             display: "flex",
@@ -580,7 +586,7 @@ function Hero() {
             <div style={{ position: "relative", flexShrink: 0 }}>
               {/* DEVELOPER vertical text */}
               <motion.span
-                initial={{ opacity: 0 }}
+                initial={shouldReduceMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
                 style={{
@@ -605,12 +611,12 @@ function Hero() {
               <div style={{ position: "relative" }}>
                 {/* Portrait */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{
                     delay: 0.35,
                     duration: 1,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: ANIMATION.easing.smooth,
                   }}
                   style={{
                     width: "clamp(220px, 22vw, 340px)",
@@ -639,20 +645,21 @@ function Hero() {
                 <div
                   style={{
                     position: "absolute",
-                    right: "-40%",
+                    right: "clamp(-60%, -40%, -20%)",
                     top: "28%",
                     zIndex: 2,
                     pointerEvents: "none",
+                    maxWidth: "min(60vw, 600px)",
                   }}
                 >
                   {/* Spaced last name */}
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       delay: 0.3,
                       duration: 0.7,
-                      ease: [0.16, 1, 0.3, 1],
+                      ease: ANIMATION.easing.smooth,
                     }}
                     style={{
                       fontSize: "clamp(0.6rem, 0.8vw, 0.75rem)",
@@ -679,11 +686,11 @@ function Hero() {
                     <div style={{ overflow: "hidden" }}>
                       <motion.span
                         style={{ display: "inline-block" }}
-                        initial={{ y: "120%" }}
+                        initial={shouldReduceMotion ? false : { y: "120%" }}
                         animate={{ y: "0%" }}
                         transition={{
                           duration: 0.85,
-                          ease: [0.16, 1, 0.3, 1],
+                          ease: ANIMATION.easing.smooth,
                           delay: 0.15,
                         }}
                       >
@@ -708,12 +715,12 @@ function Hero() {
               }}
             >
               <motion.p
-                initial={{ opacity: 0, y: 14 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   delay: 0.7,
                   duration: 0.65,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: ANIMATION.easing.smooth,
                 }}
                 style={{
                   fontSize: "clamp(0.72rem, 0.85vw, 0.8rem)",
@@ -731,7 +738,7 @@ function Hero() {
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                 <motion.a
                   href="#work"
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9, duration: 0.55 }}
                   style={{
@@ -764,7 +771,7 @@ function Hero() {
                 <motion.a
                   href="/resume.pdf"
                   download
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0, duration: 0.55 }}
                   style={{
@@ -807,9 +814,9 @@ function Hero() {
 
         {/* Far-right: Social icons */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.9, duration: 0.7, ease: ANIMATION.easing.smooth }}
           className="hero-vertical-right"
           style={{
             display: "flex",
@@ -824,9 +831,9 @@ function Hero() {
           {SOCIAL_LINKS.map((s) => (
             <a
               key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={s.label === "Email" ? `mailto:${getObfuscatedEmail()}` : s.href}
+              target={s.label === "Email" ? undefined : "_blank"}
+              rel={s.label === "Email" ? undefined : "noopener noreferrer"}
               aria-label={s.label}
               style={{
                 width: "38px",
@@ -890,9 +897,9 @@ function Hero() {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           {/* About heading */}
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: ANIMATION.easing.smooth }}
             style={{
               fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
               fontWeight: 700,
@@ -915,7 +922,7 @@ function Hero() {
           >
             {/* LEFT — Bio + personal info */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               animate={aboutInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15, duration: 0.7 }}
             >
@@ -948,9 +955,9 @@ function Hero() {
                 {ABOUT_INFO.map((item, i) => (
                   <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.2 + i * 0.06, duration: 0.5 }}
+                    transition={{ delay: 0.2 + i * ANIMATION.stagger.fast, duration: 0.5 }}
                     style={{
                       padding: "0.7rem 0.85rem",
                       background: "var(--card-bg)",
@@ -994,9 +1001,9 @@ function Hero() {
               {SKILL_CARDS.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                   animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.08, duration: 0.55 }}
+                  transition={{ delay: 0.2 + i * ANIMATION.stagger.normal, duration: 0.55 }}
                   style={{
                     padding: "0.85rem",
                     background: "var(--card-bg)",
@@ -1074,16 +1081,22 @@ function Hero() {
 function RevealWords({
   text,
   style,
+  as = 'div',
 }: {
   text: string;
   style?: React.CSSProperties;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span' | 'p';
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const shouldReduceMotion = useReducedMotion();
   const words = text.split(" ");
+  
+  const Component = as;
+  
   return (
-    <div
-      ref={ref}
+    <Component
+      ref={ref as any}
       style={{ ...style, display: "flex", flexWrap: "wrap", gap: "0 0.22em" }}
     >
       {words.map((word, i) => (
@@ -1097,19 +1110,19 @@ function RevealWords({
         >
           <motion.span
             style={{ display: "inline-block" }}
-            initial={{ y: "110%", opacity: 0 }}
+            initial={shouldReduceMotion ? false : { y: "110%", opacity: 0 }}
             animate={isInView ? { y: "0%", opacity: 1 } : {}}
             transition={{
-              duration: 0.85,
-              ease: [0.16, 1, 0.3, 1],
-              delay: i * 0.055,
+              duration: ANIMATION.duration.slow,
+              ease: ANIMATION.easing.smooth,
+              delay: i * ANIMATION.stagger.normal,
             }}
           >
             {word}
           </motion.span>
         </span>
       ))}
-    </div>
+    </Component>
   );
 }
 
@@ -1119,8 +1132,14 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const shouldReduceMotion = useReducedMotion();
+  
   useEffect(() => {
     if (!isInView) return;
+    if (shouldReduceMotion) {
+      setCount(target);
+      return;
+    }
     const dur = 1200,
       start = performance.now();
     const step = (now: number) => {
@@ -1129,7 +1148,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
       if (t < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, [isInView, target]);
+  }, [isInView, target, shouldReduceMotion]);
   return (
     <span ref={ref}>
       {count}
@@ -1144,6 +1163,7 @@ function Navbar() {
   const [active, setActive] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Force scroll to top on mount & clear hash so browser doesn't jump
   useEffect(() => {
@@ -1160,6 +1180,50 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [mobileMenuOpen]);
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    
+    const menu = mobileMenuRef.current;
+    if (!menu) return;
+
+    const focusableElements = menu.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    };
+
+    // Focus first element when menu opens
+    firstElement?.focus();
+    
+    menu.addEventListener("keydown", handleTabKey);
+    return () => menu.removeEventListener("keydown", handleTabKey);
+  }, [mobileMenuOpen]);
+
   useEffect(() => {
     const fn = () => {
       for (const id of [
@@ -1234,6 +1298,7 @@ function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <motion.div
+          ref={mobileMenuRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -1343,6 +1408,8 @@ function ProjectModal({
 }) {
   const name = (p as any).client ?? (p as any).company ?? "";
   const company = (p as any).company ?? "";
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // close on Escape
   useEffect(() => {
@@ -1353,8 +1420,39 @@ function ProjectModal({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
+  // Focus trap
+  useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Focus close button when modal opens
+    closeButtonRef.current?.focus();
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    };
+
+    modal.addEventListener("keydown", handleTabKey);
+    return () => modal.removeEventListener("keydown", handleTabKey);
+  }, []);
+
   return (
     <motion.div
+      ref={modalRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -1377,7 +1475,7 @@ function ProjectModal({
         initial={{ opacity: 0, scale: 0.94, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.94, y: 16 }}
-        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.28, ease: ANIMATION.easing.smooth }}
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "var(--surface-2)",
@@ -1393,7 +1491,9 @@ function ProjectModal({
       >
         {/* Close button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
+          aria-label="Close project details"
           style={{
             position: "absolute",
             top: "1rem",
@@ -1410,6 +1510,15 @@ function ProjectModal({
             alignItems: "center",
             justifyContent: "center",
             lineHeight: 1,
+            transition: "all 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "var(--card-hover)";
+            e.currentTarget.style.color = "var(--text-1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "var(--card-bg)";
+            e.currentTarget.style.color = "var(--text-3)";
           }}
         >
           ×
@@ -1574,14 +1683,17 @@ function ProjectCard({
   onOpen: () => void;
 }) {
   const name = (p as any).client ?? (p as any).company ?? "";
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.6, delay: i * 0.05 }}
-      whileHover={{
+      transition={{ duration: 0.6, delay: i * ANIMATION.stagger.fast }}
+      whileHover={shouldReduceMotion ? undefined : {
         y: -4,
         backgroundColor: "var(--card-hover)",
         borderColor: "var(--text-3)",
@@ -1600,7 +1712,17 @@ function ProjectCard({
         cursor: "pointer",
         padding: "1.5rem 1.25rem 1.25rem",
         minHeight: "160px",
-        transition: "border-color 0.2s, background 0.2s",
+        transition: "border-color 0.2s, background 0.2s, transform 0.2s",
+        outline: "none",
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${name} project details`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
       }}
     >
       {/* Logo */}
@@ -1611,25 +1733,50 @@ function ProjectCard({
           justifyContent: "center",
           flex: 1,
           minHeight: "60px",
+          position: "relative",
         }}
       >
-        <img
-          src={p.logo}
-          alt={`${name} logo`}
-          loading="lazy"
-          decoding="async"
-          style={{
-            height: "44px",
-            width: "auto",
-            maxWidth: "140px",
-            objectFit: "contain",
-            opacity: 0.95,
-          }}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.style.display = "none";
-          }}
-        />
+        {!isLoaded && !hasError && (
+          <div
+            style={{
+              position: "absolute",
+              width: "120px",
+              height: "44px",
+              background: "var(--card-hover)",
+              borderRadius: "4px",
+              animation: "pulse 1.5s ease-in-out infinite",
+            }}
+          />
+        )}
+        {!hasError && (
+          <img
+            src={p.logo}
+            alt={`${name} logo`}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setIsLoaded(true)}
+            onError={() => setHasError(true)}
+            style={{
+              height: "44px",
+              width: "auto",
+              maxWidth: "140px",
+              objectFit: "contain",
+              opacity: isLoaded ? 0.95 : 0,
+              transition: "opacity 0.3s ease",
+            }}
+          />
+        )}
+        {hasError && (
+          <div
+            style={{
+              fontSize: "0.75rem",
+              color: "var(--text-4)",
+              textAlign: "center",
+            }}
+          >
+            {name}
+          </div>
+        )}
       </div>
 
       {/* Company + Industry */}
@@ -1782,10 +1929,12 @@ const CARD: React.CSSProperties = {
 
 // ── Section header ─────────────────────────────────────────────────────────────
 function SectionHeader({ label, title }: { label: string; title: string }) {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <div style={{ marginBottom: "2.5rem" }}>
       <motion.span
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         style={{
@@ -1800,6 +1949,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
         {label}
       </motion.span>
       <RevealWords
+        as="h2"
         text={title}
         style={{
           fontSize: "clamp(1.5rem,3vw,2.25rem)",
@@ -1816,6 +1966,8 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
 const SERVICE_ICONS = [Paper, Category, Send, Swap, InfoSquare, Graph];
 
 function Services() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section
       id="skills"
@@ -1838,10 +1990,10 @@ function Services() {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.45, delay: i * 0.05 }}
+                transition={{ duration: 0.45, delay: i * ANIMATION.stagger.fast }}
                 style={{
                   padding: "1.25rem 1.5rem",
                   borderBottom: "1px solid var(--card-border)",
@@ -1857,6 +2009,7 @@ function Services() {
                     flexShrink: 0,
                     marginTop: "0.05rem",
                     color: "var(--text-2)",
+                    transition: "color 0.3s ease",
                   }}
                 >
                   <Icon set="bulk" size={22} />
@@ -1894,6 +2047,8 @@ function Services() {
 // ── Career ────────────────────────────────────────────────────────────────────
 
 function Experience() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section
       id="experience"
@@ -1922,14 +2077,18 @@ function Experience() {
             {workHistory.map((job, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -12 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.5, delay: i * 0.07 }}
                 style={{ position: "relative" }}
               >
-                {/* Timeline dot */}
-                <div
+                {/* Timeline dot with animation */}
+                <motion.div
+                  initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.07 + 0.1, duration: 0.3 }}
                   style={{
                     position: "absolute",
                     left: "-1.75rem",
@@ -2045,6 +2204,9 @@ function Experience() {
 // ── Contact ───────────────────────────────────────────────────────────────────
 
 function Contact() {
+  const shouldReduceMotion = useReducedMotion();
+  const email = getObfuscatedEmail();
+  
   return (
     <section
       id="contact"
@@ -2064,7 +2226,7 @@ function Contact() {
         >
           <div>
             <motion.p
-              initial={{ opacity: 0 }}
+              initial={shouldReduceMotion ? false : { opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               style={{
@@ -2078,6 +2240,7 @@ function Contact() {
               GET IN TOUCH
             </motion.p>
             <RevealWords
+              as="h2"
               text="LET'S BUILD SOMETHING"
               style={{
                 fontSize: "clamp(1.75rem,4vw,3rem)",
@@ -2089,7 +2252,7 @@ function Contact() {
             />
           </div>
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
@@ -2101,7 +2264,7 @@ function Contact() {
             }}
           >
             <a
-              href="mailto:ziyaada22@gmail.com"
+              href={`mailto:${email}`}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -2115,6 +2278,15 @@ function Contact() {
                 textDecoration: "none",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
+                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <Mail size={16} />
@@ -2123,7 +2295,7 @@ function Contact() {
             <a
               href="https://github.com/ziyaadsmada"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -2138,6 +2310,15 @@ function Contact() {
                 textDecoration: "none",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
+                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--card-bg)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <Github size={16} />
@@ -2146,7 +2327,7 @@ function Contact() {
             <a
               href="https://www.salesforce.com/trailblazer/zadams4"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -2161,6 +2342,15 @@ function Contact() {
                 textDecoration: "none",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
+                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--card-bg)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <img
@@ -2178,7 +2368,7 @@ function Contact() {
             <a
               href="https://linkedin.com/in/ziyaad-adams-8b0b001a2"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -2193,6 +2383,15 @@ function Contact() {
                 textDecoration: "none",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
+                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--card-bg)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <Linkedin size={16} />
@@ -2200,7 +2399,7 @@ function Contact() {
             </a>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
@@ -2222,6 +2421,8 @@ function Contact() {
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 function Footer() {
+  const email = getObfuscatedEmail();
+  
   return (
     <footer
       style={{
@@ -2250,7 +2451,7 @@ function Footer() {
           © {new Date().getFullYear()} Ziyaad Adams
         </div>
         <a
-          href="mailto:ziyaada22@gmail.com"
+          href={`mailto:${email}`}
           style={{
             fontSize: "0.75rem",
             color: "var(--text-4)",
@@ -2258,7 +2459,7 @@ function Footer() {
             letterSpacing: "0.06em",
           }}
         >
-          ziyaada22@gmail.com
+          {email}
         </a>
         <div
           style={{
@@ -2289,6 +2490,9 @@ export default function Home() {
       >
         Skip to main content
       </a>
+      
+      {/* Scroll progress indicator */}
+      <ScrollProgress />
       
       {/* Animated dots background */}
       <ParticleBackground aria-hidden="true" />

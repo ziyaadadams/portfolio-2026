@@ -121,6 +121,18 @@ export function ParticleBackground({ className }: { className?: string }) {
     let running = true;
     let last = 0;
 
+    // Handle visibility change for performance
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        running = false;
+      } else {
+        running = true;
+        last = performance.now();
+        requestAnimationFrame(tick);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     const tick = (now: number) => {
       if (!running) return;
       const dt = Math.min(now - last, 50);
@@ -185,6 +197,7 @@ export function ParticleBackground({ className }: { className?: string }) {
     return () => {
       running = false;
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [isDark]);
 
