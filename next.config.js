@@ -1,26 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  distDir: 'dist',
   images: {
-    domains: ['localhost', 'vercel.app'],
+    unoptimized: true,
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            three: {
-              test: /[\\/]node_modules[\\/]three[\\/]/,
-              name: 'three',
-              priority: 10,
-            },
-          },
-        },
-      };
-    }
-    return config;
+  // Enable compression
+  compress: true,
+  // Optimize for production
+  poweredByHeader: false,
+  // Remove console logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
   },
+  // Trailing slash for better SEO
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;

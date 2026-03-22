@@ -5,7 +5,9 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ParticleBackground } from "@/components/ui/particle-background";
 import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
-import { Mail, Linkedin, Github, Globe } from "lucide-react";
+import { Mail, Linkedin, Github, Globe, ArrowUp } from "lucide-react";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { Preloader } from "@/components/Preloader";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -1126,6 +1128,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 function Navbar() {
   const [active, setActive] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Force scroll to top on mount & clear hash so browser doesn't jump
   useEffect(() => {
@@ -1167,33 +1170,89 @@ function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`nav-island ${scrolled ? 'nav-island--scrolled' : ''}`}
-    >
-      <a href="#hero" className="nav-island__logo">
-        Z<span>.</span>
-      </a>
-      <div className="nav-island__links">
-        {navItems.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            className="nav-island__link"
-            style={{
-              opacity: active === item.href.slice(1) ? 1 : 0.7,
-            }}
-          >
-            {item.label}
-          </a>
-        ))}
-      </div>
-      <a href="#contact" className="nav-island__cta">
-        Get Started
-      </a>
-    </motion.nav>
+    <>
+      <motion.nav
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className={`nav-island ${scrolled ? 'nav-island--scrolled' : ''}`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <a href="#hero" className="nav-island__logo" aria-label="Go to homepage">
+          Z<span>.</span>
+        </a>
+        <div className="nav-island__links" role="menubar">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="nav-island__link"
+              role="menuitem"
+              aria-current={active === item.href.slice(1) ? 'page' : undefined}
+              style={{
+                opacity: active === item.href.slice(1) ? 1 : 0.7,
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <a href="#contact" className="nav-island__cta">
+          Get Started
+        </a>
+        
+        {/* Mobile menu button */}
+        <button
+          className="nav-island__menu-btn lg:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileMenuOpen ? '✕' : '☰'}
+        </button>
+      </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="menu-overlay lg:hidden"
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
+          <nav className="menu-nav">
+            <ul className="menu-links" role="menubar">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="menu-link"
+                    onClick={() => setMobileMenuOpen(false)}
+                    role="menuitem"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="menu-footer">
+              <a href="https://github.com/ziyaadsmada" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/ziyaad-adams-8b0b001a2" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </div>
+          </nav>
+        </motion.div>
+      )}
+    </>
   );
 }
 
@@ -2196,13 +2255,23 @@ function Footer() {
 export default function Home() {
   return (
     <>
+      <Preloader />
+      
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[10001] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-md"
+      >
+        Skip to main content
+      </a>
+      
       {/* Hexagon background */}
       <ParticleBackground className="z-0" aria-hidden="true" />
       <CustomCursor />
       <div className="holo-left" aria-hidden="true" />
       <div className="holo-right" aria-hidden="true" />
       <Navbar />
-      <main style={{ position: "relative", zIndex: 1 }}>
+      <main id="main-content" style={{ position: "relative", zIndex: 1 }}>
         <Hero />
         <Experience />
         <Projects />
@@ -2210,6 +2279,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
