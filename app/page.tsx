@@ -1415,23 +1415,21 @@ function ProjectModal({
           ×
         </button>
 
-        {/* Logos */}
+        {/* Logo */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             padding: "1.5rem 0 1rem",
-            gap: "0.75rem",
           }}
         >
           <img
             src={p.logo}
             alt={name}
             style={{
-              height: "48px",
-              maxWidth: "160px",
+              height: "56px",
+              maxWidth: "180px",
               objectFit: "contain",
               opacity: 0.95,
             }}
@@ -1439,21 +1437,6 @@ function ProjectModal({
               (e.target as HTMLImageElement).style.display = "none";
             }}
           />
-          {(p as any).companyLogo && (
-            <img
-              src={(p as any).companyLogo}
-              alt="Consulting company"
-              style={{
-                height: "20px",
-                maxWidth: "100px",
-                objectFit: "contain",
-                opacity: 0.5,
-              }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
-            />
-          )}
         </div>
 
         {/* Name + meta */}
@@ -1624,24 +1607,21 @@ function ProjectCard({
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           flex: 1,
-          minHeight: "70px",
-          gap: "0.5rem",
+          minHeight: "60px",
         }}
       >
-        {/* Client Logo */}
         <img
           src={p.logo}
           alt={`${name} logo`}
           loading="lazy"
           decoding="async"
           style={{
-            height: "36px",
+            height: "44px",
             width: "auto",
-            maxWidth: "120px",
+            maxWidth: "140px",
             objectFit: "contain",
             opacity: 0.95,
           }}
@@ -1650,25 +1630,6 @@ function ProjectCard({
             target.style.display = "none";
           }}
         />
-        {/* Company Logo (small) */}
-        {(p as any).companyLogo && (
-          <img
-            src={(p as any).companyLogo}
-            alt="Consulting company"
-            loading="lazy"
-            style={{
-              height: "16px",
-              width: "auto",
-              maxWidth: "80px",
-              objectFit: "contain",
-              opacity: 0.5,
-              marginTop: "4px",
-            }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
-        )}
       </div>
 
       {/* Company + Industry */}
