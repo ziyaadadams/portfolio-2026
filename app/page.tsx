@@ -106,6 +106,7 @@ const services = [
 const projects = [
   {
     company: "via Digital Modus",
+    companyLogo: "/logos/digitalmodus.png",
     client: "NHS Professionals",
     logo: "/logos/NHS-01.svg",
     industry: "Healthcare",
@@ -116,6 +117,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "Capitec Bank",
     logo: "/logos/CPI.JO_BIG.svg",
     industry: "Banking",
@@ -126,6 +128,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "ABSA Bank",
     logo: "/logos/ABSP.JO.svg",
     industry: "Banking",
@@ -136,6 +139,7 @@ const projects = [
   },
   {
     company: "via Cloudmuscle B.V.",
+    companyLogo: "/logos/cloudmuscle.svg",
     client: "Heineken / Distell",
     logo: "/logos/heineken.svg",
     industry: "FMCG",
@@ -146,6 +150,7 @@ const projects = [
   },
   {
     company: "via Cloudsmiths",
+    companyLogo: "/logos/cloudsmiths.png",
     client: "Four Paws International",
     logo: "/logos/fourpaws.svg",
     industry: "Non-Profit",
@@ -156,6 +161,7 @@ const projects = [
   },
   {
     company: "via Cloudsmiths",
+    companyLogo: "/logos/cloudsmiths.png",
     client: "Main One",
     logo: "/logos/mainone.svg",
     industry: "Telecom",
@@ -166,6 +172,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "Philip Morris / IQOS",
     logo: "/logos/pmi.svg",
     industry: "FMCG",
@@ -176,6 +183,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "CAFU",
     logo: "/logos/cafu.svg",
     industry: "Field Service",
@@ -186,6 +194,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "Sygnia",
     logo: "/logos/sygnia.svg",
     industry: "Finance",
@@ -196,6 +205,7 @@ const projects = [
   },
   {
     company: "via BlueSky",
+    companyLogo: "/logos/bluesky.svg",
     client: "Urban MGT",
     logo: "/logos/urbanmgt.svg",
     industry: "Property",
@@ -1314,6 +1324,7 @@ function tagColor(tag: string) {
 // ── Project Modal ──────────────────────────────────────────────────────────────
 type AnyProject = {
   logo: string;
+  companyLogo?: string;
   description: string;
   tags: string[];
   industry?: string;
@@ -1404,21 +1415,23 @@ function ProjectModal({
           ×
         </button>
 
-        {/* Logo */}
+        {/* Logos */}
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             padding: "1.5rem 0 1rem",
+            gap: "0.75rem",
           }}
         >
           <img
             src={p.logo}
             alt={name}
             style={{
-              height: "56px",
-              maxWidth: "180px",
+              height: "48px",
+              maxWidth: "160px",
               objectFit: "contain",
               opacity: 0.95,
             }}
@@ -1426,6 +1439,21 @@ function ProjectModal({
               (e.target as HTMLImageElement).style.display = "none";
             }}
           />
+          {(p as any).companyLogo && (
+            <img
+              src={(p as any).companyLogo}
+              alt="Consulting company"
+              style={{
+                height: "20px",
+                maxWidth: "100px",
+                objectFit: "contain",
+                opacity: 0.5,
+              }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+              }}
+            />
+          )}
         </div>
 
         {/* Name + meta */}
@@ -1596,25 +1624,51 @@ function ProjectCard({
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           flex: 1,
+          minHeight: "70px",
+          gap: "0.5rem",
         }}
       >
+        {/* Client Logo */}
         <img
           src={p.logo}
-          alt={name}
+          alt={`${name} logo`}
+          loading="lazy"
+          decoding="async"
           style={{
-            height: "44px",
+            height: "36px",
             width: "auto",
-            maxWidth: "140px",
+            maxWidth: "120px",
             objectFit: "contain",
-            opacity: 0.92,
+            opacity: 0.95,
           }}
           onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
+            const target = e.target as HTMLImageElement;
+            target.style.display = "none";
           }}
         />
+        {/* Company Logo (small) */}
+        {(p as any).companyLogo && (
+          <img
+            src={(p as any).companyLogo}
+            alt="Consulting company"
+            loading="lazy"
+            style={{
+              height: "16px",
+              width: "auto",
+              maxWidth: "80px",
+              objectFit: "contain",
+              opacity: 0.5,
+              marginTop: "4px",
+            }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        )}
       </div>
 
       {/* Company + Industry */}
