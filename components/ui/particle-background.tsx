@@ -25,8 +25,8 @@ interface Particle {
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 
-// Blue-teal-white particles (original style)
-function particleColor(phase: number, opacity: number): string {
+// Blue-teal-white particles for dark backgrounds
+function particleColorDark(phase: number, opacity: number): string {
   const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
   let r: number, g: number, b: number;
   if (t < 0.5) {
@@ -43,6 +43,14 @@ function particleColor(phase: number, opacity: number): string {
     b = Math.round(lerp(220, 255, s));
   }
   return `rgba(${r},${g},${b},${opacity.toFixed(3)})`;
+}
+
+// Dark particles for light backgrounds
+function particleColorLight(phase: number, opacity: number): string {
+  // Dark gray to charcoal
+  const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
+  const val = Math.round(lerp(60, 120, t));
+  return `rgba(${val},${val},${val + 10},${opacity.toFixed(3)})`;
 }
 
 function makeParticle(W: number, H: number): Particle {
@@ -63,14 +71,31 @@ function makeParticle(W: number, H: number): Particle {
     size:         0.8 + Math.random() * 2.2,
     colorOffset:  Math.random(),
     colorSpeed:   0.00006 + Math.random() * 0.00012,
-    opacity:      0.2 + Math.random() * 0.6,
-    opacityTarget:0.2 + Math.random() * 0.6,
+    opacity:      0.3 + Math.random() * 0.5,
+    opacityTarget:0.3 + Math.random() * 0.5,
     opacitySpeed: 0.0004 + Math.random() * 0.0008,
   };
 }
 
 export function ParticleBackground({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDark, setIsDark] = useState(true);
+
+  // Detect theme
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      setIsDark(isDarkMode);
+    };
+    
+    checkTheme();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -101,8 +126,8 @@ export function ParticleBackground({ className }: { className?: string }) {
       const dt = Math.min(now - last, 50);
       last = now;
 
-      // Fill with dark background
-      ctx.fillStyle = '#0a0a0a';
+      // Fill with appropriate background
+      ctx.fillStyle = isDark ? '#0a0a0a' : '#fafafa';
       ctx.fillRect(0, 0, W, H);
 
       for (const p of particles) {
@@ -117,7 +142,7 @@ export function ParticleBackground({ className }: { className?: string }) {
         // Opacity breathing
         p.opacity += (p.opacityTarget - p.opacity) * p.opacitySpeed * dt;
         if (Math.abs(p.opacity - p.opacityTarget) < 0.02) {
-          p.opacityTarget = 0.15 + Math.random() * 0.6;
+          p.opacityTarget = 0.25 + Math.random() * 0.55;
         }
 
         // Colour phase advance
@@ -130,14 +155,16 @@ export function ParticleBackground({ className }: { className?: string }) {
         // Skip if outside canvas
         if (x < -10 || x > W + 10 || y < -10 || y > H + 10) continue;
 
-        const color = particleColor(p.colorOffset, Math.max(0, Math.min(1, p.opacity)));
+        const color = isDark 
+          ? particleColorDark(p.colorOffset, Math.max(0, Math.min(1, p.opacity)))
+          : particleColorLight(p.colorOffset, Math.max(0, Math.min(1, p.opacity)));
 
         // Soft glow
         const glowR = p.size * 3.5;
         const grd = ctx.createRadialGradient(x, y, 0, x, y, glowR);
-        const baseAlpha = Math.max(0, Math.min(1, p.opacity)) * 0.25;
+        const baseAlpha = Math.max(0, Math.min(1, p.opacity)) * 0.3;
         grd.addColorStop(0, color.replace(/[\d.]+\)$/, `${baseAlpha})`));
-        grd.addColorStop(1, 'rgba(0,0,0,0)');
+        grd.addColorStop(1, isDark ? 'rgba(0,0,0,0)' : 'rgba(250,250,250,0)');
         ctx.beginPath();
         ctx.arc(x, y, glowR, 0, TWO_PI);
         ctx.fillStyle = grd;
@@ -159,7 +186,7 @@ export function ParticleBackground({ className }: { className?: string }) {
       running = false;
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <canvas
