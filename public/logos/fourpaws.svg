@@ -1,5 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
-  <rect width="120" height="60" rx="6" fill="#E05A00"/>
-  <text x="60" y="25" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="800" letter-spacing="1">FOUR PAWS</text>
-  <text x="60" y="44" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Arial,sans-serif" font-size="7.5" font-weight="500" letter-spacing="1.5">INTERNATIONAL</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect width="200" height="60" rx="8" fill="none"/>
+  <!-- Paw print icon -->
+  <g transform="translate(20, 10)" fill="#fff">
+    <ellipse cx="15" cy="35" rx="12" ry="10"/>
+    <ellipse cx="6" cy="18" rx="5" ry="6"/>
+    <ellipse cx="15" cy="12" rx="5" ry="6"/>
+    <ellipse cx="24" cy="18" rx="5" ry="6"/>
+  </g>
+  <text x="110" y="26" text-anchor="middle" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="1">FOUR PAWS</text>
+  <text x="110" y="44" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="2">INTERNATIONAL</text>
 </svg>

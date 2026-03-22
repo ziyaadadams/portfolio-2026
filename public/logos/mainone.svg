@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
-  <rect width="120" height="60" rx="6" fill="#0047AB"/>
-  <text x="60" y="27" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="16" font-weight="800" letter-spacing="1">MAIN ONE</text>
-  <text x="60" y="44" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="7" font-weight="500" letter-spacing="2">INTERNET SERVICES</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect width="200" height="60" rx="8" fill="none"/>
+  <!-- Globe icon -->
+  <circle cx="30" cy="30" r="18" fill="none" stroke="#00A0E3" stroke-width="2"/>
+  <ellipse cx="30" cy="30" rx="8" ry="18" fill="none" stroke="#00A0E3" stroke-width="1.5"/>
+  <line x1="12" y1="30" x2="48" y2="30" stroke="#00A0E3" stroke-width="1.5"/>
+  <text x="115" y="28" text-anchor="middle" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="1">MAINONE</text>
+  <text x="115" y="46" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Arial, sans-serif" font-size="9" font-weight="500" letter-spacing="1.5">INTERNET SERVICES</text>
 </svg>
