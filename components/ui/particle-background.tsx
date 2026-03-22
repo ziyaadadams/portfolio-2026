@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useTheme } from 'next-themes';
+import { useEffect, useRef, useState } from 'react';
 
 const PARTICLE_COUNT = 180;
 const TWO_PI = Math.PI * 2;
@@ -26,18 +25,33 @@ interface Particle {
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 
-// Subtle neutral particles that work in both light and dark modes
-function particleColor(phase: number, opacity: number, isDark: boolean): string {
-  // Neutral gray particles - subtle in both modes
+// Blue-teal-white particles for dark backgrounds (original style)
+function particleColorDark(phase: number, opacity: number): string {
   const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
-  
-  // Dark mode: lighter particles on dark bg
-  // Light mode: darker particles on light bg
-  const minVal = isDark ? 120 : 80;
-  const maxVal = isDark ? 200 : 140;
-  
-  const val = Math.round(lerp(minVal, maxVal, t));
-  return `rgba(${val}, ${val}, ${val}, ${opacity.toFixed(3)})`;
+  let r: number, g: number, b: number;
+  if (t < 0.5) {
+    // white → teal
+    const s = t / 0.5;
+    r = Math.round(lerp(255, 0, s));
+    g = Math.round(lerp(255, 210, s));
+    b = Math.round(lerp(255, 220, s));
+  } else {
+    // teal → blue
+    const s = (t - 0.5) / 0.5;
+    r = Math.round(lerp(0, 30, s));
+    g = Math.round(lerp(210, 130, s));
+    b = Math.round(lerp(220, 255, s));
+  }
+  return `rgba(${r},${g},${b},${opacity.toFixed(3)})`;
+}
+
+// Gray-blue particles for light backgrounds
+function particleColorLight(phase: number, opacity: number): string {
+  const t = (Math.sin(phase * TWO_PI) * 0.5) + 0.5;
+  // Gray to blue-gray range
+  const gray = Math.round(lerp(100, 160, t));
+  const blueTint = Math.round(lerp(120, 180, t));
+  return `rgba(${gray}, ${blueTint}, ${blueTint + 20}, ${opacity.toFixed(3)})`;
 }
 
 function makeParticle(W: number, H: number): Particle {
@@ -58,20 +72,23 @@ function makeParticle(W: number, H: number): Particle {
     size:         0.8 + Math.random() * 2.2,
     colorOffset:  Math.random(),
     colorSpeed:   0.00006 + Math.random() * 0.00012,
-    opacity:      0.15 + Math.random() * 0.45,
-    opacityTarget:0.15 + Math.random() * 0.45,
+    opacity:      0.2 + Math.random() * 0.6,
+    opacityTarget:0.2 + Math.random() * 0.6,
     opacitySpeed: 0.0004 + Math.random() * 0.0008,
   };
 }
 
-export function ParticleBackground({ className }: { className?: string }) {
+export function ParticleBackground({ className, isDark = true }: { className?: string; isDark?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme, systemTheme } = useTheme();
-  
-  // Determine if dark mode is active
-  const isDark = theme === 'dark' || (theme === 'system' && systemTheme === 'dark');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -100,8 +117,9 @@ export function ParticleBackground({ className }: { className?: string }) {
       const dt = Math.min(now - last, 50);
       last = now;
 
-      // Clear canvas - transparent (shows body background)
-      ctx.clearRect(0, 0, W, H);
+      // Clear canvas - fill with background color
+      ctx.fillStyle = isDark ? '#0a0a0a' : '#fafafa';
+      ctx.fillRect(0, 0, W, H);
 
       for (const p of particles) {
         // Advance angle
@@ -115,7 +133,7 @@ export function ParticleBackground({ className }: { className?: string }) {
         // Opacity breathing
         p.opacity += (p.opacityTarget - p.opacity) * p.opacitySpeed * dt;
         if (Math.abs(p.opacity - p.opacityTarget) < 0.02) {
-          p.opacityTarget = 0.08 + Math.random() * 0.45;
+          p.opacityTarget = 0.15 + Math.random() * 0.6;
         }
 
         // Colour phase advance
@@ -128,14 +146,16 @@ export function ParticleBackground({ className }: { className?: string }) {
         // Skip if outside canvas
         if (x < -10 || x > W + 10 || y < -10 || y > H + 10) continue;
 
-        const color = particleColor(p.colorOffset, Math.max(0, Math.min(1, p.opacity)), isDark);
+        const color = isDark 
+          ? particleColorDark(p.colorOffset, Math.max(0, Math.min(1, p.opacity)))
+          : particleColorLight(p.colorOffset, Math.max(0, Math.min(1, p.opacity)));
 
         // Soft glow
         const glowR = p.size * 3.5;
         const grd = ctx.createRadialGradient(x, y, 0, x, y, glowR);
         const baseAlpha = Math.max(0, Math.min(1, p.opacity)) * 0.25;
         grd.addColorStop(0, color.replace(/[\d.]+\)$/, `${baseAlpha})`));
-        grd.addColorStop(1, 'rgba(0,0,0,0)');
+        grd.addColorStop(1, isDark ? 'rgba(0,0,0,0)' : 'rgba(250,250,250,0)');
         ctx.beginPath();
         ctx.arc(x, y, glowR, 0, TWO_PI);
         ctx.fillStyle = grd;
@@ -157,7 +177,10 @@ export function ParticleBackground({ className }: { className?: string }) {
       running = false;
       window.removeEventListener('resize', resize);
     };
-  }, [isDark]);
+  }, [mounted, isDark]);
+
+  // Don't render canvas until mounted to avoid hydration mismatch
+  if (!mounted) return null;
 
   return (
     <canvas
