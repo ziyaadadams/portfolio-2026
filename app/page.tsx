@@ -8,6 +8,7 @@ import { Paper, Category, Send, Swap, InfoSquare, Graph } from "react-iconly";
 import { Mail, Linkedin, Github, Globe, ArrowUp } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Preloader } from "@/components/Preloader";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useReducedMotion } from "framer-motion";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -1218,6 +1219,8 @@ function Navbar() {
         <a href="#contact" className="nav-island__cta">
           Get Started
         </a>
+        
+        <ThemeToggle />
         
         {/* Mobile menu button */}
         <button

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -98,8 +99,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#000000',
-  colorScheme: 'dark',
+  themeColor: '#ffffff',
+  colorScheme: 'light dark',
 };
 
 export default function RootLayout({
@@ -108,7 +109,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`scroll-smooth ${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -153,8 +154,10 @@ export default function RootLayout({
         />
       </head>
       <body className={GeistSans.className}>
-        <SpeedInsights />
-        {children}
+        <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
+          <SpeedInsights />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
